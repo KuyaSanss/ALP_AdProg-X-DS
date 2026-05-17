@@ -37,13 +37,11 @@ public class DataUser {
         if(user instanceof Pendonor){
             insertPendonor(user);
         }else if(user instanceof UDD){
-            insertPendonor(user);
+            insertUDD(user);
         }else if(user instanceof BDRS){
-            Pendonor pendonor = (Pendonor) user;
-            daftarBDRS.put(pendonor.getIdPengguna(),pendonor);
+            insertBDRS(user);
         }else if(user instanceof Admin){
-            Pendonor pendonor = (Pendonor) user;
-            daftarAdmin.put(pendonor.getIdPengguna(),pendonor);
+            insertAdmin(user);
         }
     }
 
@@ -61,11 +59,13 @@ public class DataUser {
     }
 
     private void insertBDRS(User user){
-        
+        Pendonor pendonor = (Pendonor) user;
+        daftarBDRS.put(pendonor.getIdPengguna(),pendonor);
     }
 
     private void insertAdmin(User user){
-        
+        Admin admin = (Admin) user;
+        daftarAdmin.put(admin.getIdPengguna(),admin);
     }
 
     
