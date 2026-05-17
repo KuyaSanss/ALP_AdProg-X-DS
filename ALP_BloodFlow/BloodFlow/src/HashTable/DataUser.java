@@ -2,6 +2,7 @@ package HashTable;
 
 import java.util.Hashtable;
 
+import Enum.*;
 import User.*;
 
 public class DataUser {
@@ -11,21 +12,21 @@ public class DataUser {
     private Hashtable <String,User> daftarUsernameUser = new Hashtable<>();
 
     // User
-    private Hashtable <Object,Object> daftarPendonor = new Hashtable<>();
-    private Hashtable <Object,Object> daftarUDD = new Hashtable<>();
-    private Hashtable <Object,Object> daftarBDRS = new Hashtable<>();
-    private Hashtable <Object,Object> daftarAdmin = new Hashtable<>();
+    private Hashtable <String,User> daftarPendonor = new Hashtable<>();
+    private Hashtable <String,User> daftarUDD = new Hashtable<>();
+    private Hashtable <String,User> daftarBDRS = new Hashtable<>();
+    private Hashtable <String,User> daftarAdmin = new Hashtable<>();
 
     //Pendonor
-    private Hashtable <Object,Object> daftarGolDarahPendonor = new Hashtable<>();
-    private Hashtable <Object,Object> daftarRhesusPendonor = new Hashtable<>();
-    private Hashtable <Object,Object> daftarTanggalTerakhirDonorPendonor = new Hashtable<>();
+    private Hashtable <golDarahEnum,User> daftarGolDarahPendonor = new Hashtable<>();
+    private Hashtable <rhesusEnum,User> daftarRhesusPendonor = new Hashtable<>();
+    private Hashtable <String,User> daftarTanggalTerakhirDonorPendonor = new Hashtable<>();
 
     // UDD
-    private Hashtable <Object,Object> daftarAlamatUDD = new Hashtable<>();
+    private Hashtable <String,User> daftarAlamatUDD = new Hashtable<>();
 
     // BDRS
-    private Hashtable <Object,Object> daftarAlamatBDRS = new Hashtable<>();
+    private Hashtable <String,User> daftarAlamatBDRS = new Hashtable<>();
 
     public DataUser(){}
 
@@ -59,8 +60,8 @@ public class DataUser {
     }
 
     private void insertBDRS(User user){
-        Pendonor pendonor = (Pendonor) user;
-        daftarBDRS.put(pendonor.getIdPengguna(),pendonor);
+        BDRS bDRS = (BDRS) user;
+        daftarBDRS.put(bDRS.getIdPengguna(),bDRS);
     }
 
     private void insertAdmin(User user){
@@ -70,6 +71,7 @@ public class DataUser {
 
     
     //#region Getter
+    
     public Hashtable<String, User> getDaftarUser() {
         return daftarUser;
     }
@@ -78,39 +80,39 @@ public class DataUser {
         return daftarUsernameUser;
     }
 
-    public Hashtable<Object, Object> getDaftarPendonor() {
+    public Hashtable<String, User> getDaftarPendonor() {
         return daftarPendonor;
     }
 
-    public Hashtable<Object, Object> getDaftarUDD() {
+    public Hashtable<String, User> getDaftarUDD() {
         return daftarUDD;
     }
 
-    public Hashtable<Object, Object> getDaftarBDRS() {
+    public Hashtable<String, User> getDaftarBDRS() {
         return daftarBDRS;
     }
 
-    public Hashtable<Object, Object> getDaftarAdmin() {
+    public Hashtable<String, User> getDaftarAdmin() {
         return daftarAdmin;
     }
 
-    public Hashtable<Object, Object> getDaftarGolDarahPendonor() {
+    public Hashtable<golDarahEnum, User> getDaftarGolDarahPendonor() {
         return daftarGolDarahPendonor;
     }
 
-    public Hashtable<Object, Object> getDaftarRhesusPendonor() {
+    public Hashtable<rhesusEnum, User> getDaftarRhesusPendonor() {
         return daftarRhesusPendonor;
     }
 
-    public Hashtable<Object, Object> getDaftarTanggalTerakhirDonorPendonor() {
+    public Hashtable<String, User> getDaftarTanggalTerakhirDonorPendonor() {
         return daftarTanggalTerakhirDonorPendonor;
     }
 
-    public Hashtable<Object, Object> getDaftarAlamatUDD() {
+    public Hashtable<String, User> getDaftarAlamatUDD() {
         return daftarAlamatUDD;
     }
 
-    public Hashtable<Object, Object> getDaftarAlamatBDRS() {
+    public Hashtable<String, User> getDaftarAlamatBDRS() {
         return daftarAlamatBDRS;
     }
 
