@@ -3,8 +3,8 @@ package User;
 public class BDRS extends User{
     private String alamat;
 
-    public BDRS(String idPengguna, String username, String password, String noTelp, String alamat) {
-        super(idPengguna, username, password, noTelp);
+    public BDRS(String username, String password, String noTelp, String alamat) {
+        super(username, password, noTelp);
         this.alamat = alamat;
     }
 

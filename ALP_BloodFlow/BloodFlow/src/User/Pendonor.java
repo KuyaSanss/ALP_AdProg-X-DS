@@ -7,8 +7,8 @@ public class Pendonor extends User {
     private rhesusEnum rhesus;
     private String tanggalTerakhirDonor;
     
-    public Pendonor(String idPengguna, String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus) {
-        super(idPengguna, username, password, noTelp);
+    public Pendonor(String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus) {
+        super(username, password, noTelp);
         this.golDarah = golDarah;
         this.rhesus = rhesus;
     }

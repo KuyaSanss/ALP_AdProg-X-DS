@@ -3,9 +3,11 @@ package User;
 public abstract class User {
 
     private String idPengguna,username,password,noTelp;
+    private static int userTerbuat = 0;
 
-    public User(String idPengguna, String username, String password, String noTelp) {
-        this.idPengguna = idPengguna;
+    public User(String username, String password, String noTelp) {
+        userTerbuat++;
+        idPengguna= "PD"+userTerbuat;
         this.username = username;
         this.password = password;
         this.noTelp = noTelp;

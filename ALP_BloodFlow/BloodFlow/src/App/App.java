@@ -1,27 +1,38 @@
 package App;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Scanner;
 
-import Enum.golDarahEnum;
-import Enum.rhesusEnum;
-import User.Pendonor;
-import User.User;
+import Enum.*;
+import HashTable.*;
+import User.*;
 
 public class App {
-    private Hashtable<String, User> userHashtable = new Hashtable<>();
     // hashtable belum done aku bakal buat wrapper class per atribut biar nanti bisa
     // filter dengan O(1)
-    private ArrayList<User> daftarUser = new ArrayList<>();
 
+    private DataUser dataUser = new DataUser();
     private User currentUser;
-
     private Scanner sc = new Scanner(System.in);
+
+    //#region Getter Setter
+
+    public DataUser getDataUser() {
+        return dataUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
+    //#endregion
 
     public App() {
         onStartUp();
-        loginAwal();
+        menuAwal();
         tampilkanMenuUtama();
     }
 
@@ -30,10 +41,10 @@ public class App {
 
     }
 
-    private void loginAwal() {
-        int input = 0;
+    private void menuAwal() {
+        String input;
 
-        while (input != 3) {
+        while (true) {
             System.out.println("""
                     === BloodLink===
                     1. Login
@@ -41,21 +52,50 @@ public class App {
                     3. Exit
                     """);
             System.out.print("Input: ");
-            input = sc.nextInt();
-
+            input = sc.next() + sc.nextLine();
+            //todo trycatch
             switch (input) {
-                case 1:
-
+                case "1":
+                    login();
                     break;
-                case 2:
+                case "2":
                     registrasi();
                     break;
-                case 3:
+                case "3":
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Invalid Input!!");
             }
         }
+
+    }
+    
+    private void login(){
+        String username,password;
+        boolean salah=false;
+        System.out.println();
+        
+        do{
+            System.out.print("Username : ");
+            username = sc.next() + sc.nextLine();
+            System.out.print("Password : ");
+            password = sc.next() + sc.nextLine();
+
+            if(dataUser.getDaftarUser().contains(username)){
+                if(dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)){
+                    break;
+                }else{
+                    System.out.println("Password salah");
+                    salah=true;
+                }
+            }else{
+                System.out.println("Username salah");
+                salah=true;
+            }
+        }while(salah);
+
+        currentUser = dataUser.getDaftarUsernameUser().get(username);
 
     }
 
@@ -70,7 +110,7 @@ public class App {
             System.out.print("Username: ");
             username = sc.next() + sc.nextLine();
 
-            if (userHashtable.containsKey(username)) {
+            if(dataUser.getDaftarUser().contains(username)) {
 
                 System.out.println("Username sudah digunakan");
             } else {
@@ -142,8 +182,7 @@ public class App {
             }
         } while (true);
 
-        String id = "PD" + (daftarUser.size() + 1);
-
-        daftarUser.add(new Pendonor(id, username, id, noTelp, gol, rhesus));
+        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
+        currentUser = dataUser.getDaftarUsernameUser().get(username);
     }
 }
