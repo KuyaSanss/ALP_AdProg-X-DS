@@ -40,6 +40,7 @@ public class App {
                     2. Registrasi sebagai pendonor
                     3. Exit
                     """);
+            System.out.print("Input: ");
             input = sc.nextInt();
 
             switch (input) {
@@ -82,7 +83,7 @@ public class App {
             String password = sc.next() + sc.nextLine();
 
             System.out.print("Confirmed Password: ");
-            String confirmedPassword =sc.next() + sc.nextLine();
+            String confirmedPassword = sc.next() + sc.nextLine();
 
             if (!password.equals(confirmedPassword)) {
                 System.out.println("password and confirmed password are different!!");
@@ -120,15 +121,24 @@ public class App {
                 break;
             } else {
                 System.out.println("Rhesus tidak valid!!");
-                return;
             }
         } while (true);
 
-        System.out.print("Nomor HP: ");
-        int noTelp = sc.nextInt();
+        int noTelp;
+        int noTelpFix = 0;
+
+        do {
+            try {
+                System.out.print("Nomor HP: ");
+                noTelp = sc.nextInt();
+                noTelpFix = noTelp;
+            } catch (Exception e) {
+                System.out.println("isi nomor hp dengan angka only!!");
+            }
+        } while (noTelpFix == 0);
 
         String id = "PD" + (daftarUser.size() + 1);
 
-        daftarUser.add(new Pendonor(id, username, id, noTelp, gol, rhesus));
+        daftarUser.add(new Pendonor(id, username, id, noTelpFix, gol, rhesus));
     }
 }
