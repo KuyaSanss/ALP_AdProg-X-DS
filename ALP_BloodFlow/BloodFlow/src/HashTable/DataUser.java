@@ -77,7 +77,7 @@ public class DataUser {
     public void deleteUser(User user){
         //all
         daftarUser.remove(user.getIdPengguna());
-        daftarUser.remove(user.getUsername());
+        daftarUser.remove(user.getUsername(),user);
         //specific
         if(user instanceof Pendonor){
             deletePendonor(user);
@@ -92,25 +92,25 @@ public class DataUser {
 
     private void deletePendonor(User user){
         Pendonor pendonor = (Pendonor) user;
-        daftarPendonor.remove(user.getIdPengguna());
-        daftarGolDarahPendonor.remove(pendonor.getGolDarah());
-        daftarRhesusPendonor.remove(pendonor.getRhesus());
-        daftarTanggalTerakhirDonorPendonor.remove(pendonor.getTanggalTerakhirDonor());
+        daftarPendonor.remove(pendonor.getIdPengguna(),pendonor);
+        daftarGolDarahPendonor.remove(pendonor.getGolDarah(), pendonor);
+        daftarRhesusPendonor.remove(pendonor.getRhesus(),pendonor);
+        daftarTanggalTerakhirDonorPendonor.remove(pendonor.getTanggalTerakhirDonor(), pendonor);
     }
 
     private void deleteUDD(User user){
         UDD uDD = (UDD) user;
-        daftarUDD.remove(uDD.getIdPengguna());
+        daftarUDD.remove(uDD.getIdPengguna(),uDD);
     }
 
     private void deleteBDRS(User user){
         BDRS bDRS = (BDRS) user;
-        daftarBDRS.remove(bDRS.getIdPengguna());
+        daftarBDRS.remove(bDRS.getIdPengguna(),bDRS);
     }
 
     private void deleteAdmin(User user){
         Admin admin = (Admin) user;
-        daftarAdmin.remove(admin.getIdPengguna());
+        daftarAdmin.remove(admin.getIdPengguna(),admin);
     }
 
     //#endregion
