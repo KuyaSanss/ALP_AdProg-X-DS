@@ -1,13 +1,12 @@
 package App;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Scanner;
-
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
 import User.Pendonor;
 import User.User;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Scanner;
 
 public class App {
     private Hashtable<String, User> userHashtable = new Hashtable<>();
@@ -137,7 +136,7 @@ public class App {
             }
         } while (noTelpFix == 0);
 
-        String id = "P" + (daftarUser.size() + 1);
+        String id = "PD" + (daftarUser.size() + 1);
 
         daftarUser.add(new Pendonor(id, username, id, noTelpFix, gol, rhesus));
     }
