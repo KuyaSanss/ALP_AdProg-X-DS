@@ -44,7 +44,7 @@ public class App {
 
             switch (input) {
                 case 1:
-
+                    loginUser();
                     break;
                 case 2:
                     registrasi();
@@ -139,5 +139,9 @@ public class App {
         String id = "PD" + (daftarUser.size() + 1);
 
         daftarUser.add(new Pendonor(id, username, id, noTelpFix, gol, rhesus));
+    }
+
+    private void loginUser (){
+        
     }
 }
