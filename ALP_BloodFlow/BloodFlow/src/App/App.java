@@ -137,7 +137,7 @@ public class App {
             }
         } while (noTelpFix == 0);
 
-        String id = "PD" + (daftarUser.size() + 1);
+        String id = "P" + (daftarUser.size() + 1);
 
         daftarUser.add(new Pendonor(id, username, id, noTelpFix, gol, rhesus));
     }
