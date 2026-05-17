@@ -22,7 +22,6 @@ public class App {
     public App() {
         onStartUp();
         loginAwal();
-        tampilkanMenuUtama();
     }
 
     // buat baca data dari txt dulu
