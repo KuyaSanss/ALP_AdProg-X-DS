@@ -30,6 +30,7 @@ public class DataUser {
 
     public DataUser(){}
 
+    //#region insert
     public void insertUser(User user){
         //all
         daftarUser.put(user.getIdPengguna(),user);
@@ -48,7 +49,7 @@ public class DataUser {
 
     private void insertPendonor(User user){
         Pendonor pendonor = (Pendonor) user;
-        daftarPendonor.put(user.getIdPengguna(),user);
+        daftarPendonor.put(pendonor.getIdPengguna(),pendonor);
         daftarGolDarahPendonor.put(pendonor.getGolDarah(), pendonor);
         daftarRhesusPendonor.put(pendonor.getRhesus(),pendonor);
         daftarTanggalTerakhirDonorPendonor.put(pendonor.getTanggalTerakhirDonor(), pendonor);
@@ -69,6 +70,50 @@ public class DataUser {
         daftarAdmin.put(admin.getIdPengguna(),admin);
     }
 
+    //#endregion
+
+    //#region delete
+
+    public void deleteUser(User user){
+        //all
+        daftarUser.remove(user.getIdPengguna());
+        daftarUser.remove(user.getUsername());
+        //specific
+        if(user instanceof Pendonor){
+            deletePendonor(user);
+        }else if(user instanceof UDD){
+            deleteUDD(user);
+        }else if(user instanceof BDRS){
+            deleteBDRS(user);
+        }else if(user instanceof Admin){
+            deleteAdmin(user);
+        }
+    }
+
+    private void deletePendonor(User user){
+        Pendonor pendonor = (Pendonor) user;
+        daftarPendonor.remove(user.getIdPengguna());
+        daftarGolDarahPendonor.remove(pendonor.getGolDarah());
+        daftarRhesusPendonor.remove(pendonor.getRhesus());
+        daftarTanggalTerakhirDonorPendonor.remove(pendonor.getTanggalTerakhirDonor());
+    }
+
+    private void deleteUDD(User user){
+        UDD uDD = (UDD) user;
+        daftarUDD.remove(uDD.getIdPengguna());
+    }
+
+    private void deleteBDRS(User user){
+        BDRS bDRS = (BDRS) user;
+        daftarBDRS.remove(bDRS.getIdPengguna());
+    }
+
+    private void deleteAdmin(User user){
+        Admin admin = (Admin) user;
+        daftarAdmin.remove(admin.getIdPengguna());
+    }
+
+    //#endregion
     
     //#region Getter
     
