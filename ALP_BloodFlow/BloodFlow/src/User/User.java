@@ -3,12 +3,14 @@ package User;
 public abstract class User {
 
     private String idPengguna,username,password;
+    private int noTelp;
     //todo check datatype
 
-    public User(String idPengguna, String username, String password) {
+    public User(String idPengguna, String username, String password, int noTelp) {
         this.idPengguna = idPengguna;
         this.username = username;
         this.password = password;
+        this.noTelp = noTelp;
     }
 
     

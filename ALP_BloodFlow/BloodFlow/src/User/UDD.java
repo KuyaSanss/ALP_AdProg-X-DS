@@ -1,5 +1,24 @@
 package User;
 
 public class UDD extends User{
+    private String alamat;
 
+    public UDD(String idPengguna, String username, String password, int noTelp, String alamat) {
+        super(idPengguna, username, password, noTelp);
+        this.alamat = alamat;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    @Override
+    public void tampilkanMenuUtama() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
+    }
 }
