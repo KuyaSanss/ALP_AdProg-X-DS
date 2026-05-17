@@ -78,9 +78,11 @@ public class App {
             }
         } while (true);
 
+        String password;
+
         do {
             System.out.print("Password: ");
-            String password = sc.next() + sc.nextLine();
+            password = sc.next() + sc.nextLine();
 
             System.out.print("Confirmed Password: ");
             String confirmedPassword = sc.next() + sc.nextLine();
@@ -124,21 +126,24 @@ public class App {
             }
         } while (true);
 
-        int noTelp;
-        int noTelpFix = 0;
-
+        String noTelp="";
+        boolean nonDigit=false;
         do {
-            try {
-                System.out.print("Nomor HP: ");
-                noTelp = sc.nextInt();
-                noTelpFix = noTelp;
-            } catch (Exception e) {
-                System.out.println("isi nomor hp dengan angka only!!");
+            System.out.print("Nomor HP: ");
+            noTelp = sc.next() + sc.nextLine();
+            //digit check
+            for(char c : noTelp.toCharArray()){
+                nonDigit = (Character.isDigit(c)) ? nonDigit : true ;
             }
-        } while (noTelpFix == 0);
+            if (noTelp.equals("")||nonDigit){
+                System.out.println("isi nomor hp dengan angka only!!");
+            }else{
+                break;
+            }
+        } while (true);
 
         String id = "PD" + (daftarUser.size() + 1);
 
-        daftarUser.add(new Pendonor(id, username, id, noTelpFix, gol, rhesus));
+        daftarUser.add(new Pendonor(id, username, id, noTelp, gol, rhesus));
     }
 }

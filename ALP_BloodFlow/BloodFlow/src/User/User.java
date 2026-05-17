@@ -2,11 +2,9 @@ package User;
 
 public abstract class User {
 
-    private String idPengguna,username,password;
-    private int noTelp;
-    //todo check datatype
+    private String idPengguna,username,password,noTelp;
 
-    public User(String idPengguna, String username, String password, int noTelp) {
+    public User(String idPengguna, String username, String password, String noTelp) {
         this.idPengguna = idPengguna;
         this.username = username;
         this.password = password;
@@ -44,6 +42,13 @@ public abstract class User {
         this.password = password;
     }
 
+        public String getNoTelp() {
+        return noTelp;
+    }
+
+    public void setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
+    }
 
     //#endregion
 }

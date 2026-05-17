@@ -3,7 +3,7 @@ package User;
 public class UDD extends User{
     private String alamat;
 
-    public UDD(String idPengguna, String username, String password, int noTelp, String alamat) {
+    public UDD(String idPengguna, String username, String password, String noTelp, String alamat) {
         super(idPengguna, username, password, noTelp);
         this.alamat = alamat;
     }
