@@ -185,4 +185,8 @@ public class App {
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
     }
+
+    private void loginUser (){
+        
+    }
 }
