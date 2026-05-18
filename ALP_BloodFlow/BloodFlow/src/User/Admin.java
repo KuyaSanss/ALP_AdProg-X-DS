@@ -1,8 +1,8 @@
 package User;
 
 public class Admin extends User{
-    public Admin(String idPengguna, String username, String password, int noTelp) {
-        super(idPengguna, username, password, noTelp);
+    public Admin(String username, String password, String noTelp) {
+        super(username, password, noTelp);
         //TODO Auto-generated constructor stub
     }
 
