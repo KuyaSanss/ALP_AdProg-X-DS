@@ -1,8 +1,10 @@
 package User;
 
+import App.App;
+
 public abstract class User {
 
-    private String idPengguna,username,password,noTelp;
+    protected String idPengguna,username,password,noTelp;
     private static int userTerbuat = 0;
 
     public User(String username, String password, String noTelp) {
@@ -16,7 +18,7 @@ public abstract class User {
     
     //abstract classes
 
-    public abstract void tampilkanMenuUtama();
+    public abstract void tampilkanMenuUtama(App app);
 
     //#region Getter Setter
 

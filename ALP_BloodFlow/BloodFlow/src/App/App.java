@@ -33,7 +33,7 @@ public class App {
     public App() {
         onStartUp();
         menuAwal();
-        tampilkanMenuUtama();
+        tampilkanMenuUtama(this);
     }
 
     // buat baca data dari txt dulu
@@ -77,13 +77,14 @@ public class App {
         System.out.println();
         
         do{
+            salah=false;
             System.out.print("Username : ");
             username = sc.next() + sc.nextLine();
             System.out.print("Password : ");
             password = sc.next() + sc.nextLine();
 
-            if(dataUser.getDaftarUser().contains(username)){
-                if(dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)){
+            if(dataUser.getDaftarUsernameUser().containsKey(username)){
+                if(dataUser.getDaftarUsernameUser().isEmpty()||dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)){
                     break;
                 }else{
                     System.out.println("Password salah");
@@ -99,8 +100,8 @@ public class App {
 
     }
 
-    private void tampilkanMenuUtama() {
-        currentUser.tampilkanMenuUtama();
+    private void tampilkanMenuUtama(App app) {
+        currentUser.tampilkanMenuUtama(app);
     }
 
     private void registrasi() {
@@ -168,25 +169,26 @@ public class App {
 
         String noTelp="";
         boolean nonDigit=false;
-        do {
+        nonDigit=false;
             System.out.print("Nomor HP: ");
             noTelp = sc.next() + sc.nextLine();
-            //digit check
-            for(char c : noTelp.toCharArray()){
-                nonDigit = (Character.isDigit(c)) ? nonDigit : true ;
-            }
-            if (noTelp.equals("")||nonDigit){
-                System.out.println("isi nomor hp dengan angka only!!");
-            }else{
-                break;
-            }
-        } while (true);
+        // do {
+            
+        //     //digit check
+        //     for(char c : noTelp.toCharArray()){
+        //         nonDigit = (Character.isDigit(c)) ? nonDigit : true ;
+        //     }
+        //     if (noTelp.equals("")||nonDigit){
+        //         System.out.println("isi nomor hp dengan angka only!!");
+        //     }else{
+        //         break;
+        //     }
+        // } while (true);
 
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
+        // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
     }
 
-    private void loginUser (){
-        
-    }
+
 }

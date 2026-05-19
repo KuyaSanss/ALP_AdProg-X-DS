@@ -20,8 +20,6 @@ public class DataUser {
     //Pendonor
     private Hashtable <golDarahEnum,User> daftarGolDarahPendonor = new Hashtable<>();
     private Hashtable <rhesusEnum,User> daftarRhesusPendonor = new Hashtable<>();
-    private Hashtable <String,User> daftarTanggalTerakhirDonorPendonor = new Hashtable<>();
-
     // UDD
     private Hashtable <String,User> daftarAlamatUDD = new Hashtable<>();
 
@@ -34,7 +32,7 @@ public class DataUser {
     public void insertUser(User user){
         //all
         daftarUser.put(user.getIdPengguna(),user);
-        daftarUser.put(user.getUsername(),user);
+        daftarUsernameUser.put(user.getUsername(),user);
         //specific
         if(user instanceof Pendonor){
             insertPendonor(user);
@@ -52,7 +50,6 @@ public class DataUser {
         daftarPendonor.put(pendonor.getIdPengguna(),pendonor);
         daftarGolDarahPendonor.put(pendonor.getGolDarah(), pendonor);
         daftarRhesusPendonor.put(pendonor.getRhesus(),pendonor);
-        daftarTanggalTerakhirDonorPendonor.put(pendonor.getTanggalTerakhirDonor(), pendonor);
     }
 
     private void insertUDD(User user){
@@ -77,7 +74,7 @@ public class DataUser {
     public void deleteUser(User user){
         //all
         daftarUser.remove(user.getIdPengguna());
-        daftarUser.remove(user.getUsername(),user);
+        daftarUsernameUser.remove(user.getUsername(),user);
         //specific
         if(user instanceof Pendonor){
             deletePendonor(user);
@@ -95,7 +92,6 @@ public class DataUser {
         daftarPendonor.remove(pendonor.getIdPengguna(),pendonor);
         daftarGolDarahPendonor.remove(pendonor.getGolDarah(), pendonor);
         daftarRhesusPendonor.remove(pendonor.getRhesus(),pendonor);
-        daftarTanggalTerakhirDonorPendonor.remove(pendonor.getTanggalTerakhirDonor(), pendonor);
     }
 
     private void deleteUDD(User user){
@@ -147,10 +143,6 @@ public class DataUser {
 
     public Hashtable<rhesusEnum, User> getDaftarRhesusPendonor() {
         return daftarRhesusPendonor;
-    }
-
-    public Hashtable<String, User> getDaftarTanggalTerakhirDonorPendonor() {
-        return daftarTanggalTerakhirDonorPendonor;
     }
 
     public Hashtable<String, User> getDaftarAlamatUDD() {
