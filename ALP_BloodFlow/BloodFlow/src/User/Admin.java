@@ -1,16 +1,15 @@
 package User;
 
-import java.util.Scanner;
-
 import App.App;
 import HashTable.DataUser;
+import java.util.Scanner;
 
 public class Admin extends User {
 
     private Scanner scanner;
 
-    public Admin(String idPengguna, String username, String password) {
-        super(idPengguna, username, password);
+    public Admin( String username, String password, String noTelp) {
+        super( username, password, noTelp);
     }
 
     public void buatAkunInstansi(DataUser dataUtama) {
@@ -104,8 +103,8 @@ public class Admin extends User {
 
             dataUtama.deleteUser(targetHapus);
 
-            System.out.println("Akun " + tipe + " dengan ID '" + idTarget + "' (Username: " + usernameHapus
-                    + ") berhasil dihapus!");
+            System.out.println("Akun " + tipe + " dengan ID '" + idTarget + "' Username: " + usernameHapus
+                    + " berhasil dihapus!");
         } else {
             System.out.println("Pengguna dengan ID '" + idTarget + "' tidak ditemukan di sistem.");
         }

@@ -1,10 +1,9 @@
 package App;
 
-import java.util.Scanner;
-
 import Enum.*;
 import HashTable.*;
 import User.*;
+import java.util.Scanner;
 
 public class App {
     // hashtable belum done aku bakal buat wrapper class per atribut biar nanti bisa
@@ -38,7 +37,7 @@ public class App {
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-
+    dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
     }
 
     private void menuAwal() {
@@ -96,7 +95,7 @@ public class App {
         } while (salah);
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        System.out.println("sampek selesai login");
+        
     }
 
     private void tampilkanMenuUtama(App app) {
