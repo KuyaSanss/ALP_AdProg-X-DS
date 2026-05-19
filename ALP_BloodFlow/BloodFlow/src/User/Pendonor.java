@@ -40,8 +40,7 @@ public class Pendonor extends User {
 
     @Override
     public void tampilkanMenuUtama(App app) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
+        System.out.println("MENU PENDONOR");
     }
     
     
