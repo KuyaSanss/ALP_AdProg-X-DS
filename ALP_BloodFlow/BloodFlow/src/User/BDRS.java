@@ -35,7 +35,7 @@ public class BDRS extends User {
                 app.menuAwal();
                 break;
             case "1":
-                makeRequest();
+                makeRequest(app);
                 break;
             case "2":
 
@@ -82,17 +82,47 @@ public class BDRS extends User {
         System.out.print("Nomor Rekam Medis: ");
         form.setNomorRekamMedis(app.getSc().nextLine());
 
-        System.out.println("Jenis Kelamin");
-        System.out.println("1. LAKI LAKI");
-        System.out.println("2. PEREMPUAN");
-        System.out.print("Pilih: ");
+        // Error checking for Jenis Kelamin
+        while (true) {
+            System.out.println("Jenis Kelamin");
+            System.out.println("1. LAKI LAKI");
+            System.out.println("2. PEREMPUAN");
+            System.out.print("Pilih: ");
 
-        int pilihanJenisKelamin = Integer.parseInt(app.getSc().nextLine());
+            String input = app.getSc().nextLine();
 
-        if (pilihanJenisKelamin == 1) {
-            form.setJenisKelamin(JenisKelamin.LAKI_LAKI);
-        } else {
-            form.setJenisKelamin(JenisKelamin.PEREMPUAN);
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            // Check if all characters are digits
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            if (pilihan == 1) {
+                form.setJenisKelamin(JenisKelamin.LAKI_LAKI);
+                break;
+            } else if (pilihan == 2) {
+                form.setJenisKelamin(JenisKelamin.PEREMPUAN);
+                break;
+            } else {
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 atau 2.");
+                continue;
+            }
         }
 
         System.out.print("Ruang Perawatan: ");
@@ -103,49 +133,100 @@ public class BDRS extends User {
 
         System.out.println("\nB. DATA PERMINTAAN DARAH");
 
-        System.out.println("Komponen Darah");
-        System.out.println("1. WB");
-        System.out.println("2. PRC");
-        System.out.println("3. FFP");
-        System.out.println("4. TC");
-        System.out.println("5. LAINNYA");
-        System.out.print("Pilih: ");
+        // Error checking for Komponen Darah
+        while (true) {
+            System.out.println("Komponen Darah");
+            System.out.println("1. WB");
+            System.out.println("2. PRC");
+            System.out.println("3. FFP");
+            System.out.println("4. TC");
+            System.out.print("Pilih: ");
 
-        int pilihanKomponen = Integer.parseInt(app.getSc().nextLine());
+            String input = app.getSc().nextLine();
 
-        switch (pilihanKomponen) {
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
 
-            case 1:
-                form.setKomponenDarah(KomponenDarah.WB);
-                break;
+            // Check if all characters are digits
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
 
-            case 2:
-                form.setKomponenDarah(KomponenDarah.PRC);
-                break;
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
 
-            case 3:
-                form.setKomponenDarah(KomponenDarah.FFP);
-                break;
+            int pilihan = Integer.parseInt(input);
 
-            case 4:
-                form.setKomponenDarah(KomponenDarah.TC);
-                break;
-
-            default:
-                form.setKomponenDarah(KomponenDarah.LAINNYA);
+            switch (pilihan) {
+                case 1:
+                    form.setKomponenDarah(KomponenDarah.WB);
+                    break;
+                case 2:
+                    form.setKomponenDarah(KomponenDarah.PRC);
+                    break;
+                case 3:
+                    form.setKomponenDarah(KomponenDarah.FFP);
+                    break;
+                case 4:
+                    form.setKomponenDarah(KomponenDarah.TC);
+                    break;
+                default:
+                    System.out.println("Error: Pilihan tidak valid! Masukkan angka 1-5.");
+                    continue;
+            }
+            break;
         }
 
-        System.out.print("Jumlah Kantong: ");
-        form.setJumlahKantong(
-                Integer.parseInt(app.getSc().nextLine()));
+        // Error checking for Jumlah Kantong
+        while (true) {
+            System.out.print("Jumlah Kantong: ");
+            String input = app.getSc().nextLine();
+
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            // Check if all characters are digits
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int jumlah = Integer.parseInt(input);
+
+            if (jumlah <= 0) {
+                System.out.println("Error: Jumlah kantong harus lebih dari 0!");
+                continue;
+            }
+
+            form.setJumlahKantong(jumlah);
+            break;
+        }
 
         System.out.print("Rencana Waktu Transfusi: ");
-        form.setRencanaWaktuTransfusi(
-                app.getSc().nextLine());
+        form.setRencanaWaktuTransfusi(app.getSc().nextLine());
 
         System.out.print("Alasan Klinis Permintaan: ");
-        form.setAlasanKlinis(
-                app.getSc().nextLine());
+        form.setAlasanKlinis(app.getSc().nextLine());
 
         System.out.println("\nC. DATA DOKTER PEMINTA");
 

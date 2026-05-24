@@ -1,5 +1,8 @@
 package Enum;
 
 public enum KomponenDarah {
-    WB, PRC, FFP, TC
-}   
+    WB,
+    PRC,
+    FFP,
+    TC
+}
