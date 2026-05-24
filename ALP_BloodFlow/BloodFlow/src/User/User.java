@@ -2,8 +2,13 @@ package User;
 
 public abstract class User {
 
+<<<<<<< Updated upstream
     private String idPengguna,username,password,noTelp;
     private static int userTerbuat = 0;
+=======
+    protected String idPengguna,username,password,noTelp;
+    private static long userTerbuat = 0;
+>>>>>>> Stashed changes
 
     public User(String username, String password, String noTelp) {
         userTerbuat++;

@@ -33,7 +33,10 @@ public class App {
     public App() {
         onStartUp();
         menuAwal();
+<<<<<<< Updated upstream
         tampilkanMenuUtama();
+=======
+>>>>>>> Stashed changes
     }
 
     // buat baca data dari txt dulu
@@ -41,7 +44,7 @@ public class App {
 
     }
 
-    private void menuAwal() {
+    public void menuAwal() {
         String input;
 
         while (true) {
@@ -96,7 +99,12 @@ public class App {
         }while(salah);
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
+<<<<<<< Updated upstream
 
+=======
+        
+        tampilkanMenuUtama(this);
+>>>>>>> Stashed changes
     }
 
     private void tampilkanMenuUtama() {
@@ -184,5 +192,6 @@ public class App {
 
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
+        tampilkanMenuUtama(this);
     }
 }
