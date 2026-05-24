@@ -43,6 +43,7 @@ public class App {
     private void menuAwal() {
         String input;
 
+<<<<<<< Updated upstream
         System.out.println("""
                 === BloodLink===
                 1. Login
@@ -64,6 +65,31 @@ public class App {
             default:
                 System.out.println("Invalid Input!!");
                 menuAwal();
+=======
+        while (true) {
+            System.out.println("""
+                    === BloodLink===
+                    1. Login
+                    2. Registrasi sebagai pendonor
+                    3. Exit
+                    """);
+            System.out.print("Input: ");
+            input = sc.next() + sc.nextLine();
+            //todo trycatch
+            switch (input) {
+                case "1":
+                    login();
+                    break;
+                case "2":
+                    registrasi();
+                    break;
+                case "3":
+                    exit();
+                    break;
+                default:
+                    System.out.println("Invalid Input!!");
+            }
+>>>>>>> Stashed changes
         }
 
     }
@@ -187,4 +213,15 @@ public class App {
         currentUser = dataUser.getDaftarUsernameUser().get(username);
     }
 
+<<<<<<< Updated upstream
+=======
+    private void exit(){
+        save();
+        System.exit(0);
+    }
+
+    private void save(){
+        
+    }
+>>>>>>> Stashed changes
 }
