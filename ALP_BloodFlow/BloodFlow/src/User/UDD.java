@@ -1,15 +1,10 @@
 package User;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-
 import App.App;
-import HashTable.DataUser;
 import Request.Request;
 
 public class UDD extends User{
     private String alamat;
-    private String nama;
 
     public UDD(String username, String password, String noTelp, String alamat, String nama) {
         super(username, password, noTelp,nama);
@@ -53,7 +48,7 @@ public class UDD extends User{
 
     public void checkRequest(App app){
         Request request = Request.displayRequests(app);
-
+        request.approveRequest(app);
     }
 
 }
