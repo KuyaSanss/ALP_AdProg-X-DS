@@ -1,9 +1,13 @@
 package User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import App.App;
+import Enum.AlasanKlinis;
 import Enum.JenisKelamin;
 import Enum.KomponenDarah;
 import Request.Request;
@@ -11,8 +15,8 @@ import Request.Request;
 public class BDRS extends User {
     private String alamat;
 
-    public BDRS(String username, String password, String noTelp, String alamat,String nama) {
-        super(username, password, noTelp,nama);
+    public BDRS(String username, String password, String noTelp, String alamat, String nama) {
+        super(username, password, noTelp, nama);
         this.alamat = alamat;
     }
 
@@ -30,8 +34,8 @@ public class BDRS extends User {
         System.out.println("1. Buat permintaan darah");
         System.out.println("0. Log Out");
         System.out.print("input: ");
-        System.out.println();
         String input = app.getSc().next() + app.getSc().nextLine();
+        System.out.println();
         switch (input) {
             case "0":
                 app.menuAwal();
@@ -61,11 +65,9 @@ public class BDRS extends User {
 
         form.setAlamat(alamat);
 
-        System.out.print("Telepon: ");
-        form.setTelepon(app.getSc().nextLine());
+        form.setTelepon(noTelp);
 
-        System.out.print("Unit BDRS: ");
-        form.setUnitBDRS(app.getSc().nextLine());
+        form.setUnitBDRS(this);
 
         form.setTanggalPermintaan(LocalDate.now());
 
@@ -82,7 +84,40 @@ public class BDRS extends User {
         System.out.print("Nomor Rekam Medis: ");
         form.setNomorRekamMedis(app.getSc().nextLine());
 
-        // Error checking for Jenis Kelamin
+        jenisKelamin(app, form);
+
+        System.out.print("Ruang Perawatan: ");
+        form.setRuangPerawatan(app.getSc().nextLine());
+
+        System.out.print("Diagnosa Klinis: ");
+        form.setDiagnosaKlinis(app.getSc().nextLine());
+
+        System.out.println("\nB. DATA PERMINTAAN DARAH");
+
+        komponenDarah(app, form);
+
+        jumlahKantong(app, form);
+
+        rencanaWaktuTransfusi(app, form);
+
+        alasanKlinis(app, form);
+
+        System.out.println("\nC. DATA DOKTER PEMINTA");
+
+        System.out.print("Nama Dokter: ");
+        form.setNamaDokter(app.getSc().nextLine());
+
+        System.out.print("Jabatan: ");
+        form.setJabatan(app.getSc().nextLine());
+
+        System.out.print("Nomor SIP: ");
+        form.setNomorSIP(app.getSc().nextLine());
+
+    }
+
+    // #region Form
+
+    private void jenisKelamin(App app, Request form) {
         while (true) {
             System.out.println("Jenis Kelamin");
             System.out.println("1. LAKI LAKI");
@@ -124,16 +159,9 @@ public class BDRS extends User {
                 continue;
             }
         }
+    }
 
-        System.out.print("Ruang Perawatan: ");
-        form.setRuangPerawatan(app.getSc().nextLine());
-
-        System.out.print("Diagnosa Klinis: ");
-        form.setDiagnosaKlinis(app.getSc().nextLine());
-
-        System.out.println("\nB. DATA PERMINTAAN DARAH");
-
-        // Error checking for Komponen Darah
+    private void komponenDarah(App app, Request form) {
         while (true) {
             System.out.println("Komponen Darah");
             System.out.println("1. WB");
@@ -185,8 +213,9 @@ public class BDRS extends User {
             }
             break;
         }
+    }
 
-        // Error checking for Jumlah Kantong
+    private void jumlahKantong(App app, Request form) {
         while (true) {
             System.out.print("Jumlah Kantong: ");
             String input = app.getSc().nextLine();
@@ -221,24 +250,135 @@ public class BDRS extends User {
             form.setJumlahKantong(jumlah);
             break;
         }
-
-        System.out.print("Rencana Waktu Transfusi: ");
-        form.setRencanaWaktuTransfusi(app.getSc().nextLine());
-
-        System.out.print("Alasan Klinis Permintaan: ");
-        form.setAlasanKlinis(app.getSc().nextLine());
-
-        System.out.println("\nC. DATA DOKTER PEMINTA");
-
-        System.out.print("Nama Dokter: ");
-        form.setNamaDokter(app.getSc().nextLine());
-
-        System.out.print("Jabatan: ");
-        form.setJabatan(app.getSc().nextLine());
-
-        System.out.print("Nomor SIP: ");
-        form.setNomorSIP(app.getSc().nextLine());
-
     }
+
+    private void alasanKlinis(App app, Request form) {
+        while (true) {
+
+            System.out.println("Alasan Klinis Permintaan");
+
+            System.out.println("1. PERDARAHAN AKTIF");
+            System.out.println("2. OPERASI DARURAT");
+            System.out.println("3. SYOK HEMORAGIK");
+            System.out.println("4. ICU");
+            System.out.println("5. ANEMIA BERAT");
+            System.out.println("6. TRAUMA");
+            System.out.println("7. OPERASI TERJADWAL");
+            System.out.println("8. DEMAM BERDARAH");
+            System.out.println("9. ANEMIA RINGAN");
+            System.out.println("10. STANDBY");
+
+            System.out.print("Pilih: ");
+
+            String pilihan = app.getSc().nextLine();
+
+            switch (pilihan) {
+
+                case "1":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.PERDARAHAN_AKTIF);
+                    return;
+
+                case "2":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.OPERASI_DARURAT);
+                    return;
+
+                case "3":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.SYOK_HEMORAGIK);
+                    return;
+
+                case "4":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.ICU);
+                    return;
+
+                case "5":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.ANEMIA_BERAT);
+                    return;
+
+                case "6":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.TRAUMA);
+                    return;
+
+                case "7":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.OPERASI_TERJADWAL);
+                    return;
+
+                case "8":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.DEMAM_BERDARAH);
+                    return;
+
+                case "9":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.ANEMIA_RINGAN);
+                    return;
+
+                case "10":
+                    form.setAlasanKlinis(
+                            AlasanKlinis.STANDBY);
+                    return;
+
+                default:
+
+                    System.out.println(
+                            "Pilihan tidak valid.");
+            }
+        }
+    }
+
+    private void rencanaWaktuTransfusi(App app, Request form) {
+        while (true) {
+
+            try {
+
+                System.out.print(
+                        "Rencana Waktu Transfusi "
+                                + "(YYYY-MM-DD HH:MM): ");
+
+                String inputWaktu = app.getSc().nextLine();
+
+                DateTimeFormatter format = DateTimeFormatter.ofPattern(
+                        "yyyy-MM-dd HH:mm");
+
+                LocalDateTime waktuTransfusi = LocalDateTime.parse(
+                        inputWaktu,
+                        format);
+
+                if (waktuTransfusi.isBefore(
+                        LocalDateTime.now())) {
+
+                    System.out.println(
+                            "Waktu transfusi tidak boleh "
+                                    + "sebelum waktu sekarang.");
+
+                    continue;
+                }
+
+                form.setRencanaWaktuTransfusi(
+                        waktuTransfusi);
+
+                break;
+
+            } catch (DateTimeParseException e) {
+
+                System.out.println(
+                        "Format salah.");
+
+                System.out.println(
+                        "Gunakan format:");
+
+                System.out.println(
+                        "YYYY-MM-DD HH:MM");
+            }
+        }
+    }
+
+    // #endregion
 
 }

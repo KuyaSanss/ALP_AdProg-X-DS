@@ -1,6 +1,7 @@
 package Request;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import Enum.*;
@@ -17,7 +18,7 @@ public class Request {
     private String namaRumahSakit;
     private String alamat;
     private String telepon;
-    private String unitBDRS;
+    private BDRS unitBDRS;
     private LocalDate tanggalPermintaan;
     private LocalTime jamPermintaan;
 
@@ -30,8 +31,8 @@ public class Request {
 
     private KomponenDarah komponenDarah;
     private int jumlahKantong;
-    private String rencanaWaktuTransfusi;
-    private String alasanKlinis;
+    private LocalDateTime rencanaWaktuTransfusi;
+    private AlasanKlinis alasanKlinis;
 
     private String namaDokter;
     private String jabatan;
@@ -81,7 +82,7 @@ public class Request {
         System.out.println("Nama Dokter             : " + getNamaDokter());
         System.out.println("Jabatan                 : " + getJabatan());
         System.out.println("Nomor SIP               : " + getNomorSIP());
-        
+
     }
 
 
@@ -112,11 +113,11 @@ public class Request {
         this.telepon = telepon;
     }
 
-    public String getUnitBDRS() {
+    public BDRS getUnitBDRS() {
         return unitBDRS;
     }
 
-    public void setUnitBDRS(String unitBDRS) {
+    public void setUnitBDRS(BDRS unitBDRS) {
         this.unitBDRS = unitBDRS;
     }
 
@@ -204,19 +205,19 @@ public class Request {
         this.jumlahKantong = jumlahKantong;
     }
 
-    public String getRencanaWaktuTransfusi() {
+    public LocalDateTime getRencanaWaktuTransfusi() {
         return rencanaWaktuTransfusi;
     }
 
-    public void setRencanaWaktuTransfusi(String rencanaWaktuTransfusi) {
+    public void setRencanaWaktuTransfusi(LocalDateTime rencanaWaktuTransfusi) {
         this.rencanaWaktuTransfusi = rencanaWaktuTransfusi;
     }
 
-    public String getAlasanKlinis() {
+    public AlasanKlinis getAlasanKlinis() {
         return alasanKlinis;
     }
 
-    public void setAlasanKlinis(String alasanKlinis) {
+    public void setAlasanKlinis(AlasanKlinis alasanKlinis) {
         this.alasanKlinis = alasanKlinis;
     }
 
