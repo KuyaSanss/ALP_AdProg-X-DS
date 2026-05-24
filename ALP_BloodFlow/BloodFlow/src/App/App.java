@@ -31,18 +31,17 @@ public class App {
     // #endregion
 
     public App() {
-        do {
-            onStartUp();
-            menuAwal();
-        } while (true);
+        onStartUp();
+        menuAwal();
     }
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-        dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
+        dataUser.insertUser(new Admin("admin", "admin", "085887312500", "Budi"));
+        dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
     }
 
-    private void menuAwal() {
+    public void menuAwal() {
         String input;
 
         System.out.println("""
@@ -85,7 +84,7 @@ public class App {
             if (dataUser.getDaftarUsernameUser().containsKey(username)) {
                 if (dataUser.getDaftarUsernameUser().isEmpty() ||
                         dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
-                    break;
+                    salah = false;
                 } else {
                     System.out.println("Password salah");
                     salah = true;
@@ -95,6 +94,8 @@ public class App {
                 salah = true;
             }
         } while (salah);
+
+        System.out.println();
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
         if (currentUser instanceof Pendonor) {
@@ -106,21 +107,7 @@ public class App {
 
         String input;
 
-        do {
-            currentUser.tampilkanMenuUtama(this);
-            System.out.print("Input: ");
-            input = sc.next() + sc.nextLine();
-
-            switch (input) {
-                case "1":
-                    ((Pendonor) currentUser).tampilkanRiwayatDonor();
-                    break;
-                case "2":
-                    return;
-                default:
-                    System.out.println("Input tidak valid");
-            }
-        } while (true);
+        tampilkanMenuUtama(this);
     }
 
     private void tampilkanMenuUtama(App app) {
@@ -160,6 +147,19 @@ public class App {
 
         golDarahEnum gol = null;
         String golDarah = "z";
+        String nama="";
+
+        do {
+            System.out.print("Nama sesuai KTP: ");
+            nama = sc.next() + sc.nextLine();
+
+            if (username.equalsIgnoreCase("")) {
+
+                System.out.println("Nama tidak boleh kosong");
+            } else {
+                break;
+            }
+        } while (true);
 
         do {
             System.out.print("Golongan Darah: ");
@@ -207,13 +207,21 @@ public class App {
             }
         } while (true);
 
-        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
+        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus,nama));
         // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
-
-        Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
+        currentUser = dataUser.getDaftarUsernameUser().get(username);
+        
         System.out.println("Registrasi berhasil, silakan login");
+        menuAwal();
+    }
+
+    private void exit() {
+        save();
+        System.exit(0);
+    }
+
+    private void save() {
+
     }
 
 }

@@ -4,10 +4,11 @@ import App.App;
 
 public abstract class User {
 
-    protected String idPengguna,username,password,noTelp;
-    private static int userTerbuat = 0;
+    protected String idPengguna,username,password,noTelp,nama;
 
-    public User(String username, String password, String noTelp) {
+    private static long userTerbuat = 0;
+
+    public User(String username, String password, String noTelp,String nama) {
         userTerbuat++;
         idPengguna= "PD"+userTerbuat;
         this.username = username;
@@ -52,6 +53,15 @@ public abstract class User {
 
     public void setNoTelp(String noTelp) {
         this.noTelp = noTelp;
+    }
+    
+    public String getNama() {
+        return nama;
+    }
+
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     //#endregion
