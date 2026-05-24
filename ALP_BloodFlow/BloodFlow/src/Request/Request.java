@@ -8,13 +8,13 @@ import Enum.*;
 import User.BDRS;
 
 public class Request {
-    //untuk id
+    // untuk id
     private static long requestTerbuat;
-    //general
+    // general
     private String idPermintaan;
     private golDarahEnum golonganDarah;
     private BDRS bdrs;
-    //form
+    // form
     private String namaRumahSakit;
     private String alamat;
     private String telepon;
@@ -37,18 +37,11 @@ public class Request {
     private String namaDokter;
     private String jabatan;
     private String nomorSIP;
-    
 
-    public Request(BDRS bdrs){
-        idPermintaan="RQ"+requestTerbuat;
+    public Request(BDRS bdrs) {
+        idPermintaan = "RQ" + requestTerbuat;
     }
 
-    // TODO the most important function
-    public void getUrgency(){
-
-    }
-
-    
 
     public void tampilkanForm() {
 
@@ -85,11 +78,24 @@ public class Request {
 
     }
 
+    public int hitungWeight() {
+
+        int urgency = alasanKlinis.getSkor();
+
+        int komponen = komponenDarah.getSkor();
+
+        int kantong = jumlahKantong;
+
+        return urgency * 1000 +
+                komponen * 100 +
+                kantong * 10;
+    }
 
     
-    //  #region Getter Setter
 
-        public String getNamaRumahSakit() {
+    // #region Getter Setter
+
+    public String getNamaRumahSakit() {
         return namaRumahSakit;
     }
 
@@ -122,8 +128,8 @@ public class Request {
     }
 
     public LocalDate getTanggalPermintaan() {
-    return tanggalPermintaan;
-}
+        return tanggalPermintaan;
+    }
 
     public void setTanggalPermintaan(
             LocalDate tanggalPermintaan) {
@@ -245,7 +251,6 @@ public class Request {
         this.nomorSIP = nomorSIP;
     }
 
-
-    //  #endregion
+    // #endregion
 
 }

@@ -55,6 +55,10 @@ public class BDRS extends User {
         }
     }
 
+    
+
+    // #region Form
+
     public void makeRequest(App app) {
 
         Request form = new Request(this);
@@ -115,8 +119,6 @@ public class BDRS extends User {
 
     }
 
-    // #region Form
-
     private void jenisKelamin(App app, Request form) {
         while (true) {
             System.out.println("Jenis Kelamin");
@@ -164,10 +166,10 @@ public class BDRS extends User {
     private void komponenDarah(App app, Request form) {
         while (true) {
             System.out.println("Komponen Darah");
-            System.out.println("1. WB");
-            System.out.println("2. PRC");
-            System.out.println("3. FFP");
-            System.out.println("4. TC");
+            System.out.println("1. Whole Blood");
+            System.out.println("2. Packed Red Cells");
+            System.out.println("3. Fresh Frozen Plasma");
+            System.out.println("4. Thrombocyte Concentrate");
             System.out.print("Pilih: ");
 
             String input = app.getSc().nextLine();
@@ -196,16 +198,16 @@ public class BDRS extends User {
 
             switch (pilihan) {
                 case 1:
-                    form.setKomponenDarah(KomponenDarah.WB);
+                    form.setKomponenDarah(KomponenDarah.WHOLE_BLOOD);
                     break;
                 case 2:
-                    form.setKomponenDarah(KomponenDarah.PRC);
+                    form.setKomponenDarah(KomponenDarah.PACKED_RED_CELL);
                     break;
                 case 3:
-                    form.setKomponenDarah(KomponenDarah.FFP);
+                    form.setKomponenDarah(KomponenDarah.FRESH_FROZEN_PLASMA);
                     break;
                 case 4:
-                    form.setKomponenDarah(KomponenDarah.TC);
+                    form.setKomponenDarah(KomponenDarah.THROMBOCYTE_CONCENTRATE);
                     break;
                 default:
                     System.out.println("Error: Pilihan tidak valid! Masukkan angka 1-5.");

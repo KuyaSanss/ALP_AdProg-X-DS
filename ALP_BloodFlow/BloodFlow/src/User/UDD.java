@@ -1,5 +1,8 @@
 package User;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 import App.App;
 
 public class UDD extends User{
@@ -21,7 +24,34 @@ public class UDD extends User{
 
     @Override
     public void tampilkanMenuUtama(App app) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
+        System.out.println("=== MENU UTAMA ===");
+        System.out.println("1. Buat Cek Permintaan");
+        System.out.println("0. Log Out");
+        System.out.print("input: ");
+        String input = app.getSc().next() + app.getSc().nextLine();
+        System.out.println();
+        switch (input) {
+            case "0":
+                app.menuAwal();
+                break;
+            case "1":
+                checkRequest(app);
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+                tampilkanMenuUtama(app);
+        }
     }
+
+    public void checkRequest(App app){
+        PriorityQueue<Integer> heap = new PriorityQueue<>((Comparator.reverseOrder()););
+
+    }
+
 }
