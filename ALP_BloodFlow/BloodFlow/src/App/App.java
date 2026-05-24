@@ -33,10 +33,6 @@ public class App {
     public App() {
         onStartUp();
         menuAwal();
-<<<<<<< Updated upstream
-        tampilkanMenuUtama();
-=======
->>>>>>> Stashed changes
     }
 
     // buat baca data dari txt dulu
@@ -99,16 +95,12 @@ public class App {
         }while(salah);
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-<<<<<<< Updated upstream
-
-=======
         
         tampilkanMenuUtama(this);
->>>>>>> Stashed changes
     }
 
-    private void tampilkanMenuUtama() {
-        currentUser.tampilkanMenuUtama();
+    private void tampilkanMenuUtama(App app) {
+        currentUser.tampilkanMenuUtama(app);
     }
 
     private void registrasi() {

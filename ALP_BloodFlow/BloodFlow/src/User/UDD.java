@@ -1,5 +1,7 @@
 package User;
 
+import App.App;
+
 public class UDD extends User{
     private String alamat;
 
@@ -17,7 +19,7 @@ public class UDD extends User{
     }
 
     @Override
-    public void tampilkanMenuUtama() {
+    public void tampilkanMenuUtama(App app) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
     }

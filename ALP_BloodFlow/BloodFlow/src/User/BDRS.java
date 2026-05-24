@@ -1,12 +1,14 @@
 package User;
 
-<<<<<<< Updated upstream
-=======
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import App.App;
+import Enum.JenisKelamin;
+import Enum.KomponenDarah;
 import Request.Request;
 
->>>>>>> Stashed changes
-public class BDRS extends User{
+public class BDRS extends User {
     private String alamat;
 
     public BDRS(String username, String password, String noTelp, String alamat) {
@@ -23,11 +25,6 @@ public class BDRS extends User{
     }
 
     @Override
-<<<<<<< Updated upstream
-    public void tampilkanMenuUtama() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
-=======
     public void tampilkanMenuUtama(App app) {
         System.out.println("=== MENU UTAMA ===");
         System.out.println("1. Buat permintaan darah");
@@ -50,99 +47,117 @@ public class BDRS extends User{
                 System.out.println("Invalid Input!!");
                 tampilkanMenuUtama(app);
         }
->>>>>>> Stashed changes
     }
 
-    public void makeRequest(App app){
+    public void makeRequest(App app) {
 
-        Request form = new Request();
-        
+        Request form = new Request(this);
+
         System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
 
         System.out.print("Nama Rumah Sakit: ");
-        form.hospitalName = input.nextLine();
+        form.setNamaRumahSakit(app.getSc().nextLine());
 
         System.out.print("Alamat: ");
-        form.address = input.nextLine();
+        form.setAlamat(app.getSc().nextLine());
 
         System.out.print("Telepon: ");
-        form.phone = input.nextLine();
+        form.setTelepon(app.getSc().nextLine());
 
         System.out.print("Unit BDRS: ");
-        form.bdrsUnit = input.nextLine();
+        form.setUnitBDRS(app.getSc().nextLine());
 
-        System.out.print("Tanggal permintaan: ");
-        form.requestDate = input.nextLine();
+        form.setTanggalPermintaan(LocalDate.now());
 
-        System.out.print("Jam permintaan: ");
-        form.requestTime = input.nextLine();
+        form.setJamPermintaan(LocalTime.now());
 
         System.out.println("\nA. DATA PASIEN");
 
-        System.out.print("Nama pasien: ");
-        form.patientName = input.nextLine();
+        System.out.print("Nama Pasien: ");
+        form.setNamaPasien(app.getSc().nextLine());
 
-        System.out.print("Tanggal lahir atau usia: ");
-        form.birthDateOrAge = input.nextLine();
+        System.out.print("Tanggal Lahir atau Usia: ");
+        form.setTanggalLahirAtauUsia(app.getSc().nextLine());
 
-        System.out.print("Nomor rekam medis: ");
-        form.medicalRecordNumber = input.nextLine();
+        System.out.print("Nomor Rekam Medis: ");
+        form.setNomorRekamMedis(app.getSc().nextLine());
 
-        System.out.println("Jenis kelamin");
+        System.out.println("Jenis Kelamin");
         System.out.println("1. LAKI LAKI");
         System.out.println("2. PEREMPUAN");
         System.out.print("Pilih: ");
-        int genderChoice = Integer.parseInt(input.nextLine());
 
-        if (genderChoice == 1) {
-            form.gender = Gender.LAKI_LAKI;
+        int pilihanJenisKelamin = Integer.parseInt(app.getSc().nextLine());
+
+        if (pilihanJenisKelamin == 1) {
+            form.setJenisKelamin(JenisKelamin.LAKI_LAKI);
         } else {
-            form.gender = Gender.PEREMPUAN;
+            form.setJenisKelamin(JenisKelamin.PEREMPUAN);
         }
 
-        System.out.print("Ruang perawatan: ");
-        form.ward = input.nextLine();
+        System.out.print("Ruang Perawatan: ");
+        form.setRuangPerawatan(app.getSc().nextLine());
 
-        System.out.print("Diagnosa klinis: ");
-        form.clinicalDiagnosis = input.nextLine();
+        System.out.print("Diagnosa Klinis: ");
+        form.setDiagnosaKlinis(app.getSc().nextLine());
 
         System.out.println("\nB. DATA PERMINTAAN DARAH");
 
-        System.out.println("Jenis komponen darah yang diminta");
+        System.out.println("Komponen Darah");
         System.out.println("1. WB");
         System.out.println("2. PRC");
         System.out.println("3. FFP");
         System.out.println("4. TC");
-        System.out.println("5. OTHER");
+        System.out.println("5. LAINNYA");
         System.out.print("Pilih: ");
-        int componentChoice = Integer.parseInt(input.nextLine());
 
-        switch (componentChoice) {
-            case 1 -> form.bloodComponent = BloodComponent.WB;
-            case 2 -> form.bloodComponent = BloodComponent.PRC;
-            case 3 -> form.bloodComponent = BloodComponent.FFP;
-            case 4 -> form.bloodComponent = BloodComponent.TC;
-            default -> form.bloodComponent = BloodComponent.OTHER;
+        int pilihanKomponen = Integer.parseInt(app.getSc().nextLine());
+
+        switch (pilihanKomponen) {
+
+            case 1:
+                form.setKomponenDarah(KomponenDarah.WB);
+                break;
+
+            case 2:
+                form.setKomponenDarah(KomponenDarah.PRC);
+                break;
+
+            case 3:
+                form.setKomponenDarah(KomponenDarah.FFP);
+                break;
+
+            case 4:
+                form.setKomponenDarah(KomponenDarah.TC);
+                break;
+
+            default:
+                form.setKomponenDarah(KomponenDarah.LAINNYA);
         }
 
-        System.out.print("Jumlah kantong: ");
-        form.bloodUnits = Integer.parseInt(input.nextLine());
+        System.out.print("Jumlah Kantong: ");
+        form.setJumlahKantong(
+                Integer.parseInt(app.getSc().nextLine()));
 
-        System.out.print("Rencana waktu transfusi: ");
-        form.transfusionPlanTime = input.nextLine();
+        System.out.print("Rencana Waktu Transfusi: ");
+        form.setRencanaWaktuTransfusi(
+                app.getSc().nextLine());
 
-        System.out.print("Alasan klinis permintaan: ");
-        form.clinicalReason = input.nextLine();
+        System.out.print("Alasan Klinis Permintaan: ");
+        form.setAlasanKlinis(
+                app.getSc().nextLine());
 
         System.out.println("\nC. DATA DOKTER PEMINTA");
 
-        System.out.print("Nama dokter: ");
-        form.doctorName = input.nextLine();
+        System.out.print("Nama Dokter: ");
+        form.setNamaDokter(app.getSc().nextLine());
 
         System.out.print("Jabatan: ");
-        form.doctorPosition = input.nextLine();
+        form.setJabatan(app.getSc().nextLine());
 
         System.out.print("Nomor SIP: ");
-        form.sipNumber = input.nextLine();
+        form.setNomorSIP(app.getSc().nextLine());
+
     }
+
 }

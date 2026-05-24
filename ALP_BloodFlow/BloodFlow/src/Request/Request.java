@@ -1,42 +1,44 @@
 package Request;
 
-import Enum.golDarahEnum;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import Enum.*;
 import User.BDRS;
 
 public class Request {
     //untuk id
     private static long requestTerbuat;
     //general
-    private String idPermintaan, namaRumahSakit;
+    private String idPermintaan;
     private golDarahEnum golonganDarah;
-    private int jumlahKantong;
     private BDRS bdrs;
     //form
-    String hospitalName;
-    String address;
-    String phone;
-    String bdrsUnit;
-    String requestDate;
-    String requestTime;
+    private String namaRumahSakit;
+    private String alamat;
+    private String telepon;
+    private String unitBDRS;
+    private LocalDate tanggalPermintaan;
+    private LocalTime jamPermintaan;
 
-    String patientName;
-    String birthDateOrAge;
-    String medicalRecordNumber;
-    Gender gender;
-    String ward;
-    String clinicalDiagnosis;
+    private String namaPasien;
+    private String tanggalLahirAtauUsia;
+    private String nomorRekamMedis;
+    private JenisKelamin jenisKelamin;
+    private String ruangPerawatan;
+    private String diagnosaKlinis;
 
-    BloodComponent bloodComponent;
-    int bloodUnits;
-    String transfusionPlanTime;
-    String clinicalReason;
+    private KomponenDarah komponenDarah;
+    private int jumlahKantong;
+    private String rencanaWaktuTransfusi;
+    private String alasanKlinis;
 
-    String doctorName;
-    String doctorPosition;
-    String sipNumber;
+    private String namaDokter;
+    private String jabatan;
+    private String nomorSIP;
     
 
-    public Request(){
+    public Request(BDRS bdrs){
         idPermintaan="RQ"+requestTerbuat;
     }
 
@@ -60,4 +62,165 @@ public class Request {
     }
 
     
+    //  #region Getter Setter
+
+        public String getNamaRumahSakit() {
+        return namaRumahSakit;
+    }
+
+    public void setNamaRumahSakit(String namaRumahSakit) {
+        this.namaRumahSakit = namaRumahSakit;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getTelepon() {
+        return telepon;
+    }
+
+    public void setTelepon(String telepon) {
+        this.telepon = telepon;
+    }
+
+    public String getUnitBDRS() {
+        return unitBDRS;
+    }
+
+    public void setUnitBDRS(String unitBDRS) {
+        this.unitBDRS = unitBDRS;
+    }
+
+    public LocalDate getTanggalPermintaan() {
+    return tanggalPermintaan;
+}
+
+    public void setTanggalPermintaan(
+            LocalDate tanggalPermintaan) {
+
+        this.tanggalPermintaan = tanggalPermintaan;
+    }
+
+    public LocalTime getJamPermintaan() {
+        return jamPermintaan;
+    }
+
+    public void setJamPermintaan(
+            LocalTime jamPermintaan) {
+
+        this.jamPermintaan = jamPermintaan;
+    }
+
+    public String getNamaPasien() {
+        return namaPasien;
+    }
+
+    public void setNamaPasien(String namaPasien) {
+        this.namaPasien = namaPasien;
+    }
+
+    public String getTanggalLahirAtauUsia() {
+        return tanggalLahirAtauUsia;
+    }
+
+    public void setTanggalLahirAtauUsia(String tanggalLahirAtauUsia) {
+        this.tanggalLahirAtauUsia = tanggalLahirAtauUsia;
+    }
+
+    public String getNomorRekamMedis() {
+        return nomorRekamMedis;
+    }
+
+    public void setNomorRekamMedis(String nomorRekamMedis) {
+        this.nomorRekamMedis = nomorRekamMedis;
+    }
+
+    public JenisKelamin getJenisKelamin() {
+        return jenisKelamin;
+    }
+
+    public void setJenisKelamin(JenisKelamin jenisKelamin) {
+        this.jenisKelamin = jenisKelamin;
+    }
+
+    public String getRuangPerawatan() {
+        return ruangPerawatan;
+    }
+
+    public void setRuangPerawatan(String ruangPerawatan) {
+        this.ruangPerawatan = ruangPerawatan;
+    }
+
+    public String getDiagnosaKlinis() {
+        return diagnosaKlinis;
+    }
+
+    public void setDiagnosaKlinis(String diagnosaKlinis) {
+        this.diagnosaKlinis = diagnosaKlinis;
+    }
+
+    public KomponenDarah getKomponenDarah() {
+        return komponenDarah;
+    }
+
+    public void setKomponenDarah(KomponenDarah komponenDarah) {
+        this.komponenDarah = komponenDarah;
+    }
+
+    public int getJumlahKantong() {
+        return jumlahKantong;
+    }
+
+    public void setJumlahKantong(int jumlahKantong) {
+        this.jumlahKantong = jumlahKantong;
+    }
+
+    public String getRencanaWaktuTransfusi() {
+        return rencanaWaktuTransfusi;
+    }
+
+    public void setRencanaWaktuTransfusi(String rencanaWaktuTransfusi) {
+        this.rencanaWaktuTransfusi = rencanaWaktuTransfusi;
+    }
+
+    public String getAlasanKlinis() {
+        return alasanKlinis;
+    }
+
+    public void setAlasanKlinis(String alasanKlinis) {
+        this.alasanKlinis = alasanKlinis;
+    }
+
+    public String getNamaDokter() {
+        return namaDokter;
+    }
+
+    public void setNamaDokter(String namaDokter) {
+        this.namaDokter = namaDokter;
+    }
+
+    public String getJabatan() {
+        return jabatan;
+    }
+
+    public void setJabatan(String jabatan) {
+        this.jabatan = jabatan;
+    }
+
+    public String getNomorSIP() {
+        return nomorSIP;
+    }
+
+    public void setNomorSIP(String nomorSIP) {
+        this.nomorSIP = nomorSIP;
+    }
+
+
+    //  #endregion
+
 }

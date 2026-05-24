@@ -1,14 +1,11 @@
 package User;
 
+import App.App;
+
 public abstract class User {
 
-<<<<<<< Updated upstream
-    private String idPengguna,username,password,noTelp;
-    private static int userTerbuat = 0;
-=======
     protected String idPengguna,username,password,noTelp;
     private static long userTerbuat = 0;
->>>>>>> Stashed changes
 
     public User(String username, String password, String noTelp) {
         userTerbuat++;
@@ -21,7 +18,7 @@ public abstract class User {
     
     //abstract classes
 
-    public abstract void tampilkanMenuUtama();
+    public abstract void tampilkanMenuUtama(App app);
 
     //#region Getter Setter
 
@@ -56,6 +53,7 @@ public abstract class User {
     public void setNoTelp(String noTelp) {
         this.noTelp = noTelp;
     }
+    
 
     //#endregion
 }

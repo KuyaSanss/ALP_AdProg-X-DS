@@ -1,5 +1,7 @@
 package User;
 
+import App.App;
+
 public class Admin extends User{
     public Admin(String username, String password, String noTelp) {
         super(username, password, noTelp);
@@ -7,7 +9,7 @@ public class Admin extends User{
     }
 
     @Override
-    public void tampilkanMenuUtama() {
+    public void tampilkanMenuUtama(App app) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
     }
