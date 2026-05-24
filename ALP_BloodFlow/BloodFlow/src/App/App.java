@@ -2,7 +2,6 @@ package App;
 
 import Enum.*;
 import HashTable.*;
-import Model.RiwayatDonor;
 import User.*;
 import java.util.Scanner;
 
@@ -32,16 +31,21 @@ public class App {
 
     public App() {
         onStartUp();
-        menuAwal();
+        while (true) {
+            menuAwal();
+
+            if (currentUser != null) {
+                tampilkanMenuUtama(this);
+            }
+        }
     }
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-        dataUser.insertUser(new Admin("admin", "admin", "085887312500", "Budi"));
-        dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
+        dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
     }
 
-    public void menuAwal() {
+    private void menuAwal() {
         String input;
 
         System.out.println("""
@@ -82,9 +86,8 @@ public class App {
             password = sc.next() + sc.nextLine();
 
             if (dataUser.getDaftarUsernameUser().containsKey(username)) {
-                if (dataUser.getDaftarUsernameUser().isEmpty() ||
-                        dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
-                    salah = false;
+                if (dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
+                    break;
                 } else {
                     System.out.println("Password salah");
                     salah = true;
@@ -95,23 +98,17 @@ public class App {
             }
         } while (salah);
 
-        System.out.println();
-
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        if (currentUser instanceof Pendonor) {
-            menuPendonor();
-        }
-    }
+        System.out.println(
+                "Login berhasil sebagai: "
+                        + currentUser.getClass().getSimpleName());
 
-    private void menuPendonor() {
-
-        String input;
-
-        tampilkanMenuUtama(this);
     }
 
     private void tampilkanMenuUtama(App app) {
+
         currentUser.tampilkanMenuUtama(app);
+        
     }
 
     private void registrasi() {
@@ -147,19 +144,6 @@ public class App {
 
         golDarahEnum gol = null;
         String golDarah = "z";
-        String nama="";
-
-        do {
-            System.out.print("Nama sesuai KTP: ");
-            nama = sc.next() + sc.nextLine();
-
-            if (username.equalsIgnoreCase("")) {
-
-                System.out.println("Nama tidak boleh kosong");
-            } else {
-                break;
-            }
-        } while (true);
 
         do {
             System.out.print("Golongan Darah: ");
@@ -207,21 +191,9 @@ public class App {
             }
         } while (true);
 
-        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus,nama));
+        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        
-        System.out.println("Registrasi berhasil, silakan login");
-        menuAwal();
-    }
-
-    private void exit() {
-        save();
-        System.exit(0);
-    }
-
-    private void save() {
-
     }
 
 }

@@ -8,11 +8,12 @@ public class Admin extends User {
 
     private Scanner scanner;
 
-    public Admin( String username, String password, String noTelp,String nama) {
-        super( username, password, noTelp,nama);
+    public Admin( String username, String password, String noTelp) {
+        super( username, password, noTelp);
     }
 
     public void buatAkunInstansi(DataUser dataUtama) {
+        System.out.println("");
         System.out.println("=== BUAT AKUN INSTANSI BARU ===");
 
         int pilihanInstansi = 0;
@@ -61,9 +62,8 @@ public class Admin extends User {
         System.out.print("Masukkan Nomor Telepon       : ");
         String noTelp = scanner.nextLine();
 
-
         if (pilihanInstansi == 1) {
-            BDRS rsBaru = new BDRS(username, password, noTelp, alamat,nama);
+            BDRS rsBaru = new BDRS(username, password, noTelp, alamat);
 
             dataUtama.insertUser(rsBaru);
 
@@ -71,7 +71,7 @@ public class Admin extends User {
             cetakRekapData(rsBaru, "Rumah Sakit");
 
         } else {
-            UDD uddBaru = new UDD(username, password, noTelp, alamat,nama);
+            UDD uddBaru = new UDD(username, password, noTelp, alamat);
 
             dataUtama.insertUser(uddBaru);
 
@@ -211,7 +211,8 @@ public class Admin extends User {
         boolean kondisi = true;
 
         while (kondisi) {
-            System.out.println("\n=== MENU ADMIN ===");
+            System.out.println("");
+            System.out.println("=== MENU ADMIN ===");
             System.out.println("1. Buat Akun Instansi Baru (BDRS/UDD)");
             System.out.println("2. Edit Akun Instansi");
             System.out.println("3. Hapus Akun Instansi");
@@ -231,6 +232,7 @@ public class Admin extends User {
                     break;
                 case "4":
                     System.out.println("Berhasil logout dari menu admin.");
+                    System.out.println("");
                     kondisi = false;
                     break;
                 default:
