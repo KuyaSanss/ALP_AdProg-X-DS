@@ -11,8 +11,8 @@ import Request.Request;
 public class BDRS extends User {
     private String alamat;
 
-    public BDRS(String username, String password, String noTelp, String alamat) {
-        super(username, password, noTelp);
+    public BDRS(String username, String password, String noTelp, String alamat,String nama) {
+        super(username, password, noTelp,nama);
         this.alamat = alamat;
     }
 
@@ -29,6 +29,8 @@ public class BDRS extends User {
         System.out.println("=== MENU UTAMA ===");
         System.out.println("1. Buat permintaan darah");
         System.out.println("0. Log Out");
+        System.out.print("input: ");
+        System.out.println();
         String input = app.getSc().next() + app.getSc().nextLine();
         switch (input) {
             case "0":
@@ -55,11 +57,9 @@ public class BDRS extends User {
 
         System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
 
-        System.out.print("Nama Rumah Sakit: ");
-        form.setNamaRumahSakit(app.getSc().nextLine());
+        form.setNamaRumahSakit(nama);
 
-        System.out.print("Alamat: ");
-        form.setAlamat(app.getSc().nextLine());
+        form.setAlamat(alamat);
 
         System.out.print("Telepon: ");
         form.setTelepon(app.getSc().nextLine());

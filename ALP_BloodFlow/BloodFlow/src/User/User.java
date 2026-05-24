@@ -4,10 +4,10 @@ import App.App;
 
 public abstract class User {
 
-    protected String idPengguna,username,password,noTelp;
+    protected String idPengguna,username,password,noTelp,nama;
     private static long userTerbuat = 0;
 
-    public User(String username, String password, String noTelp) {
+    public User(String username, String password, String noTelp,String nama) {
         userTerbuat++;
         idPengguna= "PD"+userTerbuat;
         this.username = username;

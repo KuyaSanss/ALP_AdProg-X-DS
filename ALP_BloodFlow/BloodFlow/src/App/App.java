@@ -32,40 +32,39 @@ public class App {
     public App() {
         onStartUp();
         menuAwal();
-        tampilkanMenuUtama(this);
     }
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-    dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
+        dataUser.insertUser(new Admin("admin", "admin", "085887312500", "Budi"));
+        dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
     }
 
     public void menuAwal() {
         String input;
 
-        while (true) {
-            System.out.println("""
-                    === BloodLink===
-                    1. Login
-                    2. Registrasi sebagai pendonor
-                    3. Exit
-                    """);
-            System.out.print("Input: ");
-            input = sc.next() + sc.nextLine();
-            //todo trycatch
-            switch (input) {
-                case "1":
-                    login();
-                    break;
-                case "2":
-                    registrasi();
-                    break;
-                case "3":
-                    exit();
-                    break;
-                default:
-                    System.out.println("Invalid Input!!");
-            }
+        System.out.println("""
+                === BloodLink===
+                1. Login
+                2. Registrasi sebagai pendonor
+                3. Exit
+                """);
+        System.out.print("Input: ");
+        input = sc.next() + sc.nextLine();
+        // todo trycatch
+        switch (input) {
+            case "1":
+                login();
+                break;
+            case "2":
+                registrasi();
+                break;
+            case "3":
+                exit();
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+                menuAwal();
         }
 
     }
@@ -85,7 +84,7 @@ public class App {
             if (dataUser.getDaftarUsernameUser().containsKey(username)) {
                 if (dataUser.getDaftarUsernameUser().isEmpty() ||
                         dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
-                    break;
+                    salah = false;
                 } else {
                     System.out.println("Password salah");
                     salah = true;
@@ -96,8 +95,11 @@ public class App {
             }
         } while (salah);
 
+        System.out.println();
+
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        
+
+        tampilkanMenuUtama(this);
     }
 
     private void tampilkanMenuUtama(App app) {
@@ -137,6 +139,19 @@ public class App {
 
         golDarahEnum gol = null;
         String golDarah = "z";
+        String nama="";
+
+        do {
+            System.out.print("Nama sesuai KTP: ");
+            nama = sc.next() + sc.nextLine();
+
+            if (username.equalsIgnoreCase("")) {
+
+                System.out.println("Nama tidak boleh kosong");
+            } else {
+                break;
+            }
+        } while (true);
 
         do {
             System.out.print("Golongan Darah: ");
@@ -184,17 +199,19 @@ public class App {
             }
         } while (true);
 
-        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
+        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus,nama));
         // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
+
+        tampilkanMenuUtama(this);
     }
 
-    private void exit(){
+    private void exit() {
         save();
         System.exit(0);
     }
 
-    private void save(){
-        
+    private void save() {
+
     }
 }

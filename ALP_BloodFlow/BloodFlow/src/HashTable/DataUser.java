@@ -34,7 +34,7 @@ public class DataUser {
     public void insertUser(User user){
         //all
         daftarUser.put(user.getIdPengguna(),user);
-        daftarUser.put(user.getUsername(),user);
+        daftarUsernameUser.put(user.getUsername(),user);
         //specific
         if(user instanceof Pendonor){
             insertPendonor(user);

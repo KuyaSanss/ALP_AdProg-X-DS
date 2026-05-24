@@ -49,17 +49,41 @@ public class Request {
 
     
 
-    public void printForm() {
+    public void tampilkanForm() {
 
-        System.out.println("=== BLOOD REQUEST FORM ===");
-        System.out.println("Patient Name    : " + patientName);
-        System.out.println("Validity        : " + validity);
-        System.out.println("Urgency Level   : " + urgencyLevel);
-        System.out.println("Needed Time     : " + neededTime);
-        System.out.println("Component Type  : " + componentType);
-        System.out.println("Stock Level     : " + stockLevel);
-        System.out.println("Patient Category: " + patientCategory);
+        System.out.println("\n=== FORM PERMINTAAN DARAH ===");
+
+        System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
+        System.out.println("Alamat                  : " + getAlamat());
+        System.out.println("Telepon                 : " + getTelepon());
+        System.out.println("Unit BDRS               : " + getUnitBDRS());
+        System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
+        System.out.println("Jam Permintaan          : " + getJamPermintaan());
+
+        System.out.println("\nA. DATA PASIEN");
+
+        System.out.println("Nama Pasien             : " + getNamaPasien());
+        System.out.println("Tanggal Lahir atau Usia : " + getTanggalLahirAtauUsia());
+        System.out.println("Nomor Rekam Medis       : " + getNomorRekamMedis());
+        System.out.println("Jenis Kelamin           : " + getJenisKelamin());
+        System.out.println("Ruang Perawatan         : " + getRuangPerawatan());
+        System.out.println("Diagnosa Klinis         : " + getDiagnosaKlinis());
+
+        System.out.println("\nB. DATA PERMINTAAN DARAH");
+
+        System.out.println("Komponen Darah          : " + getKomponenDarah());
+        System.out.println("Jumlah Kantong          : " + getJumlahKantong());
+        System.out.println("Rencana Transfusi       : " + getRencanaWaktuTransfusi());
+        System.out.println("Alasan Klinis           : " + getAlasanKlinis());
+
+        System.out.println("\nC. DATA DOKTER PEMINTA");
+
+        System.out.println("Nama Dokter             : " + getNamaDokter());
+        System.out.println("Jabatan                 : " + getJabatan());
+        System.out.println("Nomor SIP               : " + getNomorSIP());
+        
     }
+
 
     
     //  #region Getter Setter

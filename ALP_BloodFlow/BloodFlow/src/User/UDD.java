@@ -4,9 +4,10 @@ import App.App;
 
 public class UDD extends User{
     private String alamat;
+    private String nama;
 
-    public UDD(String username, String password, String noTelp, String alamat) {
-        super(username, password, noTelp);
+    public UDD(String username, String password, String noTelp, String alamat, String nama) {
+        super(username, password, noTelp,nama);
         this.alamat = alamat;
     }
 
