@@ -5,6 +5,7 @@ import App.App;
 public abstract class User {
 
     protected String idPengguna,username,password,noTelp,nama;
+
     private static long userTerbuat = 0;
 
     public User(String username, String password, String noTelp,String nama) {
@@ -54,6 +55,14 @@ public abstract class User {
         this.noTelp = noTelp;
     }
     
+    public String getNama() {
+        return nama;
+    }
+
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
 
     //#endregion
 }

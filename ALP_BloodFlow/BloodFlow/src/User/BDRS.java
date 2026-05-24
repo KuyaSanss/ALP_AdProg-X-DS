@@ -10,6 +10,8 @@ import App.App;
 import Enum.AlasanKlinis;
 import Enum.JenisKelamin;
 import Enum.KomponenDarah;
+import Enum.golDarahEnum;
+import Enum.rhesusEnum;
 import Request.Request;
 
 public class BDRS extends User {
@@ -82,11 +84,17 @@ public class BDRS extends User {
         System.out.print("Nama Pasien: ");
         form.setNamaPasien(app.getSc().nextLine());
 
+        golonganDarah(app, form);
+
+        rhesus(app, form);
+
         System.out.print("Tanggal Lahir atau Usia: ");
         form.setTanggalLahirAtauUsia(app.getSc().nextLine());
 
         System.out.print("Nomor Rekam Medis: ");
         form.setNomorRekamMedis(app.getSc().nextLine());
+
+        
 
         jenisKelamin(app, form);
 
@@ -382,6 +390,103 @@ public class BDRS extends User {
         }
     }
 
+    private void golonganDarah(App app, Request form) {
+    while (true) {
+        System.out.println("Golongan Darah");
+        System.out.println("1. A");
+        System.out.println("2. B");
+        System.out.println("3. AB");
+        System.out.println("4. O");
+        System.out.print("Pilih: ");
+
+        String input = app.getSc().nextLine();
+
+        // Check if input is empty
+        if (input.isEmpty()) {
+            System.out.println("Error: Input tidak boleh kosong!");
+            continue;
+        }
+
+        // Check if all characters are digits
+        boolean isAllDigit = true;
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                isAllDigit = false;
+                break;
+            }
+        }
+
+        if (!isAllDigit) {
+            System.out.println("Error: Input harus berupa angka!");
+            continue;
+        }
+
+        int pilihan = Integer.parseInt(input);
+
+        switch (pilihan) {
+            case 1:
+                form.setGolonganDarah(golDarahEnum.A);
+                break;
+            case 2:
+                form.setGolonganDarah(golDarahEnum.B);
+                break;
+            case 3:
+                form.setGolonganDarah(golDarahEnum.AB);
+                break;
+            case 4:
+                form.setGolonganDarah(golDarahEnum.O);
+                break;
+            default:
+                System.out.println("Error: Pilihan tidak valid! Masukkan angka 1-4.");
+                continue;
+        }
+        break;
+    }
+}
+
+    private void rhesus(App app, Request form) {
+    while (true) {
+        System.out.println("Rhesus");
+        System.out.println("1. Positif (+)");
+        System.out.println("2. Negatif (-)");
+        System.out.print("Pilih: ");
+
+        String input = app.getSc().nextLine();
+
+        // Check if input is empty
+        if (input.isEmpty()) {
+            System.out.println("Error: Input tidak boleh kosong!");
+            continue;
+        }
+
+        // Check if all characters are digits
+        boolean isAllDigit = true;
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                isAllDigit = false;
+                break;
+            }
+        }
+
+        if (!isAllDigit) {
+            System.out.println("Error: Input harus berupa angka!");
+            continue;
+        }
+
+        int pilihan = Integer.parseInt(input);
+
+        if (pilihan == 1) {
+            form.setRhesus(rhesusEnum.POSITIVE);
+            break;
+        } else if (pilihan == 2) {
+            form.setRhesus(rhesusEnum.NEGATIVE);
+            break;
+        } else {
+            System.out.println("Error: Pilihan tidak valid! Masukkan 1 atau 2.");
+            continue;
+        }
+    }
+}
     // #endregion
 
 }

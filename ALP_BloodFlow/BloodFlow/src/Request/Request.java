@@ -14,11 +14,8 @@ public class Request implements Comparable<Request>{
     // static
     private static long requestTerbuat;
     private static LinkedList<Request> liveRequestList = new LinkedList<>();
-
     // general
     private String idPermintaan;
-    private golDarahEnum golonganDarah;
-    private BDRS bdrs;
     // form
     private String namaRumahSakit;
     private String alamat;
@@ -28,6 +25,8 @@ public class Request implements Comparable<Request>{
     private LocalTime jamPermintaan;
 
     private String namaPasien;
+    private golDarahEnum golonganDarah;
+    private rhesusEnum rhesus;
     private String tanggalLahirAtauUsia;
     private String nomorRekamMedis;
     private JenisKelamin jenisKelamin;
@@ -43,9 +42,9 @@ public class Request implements Comparable<Request>{
     private String jabatan;
     private String nomorSIP;
 
-    public Request(BDRS bdrs) {
+    public Request(BDRS unitBDRS) {
         idPermintaan = "RQ" + requestTerbuat;
-        this.bdrs=bdrs;
+        this.unitBDRS=unitBDRS;
     }
 
 
@@ -56,7 +55,7 @@ public class Request implements Comparable<Request>{
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
         System.out.println("Alamat                  : " + getAlamat());
         System.out.println("Telepon                 : " + getTelepon());
-        System.out.println("Unit BDRS               : " + getUnitBDRS());
+        System.out.println("Unit BDRS               : " + getUnitBDRS().getNama());
         System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
         System.out.println("Jam Permintaan          : " + getJamPermintaan());
 
@@ -170,7 +169,7 @@ public class Request implements Comparable<Request>{
     }
 }
 
-    
+
 
     //#endregion
 
@@ -349,6 +348,24 @@ public class Request implements Comparable<Request>{
 
     public void setIdPermintaan(String idPermintaan) {
         this.idPermintaan = idPermintaan;
+    }
+
+    public golDarahEnum getGolonganDarah() {
+        return golonganDarah;
+    }
+
+
+    public void setGolonganDarah(golDarahEnum golonganDarah) {
+        this.golonganDarah = golonganDarah;
+    }
+
+    public rhesusEnum getRhesus() {
+        return rhesus;
+    }
+
+
+    public void setRhesus(rhesusEnum rhesus) {
+        this.rhesus = rhesus;
     }
 
     // #endregion
