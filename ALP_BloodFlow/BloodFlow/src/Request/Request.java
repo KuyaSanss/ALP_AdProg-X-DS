@@ -113,7 +113,8 @@ public class Request implements Comparable<Request>{
     }
     
     //#region static
-    public static void displayRequests(App app){
+
+    public static Request displayRequests(App app){
     MyMaxHeap<Request> maxHeap = new MyMaxHeap<>(liveRequestList);
     int size = liveRequestList.size();
     Request[] list = new Request[size];
@@ -166,7 +167,9 @@ public class Request implements Comparable<Request>{
     } else {
         Request selectedRequest = list[choice - 1];
         System.out.println("\nYou selected request ID: " + selectedRequest.getIdPermintaan());
+        return selectedRequest;
     }
+    return null;
 }
 
 

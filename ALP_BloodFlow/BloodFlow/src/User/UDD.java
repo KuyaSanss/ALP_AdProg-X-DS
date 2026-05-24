@@ -52,7 +52,7 @@ public class UDD extends User{
     }
 
     public void checkRequest(App app){
-        
+        Request request = Request.displayRequests(app);
 
     }
 
