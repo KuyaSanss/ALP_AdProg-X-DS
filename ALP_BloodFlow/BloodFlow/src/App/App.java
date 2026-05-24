@@ -2,6 +2,7 @@ package App;
 
 import Enum.*;
 import HashTable.*;
+import Model.RiwayatDonor;
 import User.*;
 import java.util.Scanner;
 
@@ -30,14 +31,10 @@ public class App {
     // #endregion
 
     public App() {
-        onStartUp();
-        while (true) {
+        do {
+            onStartUp();
             menuAwal();
-
-            if (currentUser != null) {
-                tampilkanMenuUtama(this);
-            }
-        }
+        } while (true);
     }
 
     // buat baca data dari txt dulu
@@ -86,7 +83,8 @@ public class App {
             password = sc.next() + sc.nextLine();
 
             if (dataUser.getDaftarUsernameUser().containsKey(username)) {
-                if (dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
+                if (dataUser.getDaftarUsernameUser().isEmpty() ||
+                        dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
                     break;
                 } else {
                     System.out.println("Password salah");
@@ -99,16 +97,34 @@ public class App {
         } while (salah);
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        System.out.println(
-                "Login berhasil sebagai: "
-                        + currentUser.getClass().getSimpleName());
+        if (currentUser instanceof Pendonor) {
+            menuPendonor();
+        }
+    }
 
+    private void menuPendonor() {
+
+        String input;
+
+        do {
+            currentUser.tampilkanMenuUtama(this);
+            System.out.print("Input: ");
+            input = sc.next() + sc.nextLine();
+
+            switch (input) {
+                case "1":
+                    ((Pendonor) currentUser).tampilkanRiwayatDonor();
+                    break;
+                case "2":
+                    return;
+                default:
+                    System.out.println("Input tidak valid");
+            }
+        } while (true);
     }
 
     private void tampilkanMenuUtama(App app) {
-
         currentUser.tampilkanMenuUtama(app);
-        
     }
 
     private void registrasi() {
@@ -193,7 +209,11 @@ public class App {
 
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
-        currentUser = dataUser.getDaftarUsernameUser().get(username);
+
+        Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
+        System.out.println("Registrasi berhasil, silakan login");
     }
 
 }

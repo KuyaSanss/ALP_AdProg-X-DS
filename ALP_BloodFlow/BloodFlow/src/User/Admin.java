@@ -13,7 +13,6 @@ public class Admin extends User {
     }
 
     public void buatAkunInstansi(DataUser dataUtama) {
-        System.out.println("");
         System.out.println("=== BUAT AKUN INSTANSI BARU ===");
 
         int pilihanInstansi = 0;
@@ -211,8 +210,7 @@ public class Admin extends User {
         boolean kondisi = true;
 
         while (kondisi) {
-            System.out.println("");
-            System.out.println("=== MENU ADMIN ===");
+            System.out.println("\n=== MENU ADMIN ===");
             System.out.println("1. Buat Akun Instansi Baru (BDRS/UDD)");
             System.out.println("2. Edit Akun Instansi");
             System.out.println("3. Hapus Akun Instansi");
@@ -232,7 +230,6 @@ public class Admin extends User {
                     break;
                 case "4":
                     System.out.println("Berhasil logout dari menu admin.");
-                    System.out.println("");
                     kondisi = false;
                     break;
                 default:
