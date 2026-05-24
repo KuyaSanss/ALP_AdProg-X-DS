@@ -1,9 +1,11 @@
 package User;
 
 import App.App;
+import java.util.LinkedList;
+import java.util.Scanner;
 import Request.Request;
 
-public class UDD extends User{
+public class UDD extends User {
     private String alamat;
     private static LinkedList<KantongDarah>daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
@@ -21,11 +23,11 @@ public class UDD extends User{
         this.alamat = alamat;
     }
 
-
     @Override
     public void tampilkanMenuUtama(App app) {
         System.out.println("=== MENU UTAMA ===");
         System.out.println("1. Buat Cek Permintaan");
+        System.out.println("2. Input Darah Masuk");
         System.out.println("0. Log Out");
         System.out.print("input: ");
         String input = app.getSc().next() + app.getSc().nextLine();
@@ -38,10 +40,7 @@ public class UDD extends User{
                 checkRequest(app);
                 break;
             case "2":
-
-                break;
-            case "3":
-
+                inputDarahMasuk(app);
                 break;
             default:
                 System.out.println("Invalid Input!!");
