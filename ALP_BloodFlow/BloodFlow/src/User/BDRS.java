@@ -117,6 +117,7 @@ public class BDRS extends User {
         System.out.print("Nomor SIP: ");
         form.setNomorSIP(app.getSc().nextLine());
 
+        Request.getLiveRequestList().add(form);
     }
 
     private void jenisKelamin(App app, Request form) {

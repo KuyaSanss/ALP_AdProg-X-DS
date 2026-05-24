@@ -4,6 +4,8 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import App.App;
+import HashTable.DataUser;
+import Request.Request;
 
 public class UDD extends User{
     private String alamat;
@@ -50,7 +52,7 @@ public class UDD extends User{
     }
 
     public void checkRequest(App app){
-        PriorityQueue<Integer> heap = new PriorityQueue<>((Comparator.reverseOrder()););
+        
 
     }
 

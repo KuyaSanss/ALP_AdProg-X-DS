@@ -3,13 +3,18 @@ package Request;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.LinkedList;
 
+import App.App;
+import DataStructures.MyMaxHeap;
 import Enum.*;
 import User.BDRS;
 
-public class Request {
-    // untuk id
+public class Request implements Comparable<Request>{
+    // static
     private static long requestTerbuat;
+    private static LinkedList<Request> liveRequestList = new LinkedList<>();
+
     // general
     private String idPermintaan;
     private golDarahEnum golonganDarah;
@@ -40,6 +45,7 @@ public class Request {
 
     public Request(BDRS bdrs) {
         idPermintaan = "RQ" + requestTerbuat;
+        this.bdrs=bdrs;
     }
 
 
@@ -91,7 +97,82 @@ public class Request {
                 kantong * 10;
     }
 
+    @Override
+    public int compareTo(Request other) {
+
+        if (this.hitungWeight() < other.hitungWeight()){
+            return -1;
+        }else if (this.hitungWeight() == other.hitungWeight()){
+            if(idPermintaan.compareTo(other.getIdPermintaan())==-1){
+                return -1;
+            }else{
+                return 1;
+            }
+        }else{
+            return 1;
+        }
+    }
     
+    //#region static
+    public static void displayRequests(App app){
+    MyMaxHeap<Request> maxHeap = new MyMaxHeap<>(liveRequestList);
+    int size = liveRequestList.size();
+    Request[] list = new Request[size];
+    
+    System.out.println("=== REQUEST LIST ===");
+    for(int i = 0; i < size; i++){
+        System.out.println((i + 1) + "=====================");
+        list[i] = maxHeap.extractMax();
+        list[i].tampilkanForm();
+        System.out.println();
+    }
+    
+    int choice = -1;
+    boolean isValid = false;
+
+    while (!isValid) {
+        System.out.print("Input (1-" + size + " to select, 0 to exit): ");
+        String input = app.getSc().next()+app.getSc().nextLine(); 
+
+        if (input.isEmpty()) {
+            System.out.println("Error: Input cannot be empty.\n");
+            continue;
+        }
+
+        boolean isNumeric = true;
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!Character.isDigit(c)) {
+                isNumeric = false;
+                break; 
+            }
+        }
+
+        if (!isNumeric) {
+            System.out.println("Error: Input must contain numbers only (no letters or symbols).\n");
+            continue;
+        }
+
+        choice = Integer.parseInt(input);
+
+        if (choice >= 0 && choice <= size) {
+            isValid = true;
+        } else {
+            System.out.println("Error: Number out of bounds. Please enter a number between 0 and " + size + ".\n");
+        }
+    }
+
+    if (choice == 0){
+        app.getCurrentUser().tampilkanMenuUtama(app);
+    } else {
+        Request selectedRequest = list[choice - 1];
+        System.out.println("\nYou selected request ID: " + selectedRequest.getIdPermintaan());
+    }
+}
+
+    
+
+    //#endregion
 
     // #region Getter Setter
 
@@ -251,6 +332,26 @@ public class Request {
         this.nomorSIP = nomorSIP;
     }
 
+    public static LinkedList<Request> getLiveRequestList() {
+        return liveRequestList;
+    }
+
+
+    public static void setLiveRequestList(LinkedList<Request> liveRequestList) {
+        Request.liveRequestList = liveRequestList;
+    }
+
+
+    public String getIdPermintaan() {
+        return idPermintaan;
+    }
+
+
+    public void setIdPermintaan(String idPermintaan) {
+        this.idPermintaan = idPermintaan;
+    }
+
     // #endregion
+
 
 }
