@@ -8,8 +8,8 @@ public class Admin extends User {
 
     private Scanner scanner;
 
-    public Admin( String username, String password, String noTelp) {
-        super( username, password, noTelp);
+    public Admin( String username, String password, String noTelp,String nama) {
+        super( username, password, noTelp,nama);
     }
 
     public void buatAkunInstansi(DataUser dataUtama) {
@@ -63,7 +63,7 @@ public class Admin extends User {
         String noTelp = scanner.nextLine();
 
         if (pilihanInstansi == 1) {
-            BDRS rsBaru = new BDRS(username, password, noTelp, alamat);
+            BDRS rsBaru = new BDRS(username, password, noTelp, alamat, nama);
 
             dataUtama.insertUser(rsBaru);
 
@@ -71,7 +71,7 @@ public class Admin extends User {
             cetakRekapData(rsBaru, "Rumah Sakit");
 
         } else {
-            UDD uddBaru = new UDD(username, password, noTelp, alamat);
+            UDD uddBaru = new UDD(username, password, noTelp, alamat, nama);
 
             dataUtama.insertUser(uddBaru);
 
