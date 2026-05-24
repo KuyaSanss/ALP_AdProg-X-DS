@@ -1,10 +1,9 @@
 package App;
 
-import java.util.Scanner;
-
 import Enum.*;
 import HashTable.*;
 import User.*;
+import java.util.Scanner;
 
 public class App {
     // hashtable belum done aku bakal buat wrapper class per atribut biar nanti bisa
@@ -14,7 +13,7 @@ public class App {
     private User currentUser;
     private Scanner sc = new Scanner(System.in);
 
-    //#region Getter Setter
+    // #region Getter Setter
 
     public DataUser getDataUser() {
         return dataUser;
@@ -28,79 +27,88 @@ public class App {
         return sc;
     }
 
-    //#endregion
+    // #endregion
 
     public App() {
         onStartUp();
-        menuAwal();
-        tampilkanMenuUtama();
+        while (true) {
+            menuAwal();
+
+            if (currentUser != null) {
+                tampilkanMenuUtama(this);
+            }
+        }
     }
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-
+        dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
     }
 
     private void menuAwal() {
         String input;
 
-        while (true) {
-            System.out.println("""
-                    === BloodLink===
-                    1. Login
-                    2. Registrasi sebagai pendonor
-                    3. Exit
-                    """);
-            System.out.print("Input: ");
-            input = sc.next() + sc.nextLine();
-            //todo trycatch
-            switch (input) {
-                case "1":
-                    login();
-                    break;
-                case "2":
-                    registrasi();
-                    break;
-                case "3":
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Invalid Input!!");
-            }
+        System.out.println("""
+                === BloodLink===
+                1. Login
+                2. Registrasi sebagai pendonor
+                3. Exit
+                """);
+        System.out.print("Input: ");
+        input = sc.next() + sc.nextLine();
+        switch (input) {
+            case "1":
+                login();
+                break;
+            case "2":
+                registrasi();
+                break;
+            case "3":
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+                menuAwal();
         }
 
     }
-    
-    private void login(){
-        String username,password;
-        boolean salah=false;
+
+    private void login() {
+        String username, password;
+        boolean salah = false;
         System.out.println();
-        
-        do{
+
+        do {
+            salah = false;
             System.out.print("Username : ");
             username = sc.next() + sc.nextLine();
             System.out.print("Password : ");
             password = sc.next() + sc.nextLine();
 
-            if(dataUser.getDaftarUser().contains(username)){
-                if(dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)){
+            if (dataUser.getDaftarUsernameUser().containsKey(username)) {
+                if (dataUser.getDaftarUsernameUser().get(username).getPassword().equals(password)) {
                     break;
-                }else{
+                } else {
                     System.out.println("Password salah");
-                    salah=true;
+                    salah = true;
                 }
-            }else{
+            } else {
                 System.out.println("Username salah");
-                salah=true;
+                salah = true;
             }
-        }while(salah);
+        } while (salah);
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
+        System.out.println(
+                "Login berhasil sebagai: "
+                        + currentUser.getClass().getSimpleName());
 
     }
 
-    private void tampilkanMenuUtama() {
-        currentUser.tampilkanMenuUtama();
+    private void tampilkanMenuUtama(App app) {
+
+        currentUser.tampilkanMenuUtama(app);
+        
     }
 
     private void registrasi() {
@@ -110,7 +118,7 @@ public class App {
             System.out.print("Username: ");
             username = sc.next() + sc.nextLine();
 
-            if(dataUser.getDaftarUser().contains(username)) {
+            if (dataUser.getDaftarUser().contains(username)) {
 
                 System.out.println("Username sudah digunakan");
             } else {
@@ -166,27 +174,26 @@ public class App {
             }
         } while (true);
 
-        String noTelp="";
-        boolean nonDigit=false;
+        String noTelp = "";
+        boolean nonDigit = false;
         do {
+            nonDigit = false;
             System.out.print("Nomor HP: ");
             noTelp = sc.next() + sc.nextLine();
-            //digit check
-            for(char c : noTelp.toCharArray()){
-                nonDigit = (Character.isDigit(c)) ? nonDigit : true ;
+            // digit check
+            for (char c : noTelp.toCharArray()) {
+                nonDigit = (Character.isDigit(c)) ? nonDigit : true;
             }
-            if (noTelp.equals("")||nonDigit){
+            if (noTelp.equals("") || nonDigit) {
                 System.out.println("isi nomor hp dengan angka only!!");
-            }else{
+            } else {
                 break;
             }
         } while (true);
 
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
+        // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
     }
 
-    private void loginUser (){
-        
-    }
 }

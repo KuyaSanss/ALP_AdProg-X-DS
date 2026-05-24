@@ -1,4 +1,5 @@
 package User;
+import App.App;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
 
@@ -38,9 +39,9 @@ public class Pendonor extends User {
     }
 
     @Override
-    public void tampilkanMenuUtama() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
+    public void tampilkanMenuUtama(App app) {
+        System.out.println("");
+        System.out.println("MENU PENDONOR");
     }
     
     
