@@ -55,9 +55,22 @@ public class Pendonor extends User {
 
     @Override
     public void tampilkanMenuUtama(App app) {
+        String input;
         System.out.println("=== MENU PENDONOR ===");
         System.out.println("1. Lihat Riwayat Donor");
         System.out.println("2. logout");
+        System.out.print("Input: ");
+        input = app.getSc().next() + app.getSc().nextLine();
+
+        switch (input) {
+            case "1":
+                ((Pendonor) app.getCurrentUser()).tampilkanRiwayatDonor();
+                break;
+            case "2":
+                return;
+            default:
+                System.out.println("Input tidak valid");
+        }
     }
 
     public void addRiwayatDonor(RiwayatDonor riwayat) {

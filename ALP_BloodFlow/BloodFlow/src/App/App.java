@@ -357,7 +357,11 @@ public class App {
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
-        currentUser.tampilkanMenuUtama(this);
+        String input;
+        do {
+            System.out.println();
+            currentUser.tampilkanMenuUtama(this);
+        } while (true);
     }
 
     private void tampilkanMenuUtama(App app) {
