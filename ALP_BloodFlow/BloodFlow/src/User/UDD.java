@@ -5,6 +5,8 @@ import Request.Request;
 
 public class UDD extends User{
     private String alamat;
+    private static LinkedList<KantongDarah>daftarKantongDarah = new LinkedList<>();
+    private static int counterIdDarah = 1;
 
     public UDD(String username, String password, String noTelp, String alamat, String nama) {
         super(username, password, noTelp,nama);
@@ -18,6 +20,7 @@ public class UDD extends User{
     public void setAlamat(String alamat) {
         this.alamat = alamat;
     }
+
 
     @Override
     public void tampilkanMenuUtama(App app) {

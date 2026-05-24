@@ -2,6 +2,7 @@ package App;
 
 import Enum.*;
 import HashTable.*;
+import Model.RiwayatDonor;
 import User.*;
 import java.util.Scanner;
 
@@ -51,7 +52,6 @@ public class App {
                 """);
         System.out.print("Input: ");
         input = sc.next() + sc.nextLine();
-        // todo trycatch
         switch (input) {
             case "1":
                 login();
@@ -60,7 +60,7 @@ public class App {
                 registrasi();
                 break;
             case "3":
-                exit();
+                System.exit(0);
                 break;
             default:
                 System.out.println("Invalid Input!!");
@@ -98,6 +98,14 @@ public class App {
         System.out.println();
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
+        if (currentUser instanceof Pendonor) {
+            menuPendonor();
+        }
+    }
+
+    private void menuPendonor() {
+
+        String input;
 
         tampilkanMenuUtama(this);
     }
@@ -202,8 +210,9 @@ public class App {
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus,nama));
         // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-
-        tampilkanMenuUtama(this);
+        
+        System.out.println("Registrasi berhasil, silakan login");
+        menuAwal();
     }
 
     private void exit() {
@@ -214,4 +223,5 @@ public class App {
     private void save() {
 
     }
+
 }
