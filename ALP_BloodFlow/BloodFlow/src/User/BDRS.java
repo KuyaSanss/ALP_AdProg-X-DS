@@ -1,10 +1,12 @@
 package User;
 
+import App.App;
+
 public class BDRS extends User{
     private String alamat;
 
-    public BDRS(String idPengguna, String username, String password, int noTelp, String alamat) {
-        super(idPengguna, username, password, noTelp);
+    public BDRS(String username, String password, String noTelp, String alamat) {
+        super(username, password, noTelp);
         this.alamat = alamat;
     }
 
@@ -17,7 +19,7 @@ public class BDRS extends User{
     }
 
     @Override
-    public void tampilkanMenuUtama() {
+    public void tampilkanMenuUtama(App app) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
     }

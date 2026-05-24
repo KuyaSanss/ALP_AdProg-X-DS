@@ -1,10 +1,12 @@
 package User;
 
+import App.App;
+
 public class UDD extends User{
     private String alamat;
 
-    public UDD(String idPengguna, String username, String password, int noTelp, String alamat) {
-        super(idPengguna, username, password, noTelp);
+    public UDD(String username, String password, String noTelp, String alamat) {
+        super(username, password, noTelp);
         this.alamat = alamat;
     }
 
@@ -16,8 +18,9 @@ public class UDD extends User{
         this.alamat = alamat;
     }
 
+
     @Override
-    public void tampilkanMenuUtama() {
+    public void tampilkanMenuUtama(App app) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
     }

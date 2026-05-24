@@ -1,4 +1,5 @@
 package User;
+import App.App;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
 
@@ -7,8 +8,8 @@ public class Pendonor extends User {
     private rhesusEnum rhesus;
     private String tanggalTerakhirDonor;
     
-    public Pendonor(String idPengguna, String username, String password, int noTelp, golDarahEnum golDarah, rhesusEnum rhesus) {
-        super(idPengguna, username, password, noTelp);
+    public Pendonor(String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus) {
+        super(username, password, noTelp);
         this.golDarah = golDarah;
         this.rhesus = rhesus;
     }
@@ -38,9 +39,8 @@ public class Pendonor extends User {
     }
 
     @Override
-    public void tampilkanMenuUtama() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
+    public void tampilkanMenuUtama(App app) {
+        System.out.println("MENU PENDONOR");
     }
     
     
