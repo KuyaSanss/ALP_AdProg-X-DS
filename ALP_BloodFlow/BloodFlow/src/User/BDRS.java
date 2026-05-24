@@ -124,7 +124,7 @@ public class BDRS extends User {
         tampilkanMenuUtama(app);
     }
 
-    private void jenisKelamin(App app, Request form) {
+    public void jenisKelamin(App app, Request form) {
         while (true) {
             System.out.println("Jenis Kelamin");
             System.out.println("1. LAKI LAKI");
@@ -168,7 +168,7 @@ public class BDRS extends User {
         }
     }
 
-    private void jumlahKantong(App app, Request form) {
+    public void jumlahKantong(App app, Request form) {
         while (true) {
             System.out.print("Jumlah Kantong: ");
             String input = app.getSc().nextLine();
@@ -205,7 +205,7 @@ public class BDRS extends User {
         }
     }
 
-    private void alasanKlinis(App app, Request form) {
+    public void alasanKlinis(App app, Request form) {
         while (true) {
 
             System.out.println("Alasan Klinis Permintaan");
@@ -285,7 +285,7 @@ public class BDRS extends User {
         }
     }
 
-    private void rencanaWaktuTransfusi(App app, Request form) {
+    public void rencanaWaktuTransfusi(App app, Request form) {
         while (true) {
 
             try {
@@ -332,7 +332,7 @@ public class BDRS extends User {
         }
     }
 
-    private void golonganDarah(App app, Request form) {
+    public void golonganDarah(App app, Request form) {
         while (true) {
             System.out.println("Golongan Darah");
             System.out.println("1. A");
@@ -386,7 +386,7 @@ public class BDRS extends User {
         }
     }
 
-    private void rhesus(App app, Request form) {
+    public void rhesus(App app, Request form) {
         while (true) {
             System.out.println("Rhesus");
             System.out.println("1. Positif (+)");
@@ -429,5 +429,6 @@ public class BDRS extends User {
             }
         }
     }
+
     // #endregion
 }

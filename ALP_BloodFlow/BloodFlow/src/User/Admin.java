@@ -1,7 +1,8 @@
 package User;
 
 import App.App;
-import HashTable.DataUser;
+import Model.DataUser;
+
 import java.util.Scanner;
 
 public class Admin extends User {

@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 
 import App.*;
-import DataStructures.*;
 import Enum.*;
+import Model.MyMaxHeap;
 import User.*;
 
 public class Request implements Comparable<Request> {
@@ -48,7 +48,7 @@ public class Request implements Comparable<Request> {
     }
 
     public void tampilkanForm() {
-
+        // System.out.println(hitungWeight());
         System.out.println("\n=== FORM PERMINTAAN DARAH ===");
 
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
@@ -138,7 +138,7 @@ public class Request implements Comparable<Request> {
 
         System.out.println("=== REQUEST LIST ===");
         for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + "=====================");
+            System.out.println((i + 1) + " =====================");
             list[i] = maxHeap.extractMax();
             list[i].tampilkanForm();
             System.out.println();
