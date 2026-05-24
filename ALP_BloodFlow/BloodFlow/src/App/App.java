@@ -2,6 +2,7 @@ package App;
 
 import Enum.*;
 import HashTable.*;
+import Model.RiwayatDonor;
 import User.*;
 import java.util.Scanner;
 
@@ -30,14 +31,15 @@ public class App {
     // #endregion
 
     public App() {
-        onStartUp();
-        menuAwal();
-        tampilkanMenuUtama(this);
+        do {
+            onStartUp();
+            menuAwal();
+        } while (true);
     }
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-    dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
+        dataUser.insertUser(new Admin("admin", "admin", "085887312500"));
     }
 
     private void menuAwal() {
@@ -95,7 +97,30 @@ public class App {
         } while (salah);
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        
+        if (currentUser instanceof Pendonor) {
+            menuPendonor();
+        }
+    }
+
+    private void menuPendonor() {
+
+        String input;
+
+        do {
+            currentUser.tampilkanMenuUtama(this);
+            System.out.print("Input: ");
+            input = sc.next() + sc.nextLine();
+
+            switch (input) {
+                case "1":
+                    ((Pendonor) currentUser).tampilkanRiwayatDonor();
+                    break;
+                case "2":
+                    return;
+                default:
+                    System.out.println("Input tidak valid");
+            }
+        } while (true);
     }
 
     private void tampilkanMenuUtama(App app) {
@@ -184,7 +209,11 @@ public class App {
 
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
         // dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus));
-        currentUser = dataUser.getDaftarUsernameUser().get(username);
+
+        Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
+        System.out.println("Registrasi berhasil, silakan login");
     }
 
 }
