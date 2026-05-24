@@ -1,8 +1,10 @@
 package User;
 
 import App.App;
+import java.util.LinkedList;
+import java.util.Scanner;
 
-public class UDD extends User{
+public class UDD extends User {
     private String alamat;
     private static LinkedList<KantongDarah>daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
@@ -20,11 +22,27 @@ public class UDD extends User{
         this.alamat = alamat;
     }
 
-
     @Override
     public void tampilkanMenuUtama(App app) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tampilkanMenuUtama'");
+        
+        Scanner sc = app.getSc();
+
+        while (true) {
+            System.out.println("");
+            System.out.println("=== MENU UDD ===");
+            System.out.println("1. Input Darah Masuk");
+            System.out.println("2. Logout");
+            System.out.println("Pilih: ");
+            String pilih = sc.next() + sc.nextLine();
+
+            switch (pilih) {
+                case "1":
+                    inputDarahMasuk(app);
+                    break;
+                case "2":
+                    return;
+            }
+        }
     }
     
     
