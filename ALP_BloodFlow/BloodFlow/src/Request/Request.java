@@ -34,7 +34,6 @@ public class Request implements Comparable<Request> {
     private String ruangPerawatan;
     private String diagnosaKlinis;
 
-    private KomponenDarah komponenDarah;
     private int jumlahKantong;
     private LocalDateTime rencanaWaktuTransfusi;
     private AlasanKlinis alasanKlinis;
@@ -72,7 +71,6 @@ public class Request implements Comparable<Request> {
 
         System.out.println("\nB. DATA PERMINTAAN DARAH");
 
-        System.out.println("Komponen Darah          : " + getKomponenDarah());
         System.out.println("Jumlah Kantong          : " + getJumlahKantong());
         System.out.println("Rencana Transfusi       : " + getRencanaWaktuTransfusi());
         System.out.println("Alasan Klinis           : " + getAlasanKlinis());
@@ -89,12 +87,9 @@ public class Request implements Comparable<Request> {
 
         int urgency = alasanKlinis.getSkor();
 
-        int komponen = komponenDarah.getSkor();
-
         int kantong = jumlahKantong;
 
         return urgency * 1000 +
-                komponen * 100 +
                 kantong * 10;
     }
 
@@ -296,14 +291,6 @@ public class Request implements Comparable<Request> {
 
     public void setDiagnosaKlinis(String diagnosaKlinis) {
         this.diagnosaKlinis = diagnosaKlinis;
-    }
-
-    public KomponenDarah getKomponenDarah() {
-        return komponenDarah;
-    }
-
-    public void setKomponenDarah(KomponenDarah komponenDarah) {
-        this.komponenDarah = komponenDarah;
     }
 
     public int getJumlahKantong() {

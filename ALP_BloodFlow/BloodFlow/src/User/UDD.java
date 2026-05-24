@@ -63,15 +63,20 @@ public class UDD extends User {
                             + " | Nama: " + pendonor.getUsername());
         }
 
-        System.out.print("ID Pendonor: ");
-        String idPendonor = sc.next() + sc.nextLine();
+        User user;
 
-        User user = app.getDataUser().getDaftarPendonor().get(idPendonor);
+        do {
+            System.out.print("ID Pendonor: ");
+            String idPendonor = sc.next() + sc.nextLine();
 
-        if (user == null) {
-            System.out.println("Pendonor tidak ditemukan!");
-            return;
-        }
+            user = app.getDataUser().getDaftarPendonor().get(idPendonor);
+
+            if (user == null) {
+                System.out.println("Pendonor tidak ditemukan!");
+            } else {
+                break;
+            }
+        } while (true);
 
         Pendonor pendonor = (Pendonor) user;
 

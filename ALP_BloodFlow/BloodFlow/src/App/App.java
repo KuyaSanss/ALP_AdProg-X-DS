@@ -45,7 +45,8 @@ public class App {
     private void onStartUp() {
         dataUser.insertUser(new Admin("admin", "admin", "085887312500", "Budi"));
         dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
-    }
+        dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
+    }   
 
     public void menuAwal() {
         String input;

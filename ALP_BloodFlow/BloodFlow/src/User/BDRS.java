@@ -9,7 +9,6 @@ import java.time.format.DateTimeParseException;
 import App.App;
 import Enum.AlasanKlinis;
 import Enum.JenisKelamin;
-import Enum.KomponenDarah;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
 import Request.Request;
@@ -102,8 +101,6 @@ public class BDRS extends User {
 
         System.out.println("\nB. DATA PERMINTAAN DARAH");
 
-        komponenDarah(app, form);
-
         jumlahKantong(app, form);
 
         rencanaWaktuTransfusi(app, form);
@@ -122,6 +119,9 @@ public class BDRS extends User {
         form.setNomorSIP(app.getSc().nextLine());
 
         Request.getLiveRequestList().add(form);
+
+        System.out.println("permintaan darah berhasil terkirim");
+        tampilkanMenuUtama(app);
     }
 
     private void jenisKelamin(App app, Request form) {
@@ -165,60 +165,6 @@ public class BDRS extends User {
                 System.out.println("Error: Pilihan tidak valid! Masukkan 1 atau 2.");
                 continue;
             }
-        }
-    }
-
-    private void komponenDarah(App app, Request form) {
-        while (true) {
-            System.out.println("Komponen Darah");
-            System.out.println("1. Whole Blood");
-            System.out.println("2. Packed Red Cells");
-            System.out.println("3. Fresh Frozen Plasma");
-            System.out.println("4. Thrombocyte Concentrate");
-            System.out.print("Pilih: ");
-
-            String input = app.getSc().nextLine();
-
-            // Check if input is empty
-            if (input.isEmpty()) {
-                System.out.println("Error: Input tidak boleh kosong!");
-                continue;
-            }
-
-            // Check if all characters are digits
-            boolean isAllDigit = true;
-            for (int i = 0; i < input.length(); i++) {
-                if (!Character.isDigit(input.charAt(i))) {
-                    isAllDigit = false;
-                    break;
-                }
-            }
-
-            if (!isAllDigit) {
-                System.out.println("Error: Input harus berupa angka!");
-                continue;
-            }
-
-            int pilihan = Integer.parseInt(input);
-
-            switch (pilihan) {
-                case 1:
-                    form.setKomponenDarah(KomponenDarah.WHOLE_BLOOD);
-                    break;
-                case 2:
-                    form.setKomponenDarah(KomponenDarah.PACKED_RED_CELL);
-                    break;
-                case 3:
-                    form.setKomponenDarah(KomponenDarah.FRESH_FROZEN_PLASMA);
-                    break;
-                case 4:
-                    form.setKomponenDarah(KomponenDarah.THROMBOCYTE_CONCENTRATE);
-                    break;
-                default:
-                    System.out.println("Error: Pilihan tidak valid! Masukkan angka 1-5.");
-                    continue;
-            }
-            break;
         }
     }
 
