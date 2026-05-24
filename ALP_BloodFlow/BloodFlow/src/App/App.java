@@ -47,7 +47,7 @@ public class App {
         dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
     }
 
-    private void menuAwal() {
+    public void menuAwal() {
         String input;
 
         System.out.println("""
