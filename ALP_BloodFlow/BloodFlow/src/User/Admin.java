@@ -235,6 +235,7 @@ public class Admin extends User {
                     System.out.println("Berhasil logout dari menu admin.");
                     System.out.println("");
                     kondisi = false;
+                    app.menuAwal();
                     break;
                 default:
                     System.out.println("Pilihan tidak valid!");

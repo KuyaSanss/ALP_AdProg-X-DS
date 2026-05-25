@@ -318,7 +318,7 @@ public class App {
                 registrasi();
                 break;
             case "3":
-                System.exit(0);
+                exit();
                 break;
             default:
                 System.out.println("Invalid Input!!");
@@ -484,6 +484,7 @@ public class App {
 
     private void exit() {
         save();
+        System.out.println("Sampai Jumpa!");
         System.exit(0);
     }
 
