@@ -67,6 +67,7 @@ public class Pendonor extends User {
                 ((Pendonor) app.getCurrentUser()).tampilkanRiwayatDonor();
                 break;
             case "2":
+                app.menuAwal();
                 return;
             default:
                 System.out.println("Input tidak valid");

@@ -470,8 +470,8 @@ public class App {
         //dummy riwayat
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei 2026", "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Januari 2026", "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei  2026", "KD006", "PMI Surabaya"));
 
 
         System.out.println("Registrasi berhasil, silakan login");
