@@ -16,7 +16,6 @@ public class Request implements Comparable<Request> {
     private static LinkedList<Request> liveRequestList = new LinkedList<>();
     // general
     private String idPermintaan;
-    private UDD requestApproved;//null as false
     // form
     private String namaRumahSakit;
     private String alamat;
