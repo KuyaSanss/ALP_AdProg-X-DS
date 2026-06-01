@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import App.App;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
+import Model.Notification;
 import Model.RiwayatDonor;
 
 public class Pendonor extends User {
@@ -58,7 +59,8 @@ public class Pendonor extends User {
         String input;
         System.out.println("=== MENU PENDONOR ===");
         System.out.println("1. Lihat Riwayat Donor");
-        System.out.println("2. logout");
+        System.out.println("2. Cek Notifikasi");
+        System.out.println("3. logout");
         System.out.print("Input: ");
         input = app.getSc().next() + app.getSc().nextLine();
 
@@ -67,6 +69,9 @@ public class Pendonor extends User {
                 ((Pendonor) app.getCurrentUser()).tampilkanRiwayatDonor();
                 break;
             case "2":
+                Notification.tampilkanSemuaNotifikasi(app.getCurrentUser());
+                break;
+            case "3":
                 app.menuAwal();
                 return;
             default:
@@ -84,8 +89,7 @@ public class Pendonor extends User {
         System.out.println("===== RIWAYAT DONOR =====");
 
         if (riwayatDonor.isEmpty()) {
-            System.out.println(
-                    "Anda belum memiliki riwayat donor");
+            System.out.println("Anda belum memiliki riwayat donor");
             return;
         }
 

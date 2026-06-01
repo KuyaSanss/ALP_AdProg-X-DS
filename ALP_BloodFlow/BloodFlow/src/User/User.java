@@ -1,11 +1,15 @@
 package User;
 
 import App.App;
+import Model.Notification;
+
+import java.util.ArrayList;
 
 public abstract class User {
 
     protected String idPengguna,username,password,noTelp,nama;
     private static int userTerbuat = 0;
+    private ArrayList<Notification> inbox = new ArrayList<>();
 
     public User(String username, String password, String noTelp,String nama) {
         userTerbuat++;
@@ -62,4 +66,31 @@ public abstract class User {
         this.nama = nama;
     }
     //#endregion
+
+
+    public static int getUserTerbuat() {
+        return userTerbuat;
+    }
+
+
+    public static void setUserTerbuat(int userTerbuat) {
+        User.userTerbuat = userTerbuat;
+    }
+
+ public ArrayList<Notification> getInbox() {
+        return inbox;
+    }
+
+
+    public void setInbox(ArrayList<Notification> inbox) {
+        this.inbox = inbox;
+    }
+    
+
+    public void tambahNotifikasi(Notification pesan){
+        inbox.add(pesan);
+    }
+
+
+   
 }
