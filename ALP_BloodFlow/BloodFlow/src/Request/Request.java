@@ -88,8 +88,7 @@ public class Request implements Comparable<Request> {
 
         int kantong = jumlahKantong;
 
-        return urgency * 1000 +
-                kantong * 10;
+        return urgency * 1000 + kantong * 10;
     }
 
     public void approveRequest(App app){
