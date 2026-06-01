@@ -13,6 +13,7 @@ public abstract class User {
         this.username = username;
         this.password = password;
         this.noTelp = noTelp;
+        this.nama = nama;
     }
 
     

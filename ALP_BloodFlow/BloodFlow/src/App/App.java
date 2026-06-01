@@ -5,7 +5,6 @@ import Model.DataUser;
 import Model.RiwayatDonor;
 import Request.Request;
 import User.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -52,7 +51,6 @@ public class App {
         dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
         dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
         
-
         // #region form 1
 
         BDRS bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Ciputra");
@@ -357,6 +355,7 @@ public class App {
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
+
         String input;
         do {
             System.out.println();
@@ -470,9 +469,9 @@ public class App {
         //dummy riwayat
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Januari 2026", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei  2026", "KD006", "PMI Surabaya"));
-
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-04-01", "KD006", "PMI Surabaya"));
+        pendonorBaru.setTanggalTerakhirDonor("2026-04-01");
 
         System.out.println("Registrasi berhasil, silakan login");
         menuAwal();
@@ -491,4 +490,6 @@ public class App {
     private void save() {
 
     }
+
+    
 }

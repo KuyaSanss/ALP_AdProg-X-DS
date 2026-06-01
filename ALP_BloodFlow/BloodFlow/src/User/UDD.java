@@ -1,9 +1,12 @@
 package User;
 
 import App.App;
+import Model.RiwayatDonor;
+import Request.Request;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.Scanner;
-import Request.Request;
 
 public class UDD extends User {
     private String alamat;
@@ -58,9 +61,7 @@ public class UDD extends User {
 
             Pendonor pendonor = (Pendonor) user;
 
-            System.out.println(
-                    "ID: " + pendonor.getIdPengguna()
-                            + " | Nama: " + pendonor.getUsername());
+            System.out.println("ID: " + pendonor.getIdPengguna()+ " | Nama: " + pendonor.getUsername());
         }
 
         User user;
@@ -82,6 +83,45 @@ public class UDD extends User {
 
         System.out.println("Pendonor ditemukan: " + pendonor.getUsername());
 
+        if (pendonor.getTanggalTerakhirDonor() != null
+                &&
+                !pendonor.getTanggalTerakhirDonor()
+                        .isEmpty()) {
+
+            try {
+
+                LocalDate tanggalTerakhir = LocalDate.parse(
+                        pendonor.getTanggalTerakhirDonor());
+
+                LocalDate bolehDonorLagi = tanggalTerakhir.plusDays(90);
+
+                long sisaHari = ChronoUnit.DAYS.between(
+                        LocalDate.now(),
+                        bolehDonorLagi);
+
+                if (sisaHari > 0) {
+
+                    System.out.println();
+                    System.out.println(
+                            "Pendonor belum layak donor.");
+
+                    System.out.println(
+                            "Silakan tunggu "
+                                    + sisaHari
+                                    + " hari lagi.");
+
+                    return;
+                }
+
+            } catch (Exception e) {
+
+                System.out.println(
+                        "Format tanggal donor salah");
+
+                return;
+            }
+        }
+
         System.out.print("ID Kantong Darah: ");
         String idDarah = String.valueOf(counterIdDarah++);
 
@@ -89,6 +129,11 @@ public class UDD extends User {
                 pendonor.getRhesus());
 
         daftarKantongDarah.add(darah);
+
+        RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk().toString(), darah.getIdDarah(), this.getNama());
+
+        pendonor.addRiwayatDonor(riwayat);
+        pendonor.setTanggalTerakhirDonor(darah.getTanggalMasuk().toString());
 
         System.out.println("Kantong darah berhasil ditambahkan!");
         System.out.println("Golongan: " + darah.getJenisDarah() + " " + darah.getRhesus());
