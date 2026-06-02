@@ -50,6 +50,7 @@ public class App {
     private void onStartUp() {
         dataUser.insertUser(new Admin("admin", "admin", "085887312500", "Budi"));
         dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
+
         dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
         dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
 
@@ -77,8 +78,6 @@ public class App {
 
         form.setRhesus(rhesusEnum.POSITIVE);
 
-        form.setTanggalLahirAtauUsia("67");
-
         form.setNomorRekamMedis("0");
 
         form.setJenisKelamin(JenisKelamin.LAKI_LAKI);
@@ -97,8 +96,6 @@ public class App {
                 format);
 
         form.setRencanaWaktuTransfusi(waktuTransfusi);
-
-        form.setAlasanKlinis(AlasanKlinis.OPERASI_TERJADWAL);
 
         form.setNamaDokter("Dr. Tirta");
 
@@ -126,7 +123,7 @@ public class App {
         form.setNamaPasien("Anita");
         form.setGolonganDarah(golDarahEnum.O);
         form.setRhesus(rhesusEnum.NEGATIVE);
-        form.setTanggalLahirAtauUsia("45");
+
         form.setNomorRekamMedis("123456");
         form.setJenisKelamin(JenisKelamin.PEREMPUAN);
         form.setRuangPerawatan("B15");
@@ -136,7 +133,6 @@ public class App {
         waktuTransfusi = LocalDateTime.parse("2026-05-31 09:30", format);
         form.setRencanaWaktuTransfusi(waktuTransfusi);
 
-        form.setAlasanKlinis(AlasanKlinis.ANEMIA_BERAT);
         form.setNamaDokter("Dr. Sari");
         form.setJabatan("Dokter Penanggung Jawab");
         form.setNomorSIP("6622");
@@ -161,7 +157,6 @@ public class App {
         form.setNamaPasien("Kevin");
         form.setGolonganDarah(golDarahEnum.B);
         form.setRhesus(rhesusEnum.POSITIVE);
-        form.setTanggalLahirAtauUsia("28");
         form.setNomorRekamMedis("223344");
         form.setJenisKelamin(JenisKelamin.LAKI_LAKI);
         form.setRuangPerawatan("ICU-02");
@@ -174,7 +169,6 @@ public class App {
 
         form.setRencanaWaktuTransfusi(waktuTransfusi);
 
-        form.setAlasanKlinis(AlasanKlinis.SYOK_HEMORAGIK);
         form.setNamaDokter("Dr. Jonathan");
         form.setJabatan("Dokter Bedah");
         form.setNomorSIP("7788");
@@ -199,7 +193,7 @@ public class App {
         form.setNamaPasien("Cynthia");
         form.setGolonganDarah(golDarahEnum.AB);
         form.setRhesus(rhesusEnum.POSITIVE);
-        form.setTanggalLahirAtauUsia("33");
+
         form.setNomorRekamMedis("889900");
         form.setJenisKelamin(JenisKelamin.PEREMPUAN);
         form.setRuangPerawatan("C12");
@@ -211,8 +205,6 @@ public class App {
                 format);
 
         form.setRencanaWaktuTransfusi(waktuTransfusi);
-
-        form.setAlasanKlinis(AlasanKlinis.OPERASI_TERJADWAL);
         form.setNamaDokter("Dr. Felicia");
         form.setJabatan("Dokter Kandungan");
         form.setNomorSIP("9911");
@@ -237,7 +229,6 @@ public class App {
         form.setNamaPasien("Rudi");
         form.setGolonganDarah(golDarahEnum.A);
         form.setRhesus(rhesusEnum.NEGATIVE);
-        form.setTanggalLahirAtauUsia("57");
         form.setNomorRekamMedis("445566");
         form.setJenisKelamin(JenisKelamin.LAKI_LAKI);
         form.setRuangPerawatan("ICU-08");
@@ -249,8 +240,6 @@ public class App {
                 format);
 
         form.setRencanaWaktuTransfusi(waktuTransfusi);
-
-        form.setAlasanKlinis(AlasanKlinis.PERDARAHAN_AKTIF);
         form.setNamaDokter("Dr. Bima");
         form.setJabatan("Dokter Spesialis Penyakit Dalam");
         form.setNomorSIP("5566");
@@ -275,7 +264,6 @@ public class App {
         form.setNamaPasien("Maria");
         form.setGolonganDarah(golDarahEnum.B);
         form.setRhesus(rhesusEnum.NEGATIVE);
-        form.setTanggalLahirAtauUsia("61");
         form.setNomorRekamMedis("998877");
         form.setJenisKelamin(JenisKelamin.PEREMPUAN);
         form.setRuangPerawatan("D04");
@@ -287,8 +275,6 @@ public class App {
                 format);
 
         form.setRencanaWaktuTransfusi(waktuTransfusi);
-
-        form.setAlasanKlinis(AlasanKlinis.DEMAM_BERDARAH);
         form.setNamaDokter("Dr. Clara");
         form.setJabatan("Dokter Umum");
         form.setNomorSIP("3344");
@@ -296,6 +282,7 @@ public class App {
         Request.getLiveRequestList().add(form);
 
         // #endregion
+
 
     }
 
