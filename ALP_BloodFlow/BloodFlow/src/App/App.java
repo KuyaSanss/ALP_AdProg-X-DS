@@ -52,6 +52,7 @@ public class App {
         dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
         dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
         dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
+        
 
         // #region form 1
 
@@ -361,6 +362,7 @@ public class App {
         notif.run();
 
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
+
         String input;
         do {
             System.out.println();
@@ -474,9 +476,10 @@ public class App {
         // dummy riwayat & notif
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-04-01", "KD006", "PMI Surabaya"));
+        pendonorBaru.setTanggalTerakhirDonor("2026-04-01");
         pendonorBaru.tambahNotifikasi(new Notification("Selamat datang di BloodLink"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Januari 2026", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("20 Mei  2026", "KD006", "PMI Surabaya"));
 
         System.out.println("Registrasi berhasil, silakan login");
         menuAwal();
@@ -495,4 +498,6 @@ public class App {
     private void save() {
 
     }
+
+    
 }
