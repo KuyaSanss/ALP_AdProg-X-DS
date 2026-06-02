@@ -5,6 +5,8 @@ import Model.DataUser;
 import Model.RiwayatDonor;
 import Request.Request;
 import User.*;
+import Model.Notification;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -51,6 +53,7 @@ public class App {
         dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
         dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
         
+
         // #region form 1
 
         BDRS bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Ciputra");
@@ -177,9 +180,9 @@ public class App {
         form.setJabatan("Dokter Bedah");
         form.setNomorSIP("7788");
 
-        //#endregion
+        // #endregion
 
-        //#region form 4
+        // #region form 4
 
         Request.getLiveRequestList().add(form);
 
@@ -215,9 +218,9 @@ public class App {
         form.setJabatan("Dokter Kandungan");
         form.setNomorSIP("9911");
 
-        //#endregion
+        // #endregion
 
-        //#region form 5
+        // #region form 5
 
         Request.getLiveRequestList().add(form);
 
@@ -254,10 +257,10 @@ public class App {
         form.setNomorSIP("5566");
 
         Request.getLiveRequestList().add(form);
-        
-        //#endregion
 
-        //#region form 6
+        // #endregion
+
+        // #region form 6
 
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Siloam_1");
 
@@ -354,6 +357,10 @@ public class App {
         System.out.println();
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
+
+        Notification notif = new Notification(this);
+        notif.run();
+
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
 
         String input;
@@ -466,12 +473,13 @@ public class App {
         dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus, nama));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
 
-        //dummy riwayat
+        // dummy riwayat & notif
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
         pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
         pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-04-01", "KD006", "PMI Surabaya"));
         pendonorBaru.setTanggalTerakhirDonor("2026-04-01");
+        pendonorBaru.tambahNotifikasi(new Notification("Selamat datang di BloodLink"));
 
         System.out.println("Registrasi berhasil, silakan login");
         menuAwal();

@@ -3,6 +3,7 @@ package User;
 import App.App;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
+import Model.Notification;
 import Model.RiwayatDonor;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -66,8 +67,8 @@ public class Pendonor extends User {
         String input;
         System.out.println("=== MENU PENDONOR ===");
         System.out.println("1. Lihat Riwayat Donor");
-        System.out.println("2. Tampilkan Inbox");
-        System.out.println("3. Logout");
+        System.out.println("2. Cek Notifikasi");
+        System.out.println("3. logout");
         System.out.print("Input: ");
         input = app.getSc().next() + app.getSc().nextLine();
 
@@ -76,7 +77,8 @@ public class Pendonor extends User {
                 ((Pendonor) app.getCurrentUser()).tampilkanRiwayatDonor();
                 break;
             case "2":
-                tampilkanInbox();    
+                Notification.tampilkanSemuaNotifikasi(app.getCurrentUser());
+                break;
             case "3":
                 app.menuAwal();
                 return;
@@ -95,8 +97,7 @@ public class Pendonor extends User {
         System.out.println("===== RIWAYAT DONOR =====");
 
         if (riwayatDonor.isEmpty()) {
-            System.out.println(
-                    "Anda belum memiliki riwayat donor");
+            System.out.println("Anda belum memiliki riwayat donor");
             return;
         }
 
