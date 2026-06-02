@@ -464,8 +464,8 @@ public class App {
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
         pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-04-01", "KD006", "PMI Surabaya"));
-        pendonorBaru.setTanggalTerakhirDonor("2026-04-01");
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-02-01", "KD006", "PMI Surabaya"));
+        pendonorBaru.setTanggalTerakhirDonor("2026-02-01");
         pendonorBaru.tambahNotifikasi(new Notification("Selamat datang di BloodLink"));
 
         System.out.println("Registrasi berhasil, silakan login");
