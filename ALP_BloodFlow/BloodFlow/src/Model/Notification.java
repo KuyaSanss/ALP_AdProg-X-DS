@@ -1,7 +1,19 @@
 package Model;
 
 import App.App;
+import User.Pendonor;
 import User.User;
+
+import Request.Request;
+import User.Pendonor;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Locale;
+
+import Request.Request;
+import User.Pendonor;
 
 import java.util.ArrayList;
 
@@ -93,6 +105,86 @@ public class Notification implements Runnable {
                             + status);
 
             notif.setRead(true);
+        }
+    }
+
+    public static void cekPengingatDonor(User user) {
+
+        if (!(user instanceof Pendonor)) {
+            return;
+        }
+
+        Pendonor pendonor = (Pendonor) user;
+
+        if (pendonor.getRiwayatDonor().isEmpty()) {
+            return;
+        }
+
+        for (Notification n : user.getInbox()) {
+
+            if (n.getPesan().equals(
+                    "Anda sudah dapat melakukan donor darah kembali")) {
+                return;
+            }
+        }
+
+        RiwayatDonor terakhir = pendonor.getRiwayatDonor()
+                .get(
+                        pendonor.getRiwayatDonor().size() - 1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+                "yyyy-MM-dd",
+                new Locale("id", "ID"));
+
+        LocalDate tanggalDonor = LocalDate.parse(
+                terakhir.getTanggalDonor(),
+                formatter);
+
+        long selisihHari = ChronoUnit.DAYS.between(
+                tanggalDonor,
+                LocalDate.now());
+
+        if (selisihHari >= 90) {
+
+            user.tambahNotifikasi(
+                    new Notification(
+                            "Anda sudah dapat melakukan donor darah kembali"));
+        }
+    }
+
+    public static void cekDonorDarurat(User user) {
+
+        if (!(user instanceof Pendonor)) {
+            return;
+        }
+
+        Pendonor pendonor = (Pendonor) user;
+
+        for (Request req : Request.getLiveRequestList()) {
+
+            if (req.getGolonganDarah() == pendonor.getGolDarah() && req.getRhesus() == pendonor.getRhesus()) {
+
+                String pesan = "Donor darurat dibutuhkan untuk golongan darah "
+                        + req.getGolonganDarah()
+                        + " "
+                        + req.getRhesus();
+
+                boolean sudahAda = false;
+
+                for (Notification notif : user.getInbox()) {
+
+                    if (notif.getPesan().equals(pesan)) {
+                        sudahAda = true;
+                        break;
+                    }
+                }
+
+                if (!sudahAda) {
+
+                    user.tambahNotifikasi(
+                            new Notification(pesan));
+                }
+            }
         }
     }
 }

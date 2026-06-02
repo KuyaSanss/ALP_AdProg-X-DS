@@ -52,7 +52,6 @@ public class App {
         dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
         dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
         dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
-        
 
         // #region form 1
 
@@ -357,7 +356,8 @@ public class App {
         System.out.println();
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-
+        Notification.cekPengingatDonor(currentUser);
+        Notification.cekDonorDarurat(currentUser);
         Notification notif = new Notification(this);
         notif.run();
 
@@ -499,5 +499,4 @@ public class App {
 
     }
 
-    
 }
