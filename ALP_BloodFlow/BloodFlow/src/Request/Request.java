@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import App.*;
 import DataStructures.*;
 import Enum.*;
+<<<<<<< Updated upstream
+=======
+import Model.MyMinHeap;
+>>>>>>> Stashed changes
 import User.*;
 
 public class Request implements Comparable<Request> {
@@ -28,7 +32,6 @@ public class Request implements Comparable<Request> {
     private String namaPasien;
     private golDarahEnum golonganDarah;
     private rhesusEnum rhesus;
-    private String tanggalLahirAtauUsia;
     private String nomorRekamMedis;
     private JenisKelamin jenisKelamin;
     private String ruangPerawatan;
@@ -37,11 +40,33 @@ public class Request implements Comparable<Request> {
     private KomponenDarah komponenDarah;
     private int jumlahKantong;
     private LocalDateTime rencanaWaktuTransfusi;
-    private AlasanKlinis alasanKlinis;
 
     private String namaDokter;
     private String jabatan;
     private String nomorSIP;
+
+    // tambahan data klinis / triase
+    private int usiaPasien;
+    private int tekananDarahSistolik;
+    private int gcsMata;
+    private int gcsVerbal;
+    private int gcsMotorik;
+    private int spo2;
+    private int frekuensiNapas;
+    private int frekuensiNadi;
+    private double suhuTubuh;
+    private int skalaNyeri;
+    private int resusitasiCairan;
+    private int intubasiAtauManajemenJalanNapas;
+    private int defibrilasi;
+    private int pemeriksaanLaboratorium;
+    private int pemeriksaanRadiologi;
+    private int jumlahJenisResourceMedis;
+    private int konsultasiSpesialis;
+    private int obatIVAtauIM;
+    private int nebulizer;
+    private int prosedurTindakan;
+    private int reassessmentTandaVital;
 
     public Request(BDRS unitBDRS) {
         idPermintaan = "RQ" + requestTerbuat;
@@ -64,7 +89,6 @@ public class Request implements Comparable<Request> {
         System.out.println("Nama Pasien             : " + getNamaPasien());
         System.out.println("Golongan Darah          : " + getGolonganDarah());
         System.out.println("Rhesus Darah            : " + getRhesus());
-        System.out.println("Tanggal Lahir atau Usia : " + getTanggalLahirAtauUsia());
         System.out.println("Nomor Rekam Medis       : " + getNomorRekamMedis());
         System.out.println("Jenis Kelamin           : " + getJenisKelamin());
         System.out.println("Ruang Perawatan         : " + getRuangPerawatan());
@@ -75,7 +99,6 @@ public class Request implements Comparable<Request> {
         System.out.println("Komponen Darah          : " + getKomponenDarah());
         System.out.println("Jumlah Kantong          : " + getJumlahKantong());
         System.out.println("Rencana Transfusi       : " + getRencanaWaktuTransfusi());
-        System.out.println("Alasan Klinis           : " + getAlasanKlinis());
 
         System.out.println("\nC. DATA DOKTER PEMINTA");
 
@@ -83,12 +106,63 @@ public class Request implements Comparable<Request> {
         System.out.println("Jabatan                 : " + getJabatan());
         System.out.println("Nomor SIP               : " + getNomorSIP());
 
+        System.out.println("\nC. DATA KLINIS PASIEN");
+
+        System.out.println("Usia Pasien             : " + getUsiaPasien());
+        System.out.println("Tekanan Sistolik        : " + getTekananDarahSistolik());
+        System.out.println("GCS Mata                : " + getGcsMata());
+        System.out.println("GCS Verbal              : " + getGcsVerbal());
+        System.out.println("GCS Motorik             : " + getGcsMotorik());
+        System.out.println("SpO2                    : " + getSpo2());
+        System.out.println("Frekuensi Napas         : " + getFrekuensiNapas());
+        System.out.println("Frekuensi Nadi          : " + getFrekuensiNadi());
+        System.out.println("Suhu Tubuh              : " + getSuhuTubuh());
+        System.out.println("Skala Nyeri             : " + getSkalaNyeri());
+        System.out.println("Jumlah Resource Medis   : " + getJumlahJenisResourceMedis());
+        System.out.println("Resusitasi Cairan       : " + getResusitasiCairan());
+        System.out.println("Intubasi/Jalan Napas    : " + getIntubasiAtauManajemenJalanNapas());
+        System.out.println("Defibrilasi             : " + getDefibrilasi());
+        System.out.println("Lab                     : " + getPemeriksaanLaboratorium());
+        System.out.println("Radiologi               : " + getPemeriksaanRadiologi());
+        System.out.println("Konsultasi Spesialis    : " + getKonsultasiSpesialis());
+        System.out.println("Obat IV/IM              : " + getObatIVAtauIM());
+        System.out.println("Nebulizer               : " + getNebulizer());
+        System.out.println("Prosedur Tindakan       : " + getProsedurTindakan());
+        System.out.println("Reassessment Tanda Vital: " + getReassessmentTandaVital());
+
+                System.out.println("\nC. DATA RESOURCE MEDIS");
+
+        System.out.println("Jumlah Resource Medis   : " + getJumlahJenisResourceMedis());
+        System.out.println("Laboratorium             : " + getPemeriksaanLaboratorium());
+        System.out.println("Radiologi                : " + getPemeriksaanRadiologi());
+        System.out.println("Konsultasi Spesialis     : " + getKonsultasiSpesialis());
+        System.out.println("Obat IV / IM             : " + getObatIVAtauIM());
+        System.out.println("Nebulizer                : " + getNebulizer());
+        System.out.println("Prosedur Tindakan        : " + getProsedurTindakan());
+        System.out.println("Reassessment Tanda Vital : " + getReassessmentTandaVital());
+        System.out.println("Transfusi Darah          : " + "YA");
+
+        System.out.println("\nD. TINDAKAN EMERGENSI");
+
+        System.out.println("Resusitasi Cairan        : " + getResusitasiCairan());
+        System.out.println("Intubasi / Jalan Napas   : " + getIntubasiAtauManajemenJalanNapas());
+        System.out.println("Defibrilasi              : " + getDefibrilasi());
     }
 
     public int hitungWeight() {
+        int gcsTotal = gcsMata + gcsVerbal + gcsMotorik;
 
-        int urgency = alasanKlinis.getSkor();
+        // ESI 1: paling gawat / butuh resusitasi
+        if (resusitasiCairan == 1
+                || intubasiAtauManajemenJalanNapas == 1
+                || defibrilasi == 1
+                || (spo2 > 0 && spo2 < 90)
+                || (tekananDarahSistolik > 0 && tekananDarahSistolik < 90)
+                || (gcsTotal > 0 && gcsTotal <= 8)) {
+            return 1;
+        }
 
+<<<<<<< Updated upstream
         int komponen = komponenDarah.getSkor();
 
         int kantong = jumlahKantong;
@@ -96,55 +170,90 @@ public class Request implements Comparable<Request> {
         return urgency * 1000 +
                 komponen * 100 +
                 kantong * 10;
+=======
+        // ESI 2: sangat urgent
+        if (konsultasiSpesialis == 1
+                || prosedurTindakan == 1
+                || pemeriksaanRadiologi == 1
+                || pemeriksaanLaboratorium == 1
+                || skalaNyeri >= 7
+                || (spo2 >= 90 && spo2 <= 94)
+                || (gcsTotal >= 9 && gcsTotal <= 12)
+                || (tekananDarahSistolik >= 90 && tekananDarahSistolik <= 100 && usiaPasien > 0)) {
+            return 2;
+        }
+
+        // ESI 3: butuh beberapa resource
+        if (jumlahJenisResourceMedis >= 2) {
+            return 3;
+        }
+
+        // ESI 4: butuh satu resource
+        if (jumlahJenisResourceMedis == 1) {
+            return 4;
+        }
+
+        // ESI 5: tidak butuh resource
+        return 5;
+>>>>>>> Stashed changes
     }
 
-    public void approveRequest(App app){
+    public void approveRequest(App app) {
         System.out.println("=== APPROVE REQUEST ===");
         tampilkanForm();
         System.out.println();
         System.out.println("1. Approve");
         System.out.println("0. Back to menu");
-        boolean wrong=false;
-        do{
-        String input = app.getSc().next() + app.getSc().nextLine();
-        if(input.equals("1")){
+        boolean wrong = false;
+        do {
+            String input = app.getSc().next() + app.getSc().nextLine();
+            if (input.equals("1")) {
 
-        }else if(input.equals("0")){
+            } else if (input.equals("0")) {
 
-        }else{
-            System.out.println("Wrong input! Only 1 or 0");
-            wrong=true;
-        }
-        }while(wrong);
+            } else {
+                System.out.println("Wrong input! Only 1 or 0");
+                wrong = true;
+            }
+        } while (wrong);
     }
 
     @Override
     public int compareTo(Request other) {
+        int thisWeight = this.hitungWeight();
+        int otherWeight = other.hitungWeight();
 
-        if (this.hitungWeight() < other.hitungWeight()) {
+        if (thisWeight < otherWeight) {
             return -1;
-        } else if (this.hitungWeight() == other.hitungWeight()) {
-            if (idPermintaan.compareTo(other.getIdPermintaan()) == -1) {
-                return -1;
-            } else {
-                return 1;
-            }
-        } else {
+        } else if (thisWeight > otherWeight) {
             return 1;
+        } else {
+            return this.idPermintaan.compareTo(other.idPermintaan);
         }
     }
+
+    public int getGcsTotal() {
+        return gcsMata + gcsVerbal + gcsMotorik;
+    }
+
+
 
     // #region static
 
     public static Request displayRequests(App app) {
-        MyMaxHeap<Request> maxHeap = new MyMaxHeap<>(liveRequestList);
+        MyMinHeap<Request> maxHeap = new MyMinHeap<>(liveRequestList);
         int size = liveRequestList.size();
         Request[] list = new Request[size];
 
         System.out.println("=== REQUEST LIST ===");
         for (int i = 0; i < size; i++) {
+<<<<<<< Updated upstream
             System.out.println((i + 1) + "=====================");
             list[i] = maxHeap.extractMax();
+=======
+            System.out.println((i + 1) + " =====================");
+            list[i] = maxHeap.extractMin();
+>>>>>>> Stashed changes
             list[i].tampilkanForm();
             System.out.println();
         }
@@ -258,14 +367,6 @@ public class Request implements Comparable<Request> {
         this.namaPasien = namaPasien;
     }
 
-    public String getTanggalLahirAtauUsia() {
-        return tanggalLahirAtauUsia;
-    }
-
-    public void setTanggalLahirAtauUsia(String tanggalLahirAtauUsia) {
-        this.tanggalLahirAtauUsia = tanggalLahirAtauUsia;
-    }
-
     public String getNomorRekamMedis() {
         return nomorRekamMedis;
     }
@@ -322,13 +423,6 @@ public class Request implements Comparable<Request> {
         this.rencanaWaktuTransfusi = rencanaWaktuTransfusi;
     }
 
-    public AlasanKlinis getAlasanKlinis() {
-        return alasanKlinis;
-    }
-
-    public void setAlasanKlinis(AlasanKlinis alasanKlinis) {
-        this.alasanKlinis = alasanKlinis;
-    }
 
     public String getNamaDokter() {
         return namaDokter;
@@ -384,6 +478,174 @@ public class Request implements Comparable<Request> {
 
     public void setRhesus(rhesusEnum rhesus) {
         this.rhesus = rhesus;
+    }
+
+    public int getUsiaPasien() {
+        return usiaPasien;
+    }
+
+    public void setUsiaPasien(int usiaPasien) {
+        this.usiaPasien = usiaPasien;
+    }
+
+    public int getTekananDarahSistolik() {
+        return tekananDarahSistolik;
+    }
+
+    public void setTekananDarahSistolik(int tekananDarahSistolik) {
+        this.tekananDarahSistolik = tekananDarahSistolik;
+    }
+
+    public int getGcsMata() {
+        return gcsMata;
+    }
+
+    public void setGcsMata(int gcsMata) {
+        this.gcsMata = gcsMata;
+    }
+
+    public int getGcsVerbal() {
+        return gcsVerbal;
+    }
+
+    public void setGcsVerbal(int gcsVerbal) {
+        this.gcsVerbal = gcsVerbal;
+    }
+
+    public int getGcsMotorik() {
+        return gcsMotorik;
+    }
+
+    public void setGcsMotorik(int gcsMotorik) {
+        this.gcsMotorik = gcsMotorik;
+    }
+
+    public int getSpo2() {
+        return spo2;
+    }
+
+    public void setSpo2(int spo2) {
+        this.spo2 = spo2;
+    }
+
+    public int getFrekuensiNapas() {
+        return frekuensiNapas;
+    }
+
+    public void setFrekuensiNapas(int frekuensiNapas) {
+        this.frekuensiNapas = frekuensiNapas;
+    }
+
+    public int getFrekuensiNadi() {
+        return frekuensiNadi;
+    }
+
+    public void setFrekuensiNadi(int frekuensiNadi) {
+        this.frekuensiNadi = frekuensiNadi;
+    }
+
+    public double getSuhuTubuh() {
+        return suhuTubuh;
+    }
+
+    public void setSuhuTubuh(double suhuTubuh) {
+        this.suhuTubuh = suhuTubuh;
+    }
+
+    public int getSkalaNyeri() {
+        return skalaNyeri;
+    }
+
+    public void setSkalaNyeri(int skalaNyeri) {
+        this.skalaNyeri = skalaNyeri;
+    }
+
+    public int getJumlahJenisResourceMedis() {
+        return jumlahJenisResourceMedis;
+    }
+
+    public void setJumlahJenisResourceMedis(int jumlahJenisResourceMedis) {
+        this.jumlahJenisResourceMedis = jumlahJenisResourceMedis;
+    }
+
+    public int getResusitasiCairan() {
+        return resusitasiCairan;
+    }
+
+    public void setResusitasiCairan(int resusitasiCairan) {
+        this.resusitasiCairan = resusitasiCairan;
+    }
+
+    public int getIntubasiAtauManajemenJalanNapas() {
+        return intubasiAtauManajemenJalanNapas;
+    }
+
+    public void setIntubasiAtauManajemenJalanNapas(int intubasiAtauManajemenJalanNapas) {
+        this.intubasiAtauManajemenJalanNapas = intubasiAtauManajemenJalanNapas;
+    }
+
+    public int getDefibrilasi() {
+        return defibrilasi;
+    }
+
+    public void setDefibrilasi(int defibrilasi) {
+        this.defibrilasi = defibrilasi;
+    }
+
+    public int getPemeriksaanLaboratorium() {
+        return pemeriksaanLaboratorium;
+    }
+
+    public void setPemeriksaanLaboratorium(int pemeriksaanLaboratorium) {
+        this.pemeriksaanLaboratorium = pemeriksaanLaboratorium;
+    }
+
+    public int getPemeriksaanRadiologi() {
+        return pemeriksaanRadiologi;
+    }
+
+    public void setPemeriksaanRadiologi(int pemeriksaanRadiologi) {
+        this.pemeriksaanRadiologi = pemeriksaanRadiologi;
+    }
+
+    public int getKonsultasiSpesialis() {
+        return konsultasiSpesialis;
+    }
+
+    public void setKonsultasiSpesialis(int konsultasiSpesialis) {
+        this.konsultasiSpesialis = konsultasiSpesialis;
+    }
+
+    public int getObatIVAtauIM() {
+        return obatIVAtauIM;
+    }
+
+    public void setObatIVAtauIM(int obatIVAtauIM) {
+        this.obatIVAtauIM = obatIVAtauIM;
+    }
+
+    public int getNebulizer() {
+        return nebulizer;
+    }
+
+    public void setNebulizer(int nebulizer) {
+        this.nebulizer = nebulizer;
+    }
+
+    public int getProsedurTindakan() {
+        return prosedurTindakan;
+    }
+
+    public void setProsedurTindakan(int prosedurTindakan) {
+        this.prosedurTindakan = prosedurTindakan;
+    }
+
+    public int getReassessmentTandaVital() {
+        return reassessmentTandaVital;
+    }
+
+    public void setReassessmentTandaVital(int reassessmentTandaVital) {
+        this.reassessmentTandaVital = reassessmentTandaVital;
     }
 
     // #endregion
