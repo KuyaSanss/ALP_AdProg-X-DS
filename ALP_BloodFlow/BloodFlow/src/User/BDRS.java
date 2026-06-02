@@ -87,6 +87,7 @@ public class BDRS extends User {
         System.out.println("\nB. DATA KLINIS PASIEN");
 
         usiaPasien(app, form);
+        kadarHb(app, form);
         tekananDarahSistolik(app, form);
         gcsMataLangsung(app, form);
         gcsVerbalLangsung(app, form);
@@ -532,6 +533,36 @@ public class BDRS extends User {
         form.setFrekuensiNadi(inputInt(app, "Frekuensi nadi pasien per menit.", 0, 250,
                 "Frekuensi nadi harus di antara 0 sampai 250 per menit."));
     }
+
+    public void kadarHb(App app, Request form) {
+    while (true) {
+
+        System.out.print("Kadar Hb pasien (g/dL): ");
+
+        String input = app.getSc().nextLine();
+
+        if (input.isEmpty()) {
+            System.out.println("Error: Input tidak boleh kosong!");
+            continue;
+        }
+
+        try {
+
+            double hb = Double.parseDouble(input);
+
+            if (hb < 0 || hb > 25) {
+                System.out.println("Error: Nilai Hb 0-25!");
+                continue;
+            }
+
+            form.setKadarHb(hb);
+            break;
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Input harus berupa angka!");
+        }
+    }
+}
 
     public void suhuTubuh(App app, Request form) {
         form.setSuhuTubuh(inputDouble(app, "Suhu tubuh pasien dalam derajat Celsius.", 25.0, 45.0,

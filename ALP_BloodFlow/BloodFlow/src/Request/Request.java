@@ -41,6 +41,9 @@ public class Request implements Comparable<Request> {
 
     // tambahan data klinis / triase
     private int usiaPasien;
+    private double kadarHb;
+    
+
     private int tekananDarahSistolik;
     private int gcsMata;
     private int gcsVerbal;
@@ -103,6 +106,7 @@ public class Request implements Comparable<Request> {
         System.out.println("\nC. DATA KLINIS PASIEN");
 
         System.out.println("Usia Pasien             : " + getUsiaPasien());
+        System.out.println("Kadar Hb                : " + getKadarHb() + " g/dL");
         System.out.println("Tekanan Sistolik        : " + getTekananDarahSistolik());
         System.out.println("GCS Mata                : " + getGcsMata());
         System.out.println("GCS Verbal              : " + getGcsVerbal());
@@ -140,6 +144,7 @@ public class Request implements Comparable<Request> {
         if (resusitasiCairan == 1
                 || intubasiAtauManajemenJalanNapas == 1
                 || defibrilasi == 1
+                || kadarHb < 5
                 || (spo2 > 0 && spo2 < 90)
                 || (tekananDarahSistolik > 0 && tekananDarahSistolik < 90)
                 || (gcsTotal > 0 && gcsTotal <= 8)) {
@@ -151,6 +156,7 @@ public class Request implements Comparable<Request> {
                 || prosedurTindakan == 1
                 || pemeriksaanRadiologi == 1
                 || pemeriksaanLaboratorium == 1
+                || kadarHb < 7
                 || skalaNyeri >= 7
                 || (spo2 >= 90 && spo2 <= 94)
                 || (gcsTotal >= 9 && gcsTotal <= 12)
@@ -607,6 +613,14 @@ public class Request implements Comparable<Request> {
 
     public void setReassessmentTandaVital(int reassessmentTandaVital) {
         this.reassessmentTandaVital = reassessmentTandaVital;
+    }
+    
+    public double getKadarHb() {
+        return kadarHb;
+    }
+
+    public void setKadarHb(double kadarHb) {
+        this.kadarHb = kadarHb;
     }
 
     // #endregion

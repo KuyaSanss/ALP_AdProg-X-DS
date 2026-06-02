@@ -84,6 +84,7 @@ public class App {
  
         // Data klinis - kondisi sedang, sadar penuh
         form.setUsiaPasien(45);
+        form.setKadarHb(7);
         form.setTekananDarahSistolik(110);
         form.setGcsMata(4);       // mata terbuka spontan
         form.setGcsVerbal(5);     // orientasi baik
@@ -142,6 +143,7 @@ public class App {
  
         // Data klinis - perdarahan aktif, semi-sadar
         form.setUsiaPasien(32);
+        form.setKadarHb(7);
         form.setTekananDarahSistolik(95);
         form.setGcsMata(3);       // terbuka saat dipanggil
         form.setGcsVerbal(4);     // bingung
@@ -200,6 +202,7 @@ public class App {
  
         // Data klinis - syok, tidak sadar
         form.setUsiaPasien(28);
+        form.setKadarHb(7);
         form.setTekananDarahSistolik(72);
         form.setGcsMata(2);       // terbuka saat rangsang nyeri
         form.setGcsVerbal(3);     // kata-kata tidak tepat
@@ -258,6 +261,7 @@ public class App {
  
         // Data klinis - kondisi stabil, elektif
         form.setUsiaPasien(30);
+        form.setKadarHb(7);
         form.setTekananDarahSistolik(120);
         form.setGcsMata(4);       // terbuka spontan
         form.setGcsVerbal(5);     // orientasi baik
@@ -316,6 +320,7 @@ public class App {
  
         // Data klinis - perdarahan GI aktif, tekanan turun
         form.setUsiaPasien(55);
+        form.setKadarHb(7);
         form.setTekananDarahSistolik(85);
         form.setGcsMata(3);       // terbuka saat dipanggil
         form.setGcsVerbal(4);     // bingung
@@ -374,6 +379,7 @@ public class App {
  
         // Data klinis - DBD, demam tinggi, sadar penuh
         form.setUsiaPasien(22);
+        form.setKadarHb(7);
         form.setTekananDarahSistolik(105);
         form.setGcsMata(4);       // terbuka spontan
         form.setGcsVerbal(5);     // orientasi baik
