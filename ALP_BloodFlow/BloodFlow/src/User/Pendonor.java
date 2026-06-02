@@ -58,9 +58,9 @@ public class Pendonor extends User {
         this.riwayatDonor = riwayatDonor;
     }
 
-    public Hashtable<Integer, String> getInbox() {
-        return inbox;
-    }
+    //public Hashtable<Integer, String> getInbox() {
+   //     return inbox;
+   // }
 
     @Override
     public void tampilkanMenuUtama(App app) {
@@ -77,6 +77,7 @@ public class Pendonor extends User {
                 ((Pendonor) app.getCurrentUser()).tampilkanRiwayatDonor();
                 break;
             case "2":
+                cekKelayakanDonor();
                 Notification.tampilkanSemuaNotifikasi(app.getCurrentUser());
                 break;
             case "3":
