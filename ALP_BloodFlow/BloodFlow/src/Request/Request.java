@@ -68,7 +68,8 @@ public class Request implements Comparable<Request> {
     }
 
     public void tampilkanForm() {
-        // System.out.println(hitungWeight());
+        System.out.println("ESI Priority            : "+hitungWeight());
+
         System.out.println("\n=== FORM PERMINTAAN DARAH ===");
 
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
@@ -112,34 +113,24 @@ public class Request implements Comparable<Request> {
         System.out.println("Suhu Tubuh              : " + getSuhuTubuh());
         System.out.println("Skala Nyeri             : " + getSkalaNyeri());
         System.out.println("Jumlah Resource Medis   : " + getJumlahJenisResourceMedis());
-        System.out.println("Resusitasi Cairan       : " + getResusitasiCairan());
-        System.out.println("Intubasi/Jalan Napas    : " + getIntubasiAtauManajemenJalanNapas());
-        System.out.println("Defibrilasi             : " + getDefibrilasi());
-        System.out.println("Lab                     : " + getPemeriksaanLaboratorium());
-        System.out.println("Radiologi               : " + getPemeriksaanRadiologi());
-        System.out.println("Konsultasi Spesialis    : " + getKonsultasiSpesialis());
-        System.out.println("Obat IV/IM              : " + getObatIVAtauIM());
-        System.out.println("Nebulizer               : " + getNebulizer());
-        System.out.println("Prosedur Tindakan       : " + getProsedurTindakan());
-        System.out.println("Reassessment Tanda Vital: " + getReassessmentTandaVital());
 
-                System.out.println("\nC. DATA RESOURCE MEDIS");
+        System.out.println("\nC. DATA RESOURCE MEDIS");
 
-        System.out.println("Jumlah Resource Medis   : " + getJumlahJenisResourceMedis());
-        System.out.println("Laboratorium             : " + getPemeriksaanLaboratorium());
-        System.out.println("Radiologi                : " + getPemeriksaanRadiologi());
-        System.out.println("Konsultasi Spesialis     : " + getKonsultasiSpesialis());
-        System.out.println("Obat IV / IM             : " + getObatIVAtauIM());
-        System.out.println("Nebulizer                : " + getNebulizer());
-        System.out.println("Prosedur Tindakan        : " + getProsedurTindakan());
-        System.out.println("Reassessment Tanda Vital : " + getReassessmentTandaVital());
+        System.out.println("Jumlah Resource Medis   : " + (getJumlahJenisResourceMedis()==1 ?"YA":"TIDAK"));
+        System.out.println("Laboratorium             : " + (getPemeriksaanLaboratorium()==1 ?"YA":"TIDAK"));
+        System.out.println("Radiologi                : " + (getPemeriksaanRadiologi()==1 ?"YA":"TIDAK"));
+        System.out.println("Konsultasi Spesialis     : " + (getKonsultasiSpesialis()==1 ?"YA":"TIDAK"));
+        System.out.println("Obat IV / IM             : " + (getObatIVAtauIM()==1 ?"YA":"TIDAK"));
+        System.out.println("Nebulizer                : " + (getNebulizer()==1 ?"YA":"TIDAK"));
+        System.out.println("Prosedur Tindakan        : " + (getProsedurTindakan()==1 ?"YA":"TIDAK"));
+        System.out.println("Reassessment Tanda Vital : " + (getReassessmentTandaVital()==1 ?"YA":"TIDAK"));
         System.out.println("Transfusi Darah          : " + "YA");
 
         System.out.println("\nD. TINDAKAN EMERGENSI");
 
-        System.out.println("Resusitasi Cairan        : " + getResusitasiCairan());
-        System.out.println("Intubasi / Jalan Napas   : " + getIntubasiAtauManajemenJalanNapas());
-        System.out.println("Defibrilasi              : " + getDefibrilasi());
+        System.out.println("Resusitasi Cairan        : " + (getResusitasiCairan()==1 ?"YA":"TIDAK"));
+        System.out.println("Intubasi / Jalan Napas   : " + (getIntubasiAtauManajemenJalanNapas()==1 ?"YA":"TIDAK"));
+        System.out.println("Defibrilasi              : " + (getDefibrilasi()==1 ?"YA":"TIDAK"));
     }
 
     public int hitungWeight() {
