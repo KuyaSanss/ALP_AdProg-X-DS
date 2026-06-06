@@ -4,7 +4,7 @@ import App.App;
 import User.Pendonor;
 import User.User;
 
-import Request.Form;
+import Request.*;
 import User.Pendonor;
 
 import java.time.LocalDate;
@@ -160,14 +160,14 @@ public class Notification implements Runnable {
 
         Pendonor pendonor = (Pendonor) user;
 
-        for (Form req : Form.getLiveRequestList()) {
-
-            if (req.getGolonganDarah() == pendonor.getGolDarah() && req.getRhesus() == pendonor.getRhesus()) {
+        for (Request req : Request.getLiveRequestList()) {
+            Form form = req.getForm();
+            if (form.getGolonganDarah() == pendonor.getGolDarah() && form.getRhesus() == pendonor.getRhesus()) {
 
                 String pesan = "Donor darurat dibutuhkan untuk golongan darah "
-                        + req.getGolonganDarah()
+                        + form.getGolonganDarah()
                         + " "
-                        + req.getRhesus();
+                        + form.getRhesus();
 
                 boolean sudahAda = false;
 
