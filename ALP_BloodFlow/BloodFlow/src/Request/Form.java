@@ -3,11 +3,11 @@ package Request;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.LinkedList;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import App.*;
 import Enum.*;
-import Model.MyMinHeap;
 import User.*;
 
 public class Form implements Comparable<Form> {
@@ -62,6 +62,82 @@ public class Form implements Comparable<Form> {
     private int reassessmentTandaVital;
 
     public Form(BDRS unitBDRS) {}
+
+    public void inputForm(App app) {
+
+        System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
+
+        setNamaRumahSakit(unitBDRS.getNama());
+        setAlamat(unitBDRS.getAlamat());
+        setTelepon(unitBDRS.getNoTelp());
+        setTanggalPermintaan(LocalDate.now());
+        setJamPermintaan(LocalTime.now());
+
+        System.out.println("\nA. DATA PASIEN");
+
+        System.out.print("Nama Pasien: ");
+        setNamaPasien(app.getSc().nextLine());
+
+        golonganDarah(app);
+        rhesus(app);
+
+        System.out.print("Nomor Rekam Medis: ");
+        setNomorRekamMedis(app.getSc().nextLine());
+
+        jenisKelamin(app);
+
+        System.out.print("Ruang Perawatan: ");
+        setRuangPerawatan(app.getSc().nextLine());
+
+        System.out.print("Diagnosa Klinis: ");
+        setDiagnosaKlinis(app.getSc().nextLine());
+
+        System.out.println("\nB. DATA KLINIS PASIEN");
+
+        usiaPasien(app);
+        kadarHb(app);
+        tekananDarahSistolik(app);
+        gcsMataLangsung(app);
+        gcsVerbalLangsung(app);
+        gcsMotorikLangsung(app);
+        spo2(app);
+        frekuensiNapas(app);
+        frekuensiNadi(app);
+        suhuTubuh(app);
+        skalaNyeri(app);
+
+        System.out.println("\nC. KEBUTUHAN TINDAKAN / RESOURCE MEDIS");
+
+        resusitasiCairan(app);
+        intubasiAtauManajemenJalanNapas(app);
+        defibrilasi(app);
+        pemeriksaanLaboratorium(app);
+        pemeriksaanRadiologi(app);
+        konsultasiSpesialis(app);
+        obatIVAtauIM(app);
+        nebulizer(app);
+        prosedurTindakan(app);
+        reassessmentTandaVital(app);
+
+        System.out.println("\nD. DATA PERMINTAAN DARAH");
+
+        jumlahKantong(app);
+        rencanaWaktuTransfusi(app);
+
+        System.out.println("\nE. DATA DOKTER PEMINTA");
+
+        System.out.print("Nama Dokter: ");
+        setNamaDokter(app.getSc().nextLine());
+
+        System.out.print("Jabatan: ");
+        setJabatan(app.getSc().nextLine());
+
+        System.out.print("Nomor SIP: ");
+        setNomorSIP(app.getSc().nextLine());
+
+        System.out.println("permintaan darah berhasil terkirim");
+        app.getCurrentUser().tampilkanMenuUtama(app);//kembali ke menu user
+    }
 
     public void tampilkanForm() {
         System.out.println("ESI Priority            : " + hitungWeight());
@@ -192,6 +268,7 @@ public class Form implements Comparable<Form> {
         } while (wrong);
     }
 
+
     @Override
     public int compareTo(Form other) {
         int thisWeight = this.hitungWeight();
@@ -210,67 +287,612 @@ public class Form implements Comparable<Form> {
         return gcsMata + gcsVerbal + gcsMotorik;
     }
 
-    // #region static
+    
+    // #region Questions
 
-    public static Form displayRequests(App app) {
-        MyMinHeap<Form> maxHeap = new MyMinHeap<>(liveRequestList);
-        int size = liveRequestList.size();
-        Form[] list = new Form[size];
+    private void jenisKelamin(App app) {
+        while (true) {
+            System.out.println("Jenis Kelamin");
+            System.out.println("1. LAKI LAKI");
+            System.out.println("2. PEREMPUAN");
+            System.out.print("Pilih: ");
 
-        System.out.println("=== REQUEST LIST ===");
-        for (int i = 0; i < size; i++) {
-            System.out.println((i + 1) + " =====================");
-            list[i] = maxHeap.extractMin();
-            list[i].tampilkanForm();
-            System.out.println();
-        }
+            String input = app.getSc().nextLine();
 
-        int choice = -1;
-        boolean isValid = false;
-
-        while (!isValid) {
-            System.out.print("Input (1-" + size + " to select, 0 to exit): ");
-            String input = app.getSc().next() + app.getSc().nextLine();
-
+            // Check if input is empty
             if (input.isEmpty()) {
-                System.out.println("Error: Input cannot be empty.\n");
+                System.out.println("Error: Input tidak boleh kosong!");
                 continue;
             }
 
-            boolean isNumeric = true;
+            // Check if all characters are digits
+            boolean isAllDigit = true;
             for (int i = 0; i < input.length(); i++) {
-                char c = input.charAt(i);
-                if (!Character.isDigit(c)) {
-                    isNumeric = false;
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
                     break;
                 }
             }
 
-            if (!isNumeric) {
-                System.out.println("Error: Input must contain numbers only (no letters or symbols).\n");
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
                 continue;
             }
 
-            choice = Integer.parseInt(input);
+            int pilihan = Integer.parseInt(input);
 
-            if (choice >= 0 && choice <= size) {
-                isValid = true;
+            if (pilihan == 1) {
+                setJenisKelamin(JenisKelamin.LAKI_LAKI);
+                break;
+            } else if (pilihan == 2) {
+                setJenisKelamin(JenisKelamin.PEREMPUAN);
+                break;
             } else {
-                System.out.println("Error: Number out of bounds. Please enter a number between 0 and " + size + ".\n");
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 atau 2.");
+                continue;
             }
         }
+    }
 
-        if (choice == 0) {
-            app.getCurrentUser().tampilkanMenuUtama(app);
-        } else {
-            Form selectedRequest = list[choice - 1];
-            System.out.println("\nYou selected request ID: " + selectedRequest.getIdPermintaan());
-            return selectedRequest;
+    private void jumlahKantong(App app) {
+        while (true) {
+            System.out.print("Jumlah Kantong: ");
+            String input = app.getSc().nextLine();
+
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            // Check if all characters are digits
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int jumlah = Integer.parseInt(input);
+
+            if (jumlah <= 0) {
+                System.out.println("Error: Jumlah kantong harus lebih dari 0!");
+                continue;
+            }
+
+            setJumlahKantong(jumlah);
+            break;
         }
-        return null;
+    }
+
+    private void rencanaWaktuTransfusi(App app) {
+        while (true) {
+
+            try {
+
+                System.out.print(
+                        "Rencana Waktu Transfusi "
+                                + "(YYYY-MM-DD HH:MM): ");
+
+                String inputWaktu = app.getSc().nextLine();
+
+                DateTimeFormatter format = DateTimeFormatter.ofPattern(
+                        "yyyy-MM-dd HH:mm");
+
+                LocalDateTime waktuTransfusi = LocalDateTime.parse(
+                        inputWaktu,
+                        format);
+
+                if (waktuTransfusi.isBefore(
+                        LocalDateTime.now())) {
+
+                    System.out.println(
+                            "Waktu transfusi tidak boleh "
+                                    + "sebelum waktu sekarang.");
+
+                    continue;
+                }
+
+                setRencanaWaktuTransfusi(
+                        waktuTransfusi);
+
+                break;
+
+            } catch (DateTimeParseException e) {
+
+                System.out.println(
+                        "Format salah.");
+
+                System.out.println(
+                        "Gunakan format:");
+
+                System.out.println(
+                        "YYYY-MM-DD HH:MM");
+            }
+        }
+    }
+
+    private void golonganDarah(App app) {
+        while (true) {
+            System.out.println("Golongan Darah");
+            System.out.println("1. A");
+            System.out.println("2. B");
+            System.out.println("3. AB");
+            System.out.println("4. O");
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            // Check if all characters are digits
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            switch (pilihan) {
+                case 1:
+                    setGolonganDarah(golDarahEnum.A);
+                    break;
+                case 2:
+                    setGolonganDarah(golDarahEnum.B);
+                    break;
+                case 3:
+                    setGolonganDarah(golDarahEnum.AB);
+                    break;
+                case 4:
+                    setGolonganDarah(golDarahEnum.O);
+                    break;
+                default:
+                    System.out.println("Error: Pilihan tidak valid! Masukkan angka 1-4.");
+                    continue;
+            }
+            break;
+        }
+    }
+
+    private void rhesus(App app) {
+        while (true) {
+            System.out.println("Rhesus");
+            System.out.println("1. Positif (+)");
+            System.out.println("2. Negatif (-)");
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            // Check if all characters are digits
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            if (pilihan == 1) {
+                setRhesus(rhesusEnum.POSITIVE);
+                break;
+            } else if (pilihan == 2) {
+                setRhesus(rhesusEnum.NEGATIVE);
+                break;
+            } else {
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 atau 2.");
+                continue;
+            }
+        }
+    }
+
+    public void usiaPasien(App app) {
+        setUsiaPasien(inputInt(app, "Usia pasien dalam tahun.", 0, 150,
+                "Usia harus di antara 0 sampai 150 tahun."));
+    }
+
+    public void tekananDarahSistolik(App app) {
+        setTekananDarahSistolik(inputInt(app, "Tekanan darah sistolik pasien dalam mmHg.", 0, 300,
+                "Tekanan darah sistolik harus di antara 0 sampai 300 mmHg."));
+    }
+
+    public void spo2(App app) {
+        setSpo2(inputInt(app, "SpO2 pasien dalam persen.", 0, 100,
+                "SpO2 harus di antara 0 sampai 100 persen."));
+    }
+
+    public void frekuensiNapas(App app) {
+        setFrekuensiNapas(inputInt(app, "Frekuensi napas pasien per menit.", 0, 100,
+                "Frekuensi napas harus di antara 0 sampai 100 per menit."));
+    }
+
+    public void frekuensiNadi(App app) {
+        setFrekuensiNadi(inputInt(app, "Frekuensi nadi pasien per menit.", 0, 250,
+                "Frekuensi nadi harus di antara 0 sampai 250 per menit."));
+    }
+
+    public void kadarHb(App app) {
+        while (true) {
+
+            System.out.print("Kadar Hb pasien (g/dL): ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            try {
+
+                double hb = Double.parseDouble(input);
+
+                if (hb < 0 || hb > 25) {
+                    System.out.println("Error: Nilai Hb 0-25!");
+                    continue;
+                }
+
+                setKadarHb(hb);
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Input harus berupa angka!");
+            }
+        }
+    }
+
+    public void suhuTubuh(App app) {
+        setSuhuTubuh(inputDouble(app, "Suhu tubuh pasien dalam derajat Celsius.", 25.0, 45.0,
+                "Suhu tubuh harus di antara 25.0 sampai 45.0 derajat Celsius."));
+    }
+
+    public void skalaNyeri(App app) {
+        setSkalaNyeri(inputInt(app, "Skala nyeri pasien 0 sampai 10.", 0, 10,
+                "Skala nyeri harus di antara 0 sampai 10."));
+    }
+
+    public void resusitasiCairan(App app) {
+        setResusitasiCairan(inputYaTidak(app,
+                "Apakah pasien membutuhkan tindakan resusitasi cairan, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void intubasiAtauManajemenJalanNapas(App app) {
+        setIntubasiAtauManajemenJalanNapas(inputYaTidak(app,
+                "Apakah pasien membutuhkan intubasi atau manajemen jalan napas, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void defibrilasi(App app) {
+        setDefibrilasi(inputYaTidak(app, "Apakah pasien membutuhkan defibrilasi, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void pemeriksaanLaboratorium(App app) {
+        setPemeriksaanLaboratorium(inputYaTidak(app,
+                "Apakah pasien membutuhkan pemeriksaan laboratorium, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void pemeriksaanRadiologi(App app) {
+        setPemeriksaanRadiologi(
+                inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan radiologi, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void konsultasiSpesialis(App app) {
+        setKonsultasiSpesialis(
+                inputYaTidak(app, "Apakah pasien membutuhkan konsultasi spesialis, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void obatIVAtauIM(App app) {
+        setObatIVAtauIM(
+                inputYaTidak(app, "Apakah pasien membutuhkan obat IV atau IM, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void nebulizer(App app) {
+        setNebulizer(inputYaTidak(app, "Apakah pasien membutuhkan nebulizer, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void prosedurTindakan(App app) {
+        setProsedurTindakan(
+                inputYaTidak(app, "Apakah pasien membutuhkan prosedur tindakan, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void reassessmentTandaVital(App app) {
+        setReassessmentTandaVital(inputYaTidak(app,
+                "Apakah pasien membutuhkan reassessment tanda vital, isi 1 untuk ya, 0 untuk tidak."));
+    }
+
+    public void gcsMataLangsung(App app) {
+        while (true) {
+            System.out.println("Form pertanyaan GCS langsung, versi mata.");
+            System.out.println("1. Apakah mata pasien terbuka spontan.");
+            System.out.println("2. Apakah mata pasien terbuka saat dipanggil dengan suara.");
+            System.out.println("3. Apakah mata pasien terbuka saat diberi rangsang nyeri.");
+            System.out.println("4. Apakah mata pasien tidak membuka mata.");
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            if (pilihan == 1) {
+                setGcsMata(4);
+                break;
+            } else if (pilihan == 2) {
+                setGcsMata(3);
+                break;
+            } else if (pilihan == 3) {
+                setGcsMata(2);
+                break;
+            } else if (pilihan == 4) {
+                setGcsMata(1);
+                break;
+            } else {
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 sampai 4.");
+            }
+        }
+    }
+
+    public void gcsVerbalLangsung(App app) {
+        while (true) {
+            System.out.println("Form pertanyaan GCS langsung, versi verbal.");
+            System.out.println("1. Apakah respon verbal pasien orientasi baik dan berbicara sesuai.");
+            System.out.println("2. Apakah respon verbal pasien bingung.");
+            System.out.println("3. Apakah pasien mengucapkan kata kata yang tidak tepat.");
+            System.out.println("4. Apakah pasien hanya mengeluarkan suara tidak jelas.");
+            System.out.println("5. Apakah pasien tidak memberikan respons verbal.");
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            if (pilihan == 1) {
+                setGcsVerbal(5);
+                break;
+            } else if (pilihan == 2) {
+                setGcsVerbal(4);
+                break;
+            } else if (pilihan == 3) {
+                setGcsVerbal(3);
+                break;
+            } else if (pilihan == 4) {
+                setGcsVerbal(2);
+                break;
+            } else if (pilihan == 5) {
+                setGcsVerbal(1);
+                break;
+            } else {
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 sampai 5.");
+            }
+        }
+    }
+
+    public void gcsMotorikLangsung(App app) {
+        while (true) {
+            System.out.println("Form pertanyaan GCS langsung, versi motorik.");
+            System.out.println("1. Apakah pasien mengikuti perintah.");
+            System.out.println("2. Apakah pasien melokalisasi nyeri.");
+            System.out.println("3. Apakah pasien menarik diri dari rangsang nyeri.");
+            System.out.println("4. Apakah pasien menunjukkan fleksi abnormal.");
+            System.out.println("5. Apakah pasien menunjukkan ekstensi abnormal.");
+            System.out.println("6. Apakah pasien tidak memberikan respons motorik.");
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            if (pilihan == 1) {
+                setGcsMotorik(6);
+                break;
+            } else if (pilihan == 2) {
+                setGcsMotorik(5);
+                break;
+            } else if (pilihan == 3) {
+                setGcsMotorik(4);
+                break;
+            } else if (pilihan == 4) {
+                setGcsMotorik(3);
+                break;
+            } else if (pilihan == 5) {
+                setGcsMotorik(2);
+                break;
+            } else if (pilihan == 6) {
+                setGcsMotorik(1);
+                break;
+            } else {
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 sampai 6.");
+            }
+        }
     }
 
     // #endregion
+
+    //#region Input
+
+    private int inputInt(App app, String judul, int min, int max, String errorRange) {
+        while (true) {
+            System.out.println(judul);
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int nilai = Integer.parseInt(input);
+
+            if (nilai < min || nilai > max) {
+                System.out.println("Error: " + errorRange);
+                continue;
+            }
+
+            return nilai;
+        }
+    }
+
+    private double inputDouble(App app, String judul, double min, double max, String errorRange) {
+        while (true) {
+            System.out.println(judul);
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            try {
+                double nilai = Double.parseDouble(input);
+
+                if (nilai < min || nilai > max) {
+                    System.out.println("Error: " + errorRange);
+                    continue;
+                }
+
+                return nilai;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Input harus berupa angka!");
+            }
+        }
+    }
+
+    private int inputYaTidak(App app, String pertanyaan) {
+        while (true) {
+            System.out.println(pertanyaan);
+            System.out.println("1. YA");
+            System.out.println("0. TIDAK");
+            System.out.print("Pilih: ");
+
+            String input = app.getSc().nextLine();
+
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            boolean isAllDigit = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isAllDigit = false;
+                    break;
+                }
+            }
+
+            if (!isAllDigit) {
+                System.out.println("Error: Input harus berupa angka!");
+                continue;
+            }
+
+            int pilihan = Integer.parseInt(input);
+
+            if (pilihan == 1 || pilihan == 0) {
+                return pilihan;
+            } else {
+                System.out.println("Error: Pilihan tidak valid! Masukkan 1 atau 0.");
+            }
+        }
+    }
+
+    //#endregion
 
     // #region Getter Setter
 

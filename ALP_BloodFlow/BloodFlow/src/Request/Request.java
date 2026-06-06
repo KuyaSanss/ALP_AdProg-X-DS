@@ -21,6 +21,10 @@ public class Request implements Comparable<Request> {
         liveRequestList.add(this);
     }
 
+    public void createForm(App app){
+        form.inputForm(app);
+    }
+
     public void approveRequest(App app) {
         System.out.println("=== APPROVE REQUEST ===");
         form.tampilkanForm();
