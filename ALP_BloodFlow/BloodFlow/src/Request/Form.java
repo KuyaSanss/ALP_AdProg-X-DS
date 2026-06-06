@@ -61,10 +61,10 @@ public class Form implements Comparable<Form> {
     private int prosedurTindakan;
     private int reassessmentTandaVital;
 
-    public Form(BDRS unitBDRS) {
-        setNamaRumahSakit(unitBDRS.getNama());
-        setAlamat(unitBDRS.getAlamat());
-        setTelepon(unitBDRS.getNoTelp());
+    public Form(FasilitasDarah fasilitasDarah) {
+        setNamaRumahSakit(fasilitasDarah.getNama());
+        setAlamat(fasilitasDarah.getAlamat());
+        setTelepon(fasilitasDarah.getNoTelp());
         setTanggalPermintaan(LocalDate.now());
         setJamPermintaan(LocalTime.now());
     }
@@ -155,7 +155,7 @@ public class Form implements Comparable<Form> {
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
         System.out.println("Alamat                  : " + getAlamat());
         System.out.println("Telepon                 : " + getTelepon());
-        System.out.println("Unit BDRS               : " + getUnitBDRS().getNama());
+        System.out.println("Unit BDRS               : " + getfasilitasDarah().getNama());
         System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
         System.out.println("Jam Permintaan          : " + getJamPermintaan());
 
@@ -928,7 +928,7 @@ public class Form implements Comparable<Form> {
         this.telepon = telepon;
     }
 
-    public BDRS getUnitBDRS() {
+    public BDRS getfasilitasDarah() {
         return unitBDRS;
     }
 

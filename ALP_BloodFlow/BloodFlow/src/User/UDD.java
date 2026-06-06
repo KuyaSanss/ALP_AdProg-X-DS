@@ -4,28 +4,21 @@ import App.App;
 import Darah.KantongDarah;
 import Model.RiwayatDonor;
 import Request.Form;
+import Request.Request;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class UDD extends User {
-    private String alamat;
+public class UDD extends FasilitasDarah {
     private static LinkedList<KantongDarah> daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
 
     public UDD(String username, String password, String noTelp, String alamat, String nama) {
-        super(username, password, noTelp, nama);
-        this.alamat = alamat;
+        super(username, password, noTelp, nama,alamat);
     }
 
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
 
     @Override
     public void tampilkanMenuUtama(App app) {
@@ -143,7 +136,7 @@ public class UDD extends User {
     }
 
     public void checkRequest(App app) {
-        Form request = Form.displayRequests(app);
+        Request request = Request.displayRequests(app);
         request.approveRequest(app);
     }
 }

@@ -13,16 +13,16 @@ public class Request implements Comparable<Request> {
     private Form form;
     private String idPermintaan;
     // for form
-    private BDRS unitBDRS;
+    private FasilitasDarah fasilitasDarah;
 
-    public Request(BDRS unitBDRS) {
+    public Request(FasilitasDarah fasilitasDarah) {
         idPermintaan = "RQ" + requestTerbuat;
-        this.unitBDRS = unitBDRS;
+        this.fasilitasDarah = fasilitasDarah;
         liveRequestList.add(this);
     }
 
     public void menuRequest(App app){
-        form = new Form(unitBDRS);
+        form = new Form(fasilitasDarah);
         form.menuForm(app);
     }
 

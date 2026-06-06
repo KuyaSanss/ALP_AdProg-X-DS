@@ -5,21 +5,11 @@ import java.util.ArrayList;
 import App.App;
 import Request.Request;
 
-public class BDRS extends User {
-    private String alamat;
-    private ArrayList<Request> listRequest = new ArrayList<>();
+public class BDRS extends FasilitasDarah {
+    
 
     public BDRS(String username, String password, String noTelp, String alamat, String nama) {
-        super(username, password, noTelp, nama);
-        this.alamat = alamat;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+        super(username, password, noTelp, nama,alamat);
     }
 
     @Override
@@ -41,12 +31,6 @@ public class BDRS extends User {
                 System.out.println("Invalid Input!!");
                 tampilkanMenuUtama(app);
         }
-    }
-
-    private void makeRequest(App app){
-        Request request = new Request(this);
-        listRequest.add(request);
-        request.menuRequest(app);
     }
 
 }
