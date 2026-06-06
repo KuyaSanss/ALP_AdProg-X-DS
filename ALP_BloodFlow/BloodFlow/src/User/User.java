@@ -17,7 +17,7 @@ public abstract class User {
     private static int userTerbuat = 0;
     private ArrayList<Notification> inbox = new ArrayList<>();
 
-    public User(String username, String password, String noTelp,String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+    public User(App app,String username, String password, String noTelp,String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         userTerbuat++;
         idPengguna= "PD"+userTerbuat;
         this.username = username;
@@ -26,6 +26,7 @@ public abstract class User {
         this.nama = nama;
         this.provinsi = provinsi;
         this.wilayahIndonesia = wilayahIndonesia;
+        app.getDataUser().insertUser(this);
     }
 
     

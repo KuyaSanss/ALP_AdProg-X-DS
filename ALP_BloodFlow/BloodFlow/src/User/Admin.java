@@ -8,8 +8,8 @@ import Model.DataUser;
 public class Admin extends User {
 
 
-    public Admin( String username, String password, String noTelp,String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super( username, password, noTelp,nama,provinsi,wilayahIndonesia);
+    public Admin( App app,String username, String password, String noTelp,String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super( app,username, password, noTelp,nama,provinsi,wilayahIndonesia);
     }
 
     public void buatAkunInstansi(App app) {
@@ -68,17 +68,13 @@ public class Admin extends User {
         WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(app);
 
         if (pilihanInstansi == 1) {
-            BDRS rsBaru = new BDRS(username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
-
-            dataUtama.insertUser(rsBaru);
+            BDRS rsBaru = new BDRS(app,username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
 
             System.out.println("Akun Rumah Sakit berhasil dibuat!");
             cetakRekapData(rsBaru, "Rumah Sakit");
 
         } else {
-            UDD uddBaru = new UDD(username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
-
-            dataUtama.insertUser(uddBaru);
+            UDD uddBaru = new UDD(app,username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
 
             System.out.println("Akun UDD berhasil dibuat!");
             cetakRekapData(uddBaru, "Unit Donor Darah");

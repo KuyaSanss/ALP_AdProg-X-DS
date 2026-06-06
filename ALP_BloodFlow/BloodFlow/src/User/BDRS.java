@@ -8,8 +8,8 @@ import Enum.WilayahIndonesia;
 public class BDRS extends FasilitasDarah {
     
 
-    public BDRS(String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
+    public BDRS(App app,String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(app, username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
     }
 
     @Override

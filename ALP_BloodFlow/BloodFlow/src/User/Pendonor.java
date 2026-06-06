@@ -20,9 +20,9 @@ public class Pendonor extends User {
     private Hashtable<Integer, String> inbox;
     private static final int MASA_TUNGGU_DONOR = 90;
 
-    public Pendonor(String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus,
+    public Pendonor(App app, String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus,
             String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(username, password, noTelp, nama,provinsi,wilayahIndonesia);
+        super(app, username, password, noTelp, nama,provinsi,wilayahIndonesia);
         this.golDarah = golDarah;
         this.rhesus = rhesus;
         this.riwayatDonor = new ArrayList<>();

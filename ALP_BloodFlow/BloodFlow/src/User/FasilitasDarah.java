@@ -19,8 +19,8 @@ public abstract class FasilitasDarah extends User {
 
     private String alamat;
     
-    public FasilitasDarah(String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(username, password, noTelp, nama,provinsi,wilayahIndonesia);
+    public FasilitasDarah(App app, String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(app,username, password, noTelp, nama,provinsi,wilayahIndonesia);
         this.alamat=alamat;
     }
 
