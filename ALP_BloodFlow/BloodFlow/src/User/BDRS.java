@@ -1,9 +1,7 @@
 package User;
 
-import java.util.ArrayList;
-
 import App.App;
-import Request.Request;
+
 
 public class BDRS extends FasilitasDarah {
     
@@ -22,7 +20,7 @@ public class BDRS extends FasilitasDarah {
         System.out.println();
         switch (input) {
             case "1":
-                makeRequest(app);
+                super.makeRequest(app);
                 break;
             case "2":
                 app.menuAwal();

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public abstract class User {
 
     protected String idPengguna,username,password,noTelp,nama;
+    
     private static int userTerbuat = 0;
     private ArrayList<Notification> inbox = new ArrayList<>();
 

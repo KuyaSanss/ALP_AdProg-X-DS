@@ -128,7 +128,7 @@ public class Pendonor extends User {
     public void tampilkanInbox() {
         cekKelayakanDonor();
         System.out.println("\n===== INBOX =====");
-         if (inbox == null) {
+        if (inbox == null) {
             inbox = new Hashtable<>();
         }
         if (inbox.isEmpty()) {
