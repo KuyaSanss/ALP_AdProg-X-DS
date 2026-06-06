@@ -11,6 +11,7 @@ public abstract class User {
 
     protected String idPengguna,username,password,noTelp,nama;
     protected Provinsi provinsi;
+
     protected WilayahIndonesia wilayahIndonesia;
 
     private static int userTerbuat = 0;
@@ -74,10 +75,6 @@ public abstract class User {
         this.nama = nama;
     }
 
-
-    //#endregion
-
-
     public static int getUserTerbuat() {
         return userTerbuat;
     }
@@ -101,6 +98,25 @@ public abstract class User {
         inbox.add(pesan);
     }
 
+    public Provinsi getProvinsi() {
+        return provinsi;
+    }
 
-   
+
+    public void setProvinsi(Provinsi provinsi) {
+        this.provinsi = provinsi;
+    }
+
+
+    public WilayahIndonesia getWilayahIndonesia() {
+        return wilayahIndonesia;
+    }
+
+
+    public void setWilayahIndonesia(WilayahIndonesia wilayahIndonesia) {
+        this.wilayahIndonesia = wilayahIndonesia;
+    }
+
+    //#endregion
+
 }

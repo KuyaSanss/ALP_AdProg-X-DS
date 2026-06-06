@@ -1,5 +1,10 @@
 package Enum;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import App.App;
+
 public enum WilayahIndonesia {
     // =========================================================================
     // DAFTAR 98 KOTA (LENGKAP)
@@ -534,4 +539,54 @@ public enum WilayahIndonesia {
     public Provinsi getProvinsi() {
         return this.provinsi;
     }
+
+    public static WilayahIndonesia inputWilayahIndonesia(App app) {
+        
+        Set<String> set = new HashSet<>();
+        Provinsi provinsi = app.getCurrentUser().getProvinsi();
+
+        System.out.println("=== Kota/Kabupaten Provinsi "+provinsi.toString()+"===");
+        System.out.println();
+        for(WilayahIndonesia k: WilayahIndonesia.values()){
+            if(k.getProvinsi()==provinsi){
+                System.out.println(k);
+                set.add(k.toString());
+            }
+        }
+        String input;
+
+        while (true) {
+            System.out.println("""
+                Input Kota/Kabupaten sesuai contoh format
+                KOTA/KAB_NAMA
+                Contoh : 
+                KOTA_TIDORE_KEPULAUAN
+                KOTA_YOGYAKARTA
+                KAB_BLORA
+                KAB_ACEH_BARAT
+            """);
+            System.out.print("Input: ");
+            input = app.getSc().nextLine();
+            input=input.toUpperCase().trim();
+
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            if (!set.contains(input)) {
+                System.out.println("Kota/Kabupaten belum sesuai");
+                continue;
+            }
+
+            break;
+        }
+
+        return WilayahIndonesia.valueOf(input);
+
+    }
+
+
+
 }

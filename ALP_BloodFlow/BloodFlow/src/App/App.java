@@ -586,7 +586,10 @@ public class App {
             }
         } while (true);
 
-        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus, nama));
+        Provinsi provinsi = Provinsi.inputProvinsi(this);
+        WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(this);
+
+        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus, nama,provinsi,wilayahIndonesia));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
 
         // dummy riwayat & notif
