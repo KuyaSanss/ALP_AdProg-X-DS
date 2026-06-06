@@ -1,16 +1,20 @@
 package User;
 
 import App.App;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Model.DataUser;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Admin extends User {
 
     private Scanner scanner;
 
-    public Admin( String username, String password, String noTelp,String nama) {
-        super( username, password, noTelp,nama);
+    public Admin( String username, String password, String noTelp,String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super( username, password, noTelp,nama,provinsi,wilayahIndonesia);
     }
 
     public void buatAkunInstansi(DataUser dataUtama) {
@@ -242,4 +246,39 @@ public class Admin extends User {
             }
         }
     }
+
+        private Provinsi inputProvinsi(App app) {
+        
+        Set<String> set = new HashSet<>();
+
+        System.out.println("===PROVINSI===");
+        for(Provinsi p: Provinsi.values()){
+            System.out.println(p);
+            set.add(p.toString());
+        }
+        String input;
+
+        while (true) {
+            System.out.print("Input Provinsi: ");
+            input = app.getSc().nextLine();
+            input=input.toUpperCase().trim();
+
+            // Check if input is empty
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
+                continue;
+            }
+
+            if (!set.contains(input)) {
+                System.out.println("Provinsi belum sesuai");
+                continue;
+            }
+
+            break;
+        }
+
+        return Provinsi.valueOf(input);
+
+    }
+
 }

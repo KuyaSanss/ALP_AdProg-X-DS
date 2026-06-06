@@ -1,13 +1,15 @@
 package User;
 
 import App.App;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 
 
 public class BDRS extends FasilitasDarah {
     
 
-    public BDRS(String username, String password, String noTelp, String alamat, String nama) {
-        super(username, password, noTelp, nama,alamat);
+    public BDRS(String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
     }
 
     @Override

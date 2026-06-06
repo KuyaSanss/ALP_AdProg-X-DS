@@ -2,6 +2,8 @@ package User;
 
 import App.App;
 import Darah.KantongDarah;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Model.RiwayatDonor;
 import Request.Form;
 import Request.Request;
@@ -15,8 +17,8 @@ public class UDD extends FasilitasDarah {
     private static LinkedList<KantongDarah> daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
 
-    public UDD(String username, String password, String noTelp, String alamat, String nama) {
-        super(username, password, noTelp, nama,alamat);
+    public UDD(String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
     }
 
 
@@ -139,5 +141,5 @@ public class UDD extends FasilitasDarah {
         Request request = Request.displayRequests(app);
         request.approveRequest(app);
     }
-    
+
 }

@@ -1,6 +1,8 @@
 package User;
 
 import App.App;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
 import Model.Notification;
@@ -19,8 +21,8 @@ public class Pendonor extends User {
     private static final int MASA_TUNGGU_DONOR = 90;
 
     public Pendonor(String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus,
-            String nama) {
-        super(username, password, noTelp, nama);
+            String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(username, password, noTelp, nama,provinsi,wilayahIndonesia);
         this.golDarah = golDarah;
         this.rhesus = rhesus;
         this.riwayatDonor = new ArrayList<>();

@@ -1,6 +1,8 @@
 package User;
 
 import App.App;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Model.Notification;
 
 import java.util.ArrayList;
@@ -8,17 +10,21 @@ import java.util.ArrayList;
 public abstract class User {
 
     protected String idPengguna,username,password,noTelp,nama;
-    
+    protected Provinsi provinsi;
+    protected WilayahIndonesia wilayahIndonesia;
+
     private static int userTerbuat = 0;
     private ArrayList<Notification> inbox = new ArrayList<>();
 
-    public User(String username, String password, String noTelp,String nama) {
+    public User(String username, String password, String noTelp,String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         userTerbuat++;
         idPengguna= "PD"+userTerbuat;
         this.username = username;
         this.password = password;
         this.noTelp = noTelp;
         this.nama = nama;
+        this.provinsi = provinsi;
+        this.wilayahIndonesia = wilayahIndonesia;
     }
 
     
@@ -67,6 +73,8 @@ public abstract class User {
     public void setNama(String nama) {
         this.nama = nama;
     }
+
+
     //#endregion
 
 
@@ -79,7 +87,7 @@ public abstract class User {
         User.userTerbuat = userTerbuat;
     }
 
- public ArrayList<Notification> getInbox() {
+    public ArrayList<Notification> getInbox() {
         return inbox;
     }
 

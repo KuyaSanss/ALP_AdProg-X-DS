@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import App.App;
 import Darah.CrossMatch;
 import Darah.TesIMLTD;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Request.Request;
 
 public abstract class FasilitasDarah extends User {
@@ -17,8 +19,8 @@ public abstract class FasilitasDarah extends User {
 
     private String alamat;
     
-    public FasilitasDarah(String username, String password, String noTelp, String nama, String alamat) {
-        super(username, password, noTelp, nama);
+    public FasilitasDarah(String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(username, password, noTelp, nama,provinsi,wilayahIndonesia);
         this.alamat=alamat;
     }
 
