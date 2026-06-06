@@ -24,6 +24,7 @@ public class Pendonor extends User {
         this.golDarah = golDarah;
         this.rhesus = rhesus;
         this.riwayatDonor = new ArrayList<>();
+        inbox = new Hashtable<>();
     }
 
     public golDarahEnum getGolDarah() {
@@ -201,8 +202,9 @@ public class Pendonor extends User {
 
         } catch (Exception e) {
 
-            System.out.println(
-                    "Format tanggal donor salah");
+            // System.out.println(
+            //         "Format tanggal donor salah");
+            e.printStackTrace();
         }
     }
 }
