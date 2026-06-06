@@ -4,7 +4,7 @@ import App.App;
 import User.Pendonor;
 import User.User;
 
-import Request.Request;
+import Request.Form;
 import User.Pendonor;
 
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
-import Request.Request;
+import Request.Form;
 import User.Pendonor;
 
 import java.util.ArrayList;
@@ -160,7 +160,7 @@ public class Notification implements Runnable {
 
         Pendonor pendonor = (Pendonor) user;
 
-        for (Request req : Request.getLiveRequestList()) {
+        for (Form req : Form.getLiveRequestList()) {
 
             if (req.getGolonganDarah() == pendonor.getGolDarah() && req.getRhesus() == pendonor.getRhesus()) {
 

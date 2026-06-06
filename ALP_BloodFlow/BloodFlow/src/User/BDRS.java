@@ -11,7 +11,7 @@ import Enum.PrioritasESI;
 import Enum.JenisKelamin;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
-import Request.Request;
+import Request.Form;
 
 public class BDRS extends User {
     private String alamat;
@@ -52,9 +52,9 @@ public class BDRS extends User {
 
     // #region Form
 
-        public void makeRequest(App app) {
+    public void makeRequest(App app) {
 
-        Request form = new Request(this);
+        Form form = new Form(this);
 
         System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
 
@@ -127,13 +127,13 @@ public class BDRS extends User {
         System.out.print("Nomor SIP: ");
         form.setNomorSIP(app.getSc().nextLine());
 
-        Request.getLiveRequestList().add(form);
+        Form.getLiveRequestList().add(form);
 
         System.out.println("permintaan darah berhasil terkirim");
         tampilkanMenuUtama(app);
     }
 
-    public void jenisKelamin(App app, Request form) {
+    public void jenisKelamin(App app, Form form) {
         while (true) {
             System.out.println("Jenis Kelamin");
             System.out.println("1. LAKI LAKI");
@@ -177,7 +177,7 @@ public class BDRS extends User {
         }
     }
 
-    public void jumlahKantong(App app, Request form) {
+    public void jumlahKantong(App app, Form form) {
         while (true) {
             System.out.print("Jumlah Kantong: ");
             String input = app.getSc().nextLine();
@@ -214,7 +214,7 @@ public class BDRS extends User {
         }
     }
 
-    public void rencanaWaktuTransfusi(App app, Request form) {
+    public void rencanaWaktuTransfusi(App app, Form form) {
         while (true) {
 
             try {
@@ -261,7 +261,7 @@ public class BDRS extends User {
         }
     }
 
-        public void jumlahJenisResourceMedis(App app, Request form) {
+    public void jumlahJenisResourceMedis(App app, Form form) {
         int totalResource = 0;
 
         System.out.println("Jumlah resource medis dihitung dari jawaban YA pada daftar berikut.");
@@ -275,43 +275,51 @@ public class BDRS extends User {
         System.out.println("7. Reassessment tanda vital berulang");
         System.out.println();
 
-        form.setPemeriksaanLaboratorium(inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan laboratorium, isi 1 untuk ya, 0 untuk tidak."));
+        form.setPemeriksaanLaboratorium(inputYaTidak(app,
+                "Apakah pasien membutuhkan pemeriksaan laboratorium, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getPemeriksaanLaboratorium();
 
-        form.setPemeriksaanRadiologi(inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan radiologi, isi 1 untuk ya, 0 untuk tidak."));
+        form.setPemeriksaanRadiologi(
+                inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan radiologi, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getPemeriksaanRadiologi();
 
-        form.setKonsultasiSpesialis(inputYaTidak(app, "Apakah pasien membutuhkan konsultasi spesialis, isi 1 untuk ya, 0 untuk tidak."));
+        form.setKonsultasiSpesialis(
+                inputYaTidak(app, "Apakah pasien membutuhkan konsultasi spesialis, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getKonsultasiSpesialis();
 
-        form.setObatIVAtauIM(inputYaTidak(app, "Apakah pasien membutuhkan obat IV atau IM, isi 1 untuk ya, 0 untuk tidak."));
+        form.setObatIVAtauIM(
+                inputYaTidak(app, "Apakah pasien membutuhkan obat IV atau IM, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getObatIVAtauIM();
 
         form.setNebulizer(inputYaTidak(app, "Apakah pasien membutuhkan nebulizer, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getNebulizer();
 
-        form.setProsedurTindakan(inputYaTidak(app, "Apakah pasien membutuhkan prosedur tindakan, isi 1 untuk ya, 0 untuk tidak."));
+        form.setProsedurTindakan(
+                inputYaTidak(app, "Apakah pasien membutuhkan prosedur tindakan, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getProsedurTindakan();
 
-        form.setReassessmentTandaVital(inputYaTidak(app, "Apakah pasien membutuhkan reassessment tanda vital berulang, isi 1 untuk ya, 0 untuk tidak."));
+        form.setReassessmentTandaVital(inputYaTidak(app,
+                "Apakah pasien membutuhkan reassessment tanda vital berulang, isi 1 untuk ya, 0 untuk tidak."));
         totalResource += form.getReassessmentTandaVital();
 
-        totalResource += 1;//transfusi darah
+        totalResource += 1;// transfusi darah
 
         form.setJumlahJenisResourceMedis(totalResource);
 
         System.out.println();
 
         System.out.println("Tindakan emergensi (tidak dihitung ke jumlah resource):");
-        form.setResusitasiCairan(inputYaTidak(app, "Apakah pasien membutuhkan tindakan resusitasi cairan, isi 1 untuk ya, 0 untuk tidak."));
-        form.setIntubasiAtauManajemenJalanNapas(inputYaTidak(app, "Apakah pasien membutuhkan intubasi atau manajemen jalan napas, isi 1 untuk ya, 0 untuk tidak."));
+        form.setResusitasiCairan(inputYaTidak(app,
+                "Apakah pasien membutuhkan tindakan resusitasi cairan, isi 1 untuk ya, 0 untuk tidak."));
+        form.setIntubasiAtauManajemenJalanNapas(inputYaTidak(app,
+                "Apakah pasien membutuhkan intubasi atau manajemen jalan napas, isi 1 untuk ya, 0 untuk tidak."));
         form.setDefibrilasi(inputYaTidak(app, "Apakah pasien membutuhkan defibrilasi, isi 1 untuk ya, 0 untuk tidak."));
 
         System.out.println();
         System.out.println("Total resource medis yang dipilih: " + totalResource);
     }
 
-    public void golonganDarah(App app, Request form) {
+    public void golonganDarah(App app, Form form) {
         while (true) {
             System.out.println("Golongan Darah");
             System.out.println("1. A");
@@ -365,7 +373,7 @@ public class BDRS extends User {
         }
     }
 
-    public void rhesus(App app, Request form) {
+    public void rhesus(App app, Form form) {
         while (true) {
             System.out.println("Rhesus");
             System.out.println("1. Positif (+)");
@@ -409,7 +417,7 @@ public class BDRS extends User {
         }
     }
 
-        private int inputInt(App app, String judul, int min, int max, String errorRange) {
+    private int inputInt(App app, String judul, int min, int max, String errorRange) {
         while (true) {
             System.out.println(judul);
             System.out.print("Pilih: ");
@@ -509,113 +517,120 @@ public class BDRS extends User {
         }
     }
 
-    public void usiaPasien(App app, Request form) {
+    public void usiaPasien(App app, Form form) {
         form.setUsiaPasien(inputInt(app, "Usia pasien dalam tahun.", 0, 150,
                 "Usia harus di antara 0 sampai 150 tahun."));
     }
 
-    public void tekananDarahSistolik(App app, Request form) {
+    public void tekananDarahSistolik(App app, Form form) {
         form.setTekananDarahSistolik(inputInt(app, "Tekanan darah sistolik pasien dalam mmHg.", 0, 300,
                 "Tekanan darah sistolik harus di antara 0 sampai 300 mmHg."));
     }
 
-    public void spo2(App app, Request form) {
+    public void spo2(App app, Form form) {
         form.setSpo2(inputInt(app, "SpO2 pasien dalam persen.", 0, 100,
                 "SpO2 harus di antara 0 sampai 100 persen."));
     }
 
-    public void frekuensiNapas(App app, Request form) {
+    public void frekuensiNapas(App app, Form form) {
         form.setFrekuensiNapas(inputInt(app, "Frekuensi napas pasien per menit.", 0, 100,
                 "Frekuensi napas harus di antara 0 sampai 100 per menit."));
     }
 
-    public void frekuensiNadi(App app, Request form) {
+    public void frekuensiNadi(App app, Form form) {
         form.setFrekuensiNadi(inputInt(app, "Frekuensi nadi pasien per menit.", 0, 250,
                 "Frekuensi nadi harus di antara 0 sampai 250 per menit."));
     }
 
-    public void kadarHb(App app, Request form) {
-    while (true) {
+    public void kadarHb(App app, Form form) {
+        while (true) {
 
-        System.out.print("Kadar Hb pasien (g/dL): ");
+            System.out.print("Kadar Hb pasien (g/dL): ");
 
-        String input = app.getSc().nextLine();
+            String input = app.getSc().nextLine();
 
-        if (input.isEmpty()) {
-            System.out.println("Error: Input tidak boleh kosong!");
-            continue;
-        }
-
-        try {
-
-            double hb = Double.parseDouble(input);
-
-            if (hb < 0 || hb > 25) {
-                System.out.println("Error: Nilai Hb 0-25!");
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong!");
                 continue;
             }
 
-            form.setKadarHb(hb);
-            break;
+            try {
 
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Input harus berupa angka!");
+                double hb = Double.parseDouble(input);
+
+                if (hb < 0 || hb > 25) {
+                    System.out.println("Error: Nilai Hb 0-25!");
+                    continue;
+                }
+
+                form.setKadarHb(hb);
+                break;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Input harus berupa angka!");
+            }
         }
     }
-}
 
-    public void suhuTubuh(App app, Request form) {
+    public void suhuTubuh(App app, Form form) {
         form.setSuhuTubuh(inputDouble(app, "Suhu tubuh pasien dalam derajat Celsius.", 25.0, 45.0,
                 "Suhu tubuh harus di antara 25.0 sampai 45.0 derajat Celsius."));
     }
 
-    public void skalaNyeri(App app, Request form) {
+    public void skalaNyeri(App app, Form form) {
         form.setSkalaNyeri(inputInt(app, "Skala nyeri pasien 0 sampai 10.", 0, 10,
                 "Skala nyeri harus di antara 0 sampai 10."));
     }
 
-
-    public void resusitasiCairan(App app, Request form) {
-        form.setResusitasiCairan(inputYaTidak(app, "Apakah pasien membutuhkan tindakan resusitasi cairan, isi 1 untuk ya, 0 untuk tidak."));
+    public void resusitasiCairan(App app, Form form) {
+        form.setResusitasiCairan(inputYaTidak(app,
+                "Apakah pasien membutuhkan tindakan resusitasi cairan, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void intubasiAtauManajemenJalanNapas(App app, Request form) {
-        form.setIntubasiAtauManajemenJalanNapas(inputYaTidak(app, "Apakah pasien membutuhkan intubasi atau manajemen jalan napas, isi 1 untuk ya, 0 untuk tidak."));
+    public void intubasiAtauManajemenJalanNapas(App app, Form form) {
+        form.setIntubasiAtauManajemenJalanNapas(inputYaTidak(app,
+                "Apakah pasien membutuhkan intubasi atau manajemen jalan napas, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void defibrilasi(App app, Request form) {
+    public void defibrilasi(App app, Form form) {
         form.setDefibrilasi(inputYaTidak(app, "Apakah pasien membutuhkan defibrilasi, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void pemeriksaanLaboratorium(App app, Request form) {
-        form.setPemeriksaanLaboratorium(inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan laboratorium, isi 1 untuk ya, 0 untuk tidak."));
+    public void pemeriksaanLaboratorium(App app, Form form) {
+        form.setPemeriksaanLaboratorium(inputYaTidak(app,
+                "Apakah pasien membutuhkan pemeriksaan laboratorium, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void pemeriksaanRadiologi(App app, Request form) {
-        form.setPemeriksaanRadiologi(inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan radiologi, isi 1 untuk ya, 0 untuk tidak."));
+    public void pemeriksaanRadiologi(App app, Form form) {
+        form.setPemeriksaanRadiologi(
+                inputYaTidak(app, "Apakah pasien membutuhkan pemeriksaan radiologi, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void konsultasiSpesialis(App app, Request form) {
-        form.setKonsultasiSpesialis(inputYaTidak(app, "Apakah pasien membutuhkan konsultasi spesialis, isi 1 untuk ya, 0 untuk tidak."));
+    public void konsultasiSpesialis(App app, Form form) {
+        form.setKonsultasiSpesialis(
+                inputYaTidak(app, "Apakah pasien membutuhkan konsultasi spesialis, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void obatIVAtauIM(App app, Request form) {
-        form.setObatIVAtauIM(inputYaTidak(app, "Apakah pasien membutuhkan obat IV atau IM, isi 1 untuk ya, 0 untuk tidak."));
+    public void obatIVAtauIM(App app, Form form) {
+        form.setObatIVAtauIM(
+                inputYaTidak(app, "Apakah pasien membutuhkan obat IV atau IM, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void nebulizer(App app, Request form) {
+    public void nebulizer(App app, Form form) {
         form.setNebulizer(inputYaTidak(app, "Apakah pasien membutuhkan nebulizer, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void prosedurTindakan(App app, Request form) {
-        form.setProsedurTindakan(inputYaTidak(app, "Apakah pasien membutuhkan prosedur tindakan, isi 1 untuk ya, 0 untuk tidak."));
+    public void prosedurTindakan(App app, Form form) {
+        form.setProsedurTindakan(
+                inputYaTidak(app, "Apakah pasien membutuhkan prosedur tindakan, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void reassessmentTandaVital(App app, Request form) {
-        form.setReassessmentTandaVital(inputYaTidak(app, "Apakah pasien membutuhkan reassessment tanda vital, isi 1 untuk ya, 0 untuk tidak."));
+    public void reassessmentTandaVital(App app, Form form) {
+        form.setReassessmentTandaVital(inputYaTidak(app,
+                "Apakah pasien membutuhkan reassessment tanda vital, isi 1 untuk ya, 0 untuk tidak."));
     }
 
-    public void gcsMataLangsung(App app, Request form) {
+    public void gcsMataLangsung(App app, Form form) {
         while (true) {
             System.out.println("Form pertanyaan GCS langsung, versi mata.");
             System.out.println("1. Apakah mata pasien terbuka spontan.");
@@ -664,7 +679,7 @@ public class BDRS extends User {
         }
     }
 
-    public void gcsVerbalLangsung(App app, Request form) {
+    public void gcsVerbalLangsung(App app, Form form) {
         while (true) {
             System.out.println("Form pertanyaan GCS langsung, versi verbal.");
             System.out.println("1. Apakah respon verbal pasien orientasi baik dan berbicara sesuai.");
@@ -717,7 +732,7 @@ public class BDRS extends User {
         }
     }
 
-    public void gcsMotorikLangsung(App app, Request form) {
+    public void gcsMotorikLangsung(App app, Form form) {
         while (true) {
             System.out.println("Form pertanyaan GCS langsung, versi motorik.");
             System.out.println("1. Apakah pasien mengikuti perintah.");
@@ -773,8 +788,6 @@ public class BDRS extends User {
             }
         }
     }
-    
-    
-    
+
     // #endregion
 }

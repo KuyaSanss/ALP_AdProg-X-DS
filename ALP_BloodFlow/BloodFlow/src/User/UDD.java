@@ -2,7 +2,7 @@ package User;
 
 import App.App;
 import Model.RiwayatDonor;
-import Request.Request;
+import Request.Form;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
@@ -61,7 +61,7 @@ public class UDD extends User {
 
             Pendonor pendonor = (Pendonor) user;
 
-            System.out.println("ID: " + pendonor.getIdPengguna()+ " | Nama: " + pendonor.getUsername());
+            System.out.println("ID: " + pendonor.getIdPengguna() + " | Nama: " + pendonor.getUsername());
         }
 
         User user;
@@ -142,7 +142,7 @@ public class UDD extends User {
     }
 
     public void checkRequest(App app) {
-        Request request = Request.displayRequests(app);
+        Form request = Form.displayRequests(app);
         request.approveRequest(app);
     }
 }

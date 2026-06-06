@@ -3,9 +3,10 @@ package App;
 import Enum.*;
 import Model.DataUser;
 import Model.RiwayatDonor;
-import Request.Request;
+import Request.Form;
 import User.*;
 import Model.Notification;
+import Request.Request;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -52,23 +53,23 @@ public class App {
         dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
         dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
         dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
- 
+
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
- 
+
         // #region form 1
         // Bakrie - A+ - "mengalami penyakit" - kondisi sedang, ESI 2
- 
+
         BDRS bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Ciputra");
- 
-        Request form = new Request(bdrs);
- 
+        Request request = new Request(bdrs);
+        Form form = new Form(bdrs);
+
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
         form.setUnitBDRS(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
- 
+
         form.setNamaPasien("Bakrie");
         form.setGolonganDarah(golDarahEnum.A);
         form.setRhesus(rhesusEnum.POSITIVE);
@@ -81,25 +82,25 @@ public class App {
         form.setNamaDokter("Dr. Tirta");
         form.setJabatan("Tertinggi");
         form.setNomorSIP("5515");
- 
+
         // Data klinis - kondisi sedang, sadar penuh
         form.setUsiaPasien(45);
         form.setKadarHb(7);
         form.setTekananDarahSistolik(110);
-        form.setGcsMata(4);       // mata terbuka spontan
-        form.setGcsVerbal(5);     // orientasi baik
-        form.setGcsMotorik(6);    // mengikuti perintah  → GCS 15
+        form.setGcsMata(4); // mata terbuka spontan
+        form.setGcsVerbal(5); // orientasi baik
+        form.setGcsMotorik(6); // mengikuti perintah → GCS 15
         form.setSpo2(96);
         form.setFrekuensiNapas(20);
         form.setFrekuensiNadi(88);
         form.setSuhuTubuh(37.2);
         form.setSkalaNyeri(4);
- 
+
         // Tindakan emergensi
         form.setResusitasiCairan(0);
         form.setIntubasiAtauManajemenJalanNapas(0);
         form.setDefibrilasi(0);
- 
+
         // Resource medis (lab + obatIV + transfusi = 3)
         form.setPemeriksaanLaboratorium(1);
         form.setPemeriksaanRadiologi(0);
@@ -109,25 +110,25 @@ public class App {
         form.setProsedurTindakan(0);
         form.setReassessmentTandaVital(0);
         form.setJumlahJenisResourceMedis(3); // lab + obatIV + transfusi
- 
-        Request.getLiveRequestList().add(form);
- 
+
+        request.setForm(form);
+
         // #endregion
- 
+
         // #region form 2
         // Anita - O- - "anemia berat dengan perdarahan" - kritis, ESI 1
- 
+
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Siloam_1");
- 
-        form = new Request(bdrs);
- 
+        request = new Request(bdrs);
+        form = new Form(bdrs);
+
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
         form.setUnitBDRS(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
- 
+
         form.setNamaPasien("Anita");
         form.setGolonganDarah(golDarahEnum.O);
         form.setRhesus(rhesusEnum.NEGATIVE);
@@ -140,26 +141,27 @@ public class App {
         form.setNamaDokter("Dr. Sari");
         form.setJabatan("Dokter Penanggung Jawab");
         form.setNomorSIP("6622");
- 
+
         // Data klinis - perdarahan aktif, semi-sadar
         form.setUsiaPasien(32);
         form.setKadarHb(7);
         form.setTekananDarahSistolik(95);
-        form.setGcsMata(3);       // terbuka saat dipanggil
-        form.setGcsVerbal(4);     // bingung
-        form.setGcsMotorik(5);    // melokalisasi nyeri  → GCS 12
+        form.setGcsMata(3); // terbuka saat dipanggil
+        form.setGcsVerbal(4); // bingung
+        form.setGcsMotorik(5); // melokalisasi nyeri → GCS 12
         form.setSpo2(92);
         form.setFrekuensiNapas(24);
         form.setFrekuensiNadi(118);
         form.setSuhuTubuh(36.8);
         form.setSkalaNyeri(7);
- 
+
         // Tindakan emergensi - butuh resusitasi cairan
         form.setResusitasiCairan(1);
         form.setIntubasiAtauManajemenJalanNapas(0);
         form.setDefibrilasi(0);
- 
-        // Resource medis (lab + radiologi + konsultasi + obatIV + reassessment + transfusi = 6)
+
+        // Resource medis (lab + radiologi + konsultasi + obatIV + reassessment +
+        // transfusi = 6)
         form.setPemeriksaanLaboratorium(1);
         form.setPemeriksaanRadiologi(1);
         form.setKonsultasiSpesialis(1);
@@ -168,25 +170,25 @@ public class App {
         form.setProsedurTindakan(0);
         form.setReassessmentTandaVital(1);
         form.setJumlahJenisResourceMedis(6); // lab + rad + konsultasi + obatIV + reassessment + transfusi
- 
-        Request.getLiveRequestList().add(form);
- 
+
+        request.setForm(form);
+
         // #endregion
- 
+
         // #region form 3
         // Kevin - B+ - "syok hemoragik akibat kecelakaan" - sangat kritis, ESI 1
- 
+
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Ciputra");
- 
-        form = new Request(bdrs);
- 
+        request = new Request(bdrs);
+        form = new Form(bdrs);
+
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
         form.setUnitBDRS(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
- 
+
         form.setNamaPasien("Kevin");
         form.setGolonganDarah(golDarahEnum.B);
         form.setRhesus(rhesusEnum.POSITIVE);
@@ -199,26 +201,27 @@ public class App {
         form.setNamaDokter("Dr. Jonathan");
         form.setJabatan("Dokter Bedah");
         form.setNomorSIP("7788");
- 
+
         // Data klinis - syok, tidak sadar
         form.setUsiaPasien(28);
         form.setKadarHb(7);
         form.setTekananDarahSistolik(72);
-        form.setGcsMata(2);       // terbuka saat rangsang nyeri
-        form.setGcsVerbal(3);     // kata-kata tidak tepat
-        form.setGcsMotorik(3);    // fleksi abnormal  → GCS 8
+        form.setGcsMata(2); // terbuka saat rangsang nyeri
+        form.setGcsVerbal(3); // kata-kata tidak tepat
+        form.setGcsMotorik(3); // fleksi abnormal → GCS 8
         form.setSpo2(87);
         form.setFrekuensiNapas(30);
         form.setFrekuensiNadi(145);
         form.setSuhuTubuh(36.0);
         form.setSkalaNyeri(9);
- 
+
         // Tindakan emergensi - resusitasi + intubasi
         form.setResusitasiCairan(1);
         form.setIntubasiAtauManajemenJalanNapas(1);
         form.setDefibrilasi(0);
- 
-        // Resource medis (lab + radiologi + konsultasi + obatIV + prosedur + reassessment + transfusi = 7)
+
+        // Resource medis (lab + radiologi + konsultasi + obatIV + prosedur +
+        // reassessment + transfusi = 7)
         form.setPemeriksaanLaboratorium(1);
         form.setPemeriksaanRadiologi(1);
         form.setKonsultasiSpesialis(1);
@@ -227,25 +230,25 @@ public class App {
         form.setProsedurTindakan(1);
         form.setReassessmentTandaVital(1);
         form.setJumlahJenisResourceMedis(7); // lab + rad + konsultasi + obatIV + prosedur + reassessment + transfusi
- 
-        Request.getLiveRequestList().add(form);
- 
+
+        request.setForm(form);
+
         // #endregion
- 
+
         // #region form 4
         // Cynthia - AB+ - "operasi caesar terjadwal" - elektif, stabil, ESI 2
- 
+
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Siloam_1");
- 
-        form = new Request(bdrs);
- 
+        request = new Request(bdrs);
+        form = new Form(bdrs);
+
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
         form.setUnitBDRS(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
- 
+
         form.setNamaPasien("Cynthia");
         form.setGolonganDarah(golDarahEnum.AB);
         form.setRhesus(rhesusEnum.POSITIVE);
@@ -258,25 +261,25 @@ public class App {
         form.setNamaDokter("Dr. Felicia");
         form.setJabatan("Dokter Kandungan");
         form.setNomorSIP("9911");
- 
+
         // Data klinis - kondisi stabil, elektif
         form.setUsiaPasien(30);
         form.setKadarHb(7);
         form.setTekananDarahSistolik(120);
-        form.setGcsMata(4);       // terbuka spontan
-        form.setGcsVerbal(5);     // orientasi baik
-        form.setGcsMotorik(6);    // mengikuti perintah  → GCS 15
+        form.setGcsMata(4); // terbuka spontan
+        form.setGcsVerbal(5); // orientasi baik
+        form.setGcsMotorik(6); // mengikuti perintah → GCS 15
         form.setSpo2(98);
         form.setFrekuensiNapas(18);
         form.setFrekuensiNadi(78);
         form.setSuhuTubuh(36.7);
         form.setSkalaNyeri(3);
- 
+
         // Tidak ada tindakan emergensi
         form.setResusitasiCairan(0);
         form.setIntubasiAtauManajemenJalanNapas(0);
         form.setDefibrilasi(0);
- 
+
         // Resource medis (lab + konsultasi + obatIV + prosedur + transfusi = 5)
         form.setPemeriksaanLaboratorium(1);
         form.setPemeriksaanRadiologi(0);
@@ -286,25 +289,25 @@ public class App {
         form.setProsedurTindakan(1);
         form.setReassessmentTandaVital(0);
         form.setJumlahJenisResourceMedis(5); // lab + konsultasi + obatIV + prosedur + transfusi
- 
-        Request.getLiveRequestList().add(form);
- 
+
+        request.setForm(form);
+
         // #endregion
- 
+
         // #region form 5
         // Rudi - A- - "perdarahan aktif pada saluran cerna" - kritis, ESI 1
- 
+
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Ciputra");
- 
-        form = new Request(bdrs);
- 
+        request = new Request(bdrs);
+        form = new Form(bdrs);
+
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
         form.setUnitBDRS(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
- 
+
         form.setNamaPasien("Rudi");
         form.setGolonganDarah(golDarahEnum.A);
         form.setRhesus(rhesusEnum.NEGATIVE);
@@ -317,26 +320,27 @@ public class App {
         form.setNamaDokter("Dr. Bima");
         form.setJabatan("Dokter Spesialis Penyakit Dalam");
         form.setNomorSIP("5566");
- 
+
         // Data klinis - perdarahan GI aktif, tekanan turun
         form.setUsiaPasien(55);
         form.setKadarHb(7);
         form.setTekananDarahSistolik(85);
-        form.setGcsMata(3);       // terbuka saat dipanggil
-        form.setGcsVerbal(4);     // bingung
-        form.setGcsMotorik(5);    // melokalisasi nyeri  → GCS 12
+        form.setGcsMata(3); // terbuka saat dipanggil
+        form.setGcsVerbal(4); // bingung
+        form.setGcsMotorik(5); // melokalisasi nyeri → GCS 12
         form.setSpo2(93);
         form.setFrekuensiNapas(22);
         form.setFrekuensiNadi(122);
         form.setSuhuTubuh(37.5);
         form.setSkalaNyeri(8);
- 
+
         // Tindakan emergensi - butuh resusitasi cairan
         form.setResusitasiCairan(1);
         form.setIntubasiAtauManajemenJalanNapas(0);
         form.setDefibrilasi(0);
- 
-        // Resource medis (lab + radiologi + konsultasi + obatIV + prosedur + reassessment + transfusi = 7)
+
+        // Resource medis (lab + radiologi + konsultasi + obatIV + prosedur +
+        // reassessment + transfusi = 7)
         form.setPemeriksaanLaboratorium(1);
         form.setPemeriksaanRadiologi(1);
         form.setKonsultasiSpesialis(1);
@@ -345,25 +349,25 @@ public class App {
         form.setProsedurTindakan(1);
         form.setReassessmentTandaVital(1);
         form.setJumlahJenisResourceMedis(7); // lab + rad + konsultasi + obatIV + prosedur + reassessment + transfusi
- 
-        Request.getLiveRequestList().add(form);
- 
+
+        request.setForm(form);
+
         // #endregion
- 
+
         // #region form 6
         // Maria - B- - "demam berdarah dengan trombosit rendah" - sedang, ESI 2
- 
+
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Siloam_1");
- 
-        form = new Request(bdrs);
- 
+        request = new Request(bdrs);
+        form = new Form(bdrs);
+
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
         form.setUnitBDRS(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
- 
+
         form.setNamaPasien("Maria");
         form.setGolonganDarah(golDarahEnum.B);
         form.setRhesus(rhesusEnum.NEGATIVE);
@@ -376,25 +380,25 @@ public class App {
         form.setNamaDokter("Dr. Clara");
         form.setJabatan("Dokter Umum");
         form.setNomorSIP("3344");
- 
+
         // Data klinis - DBD, demam tinggi, sadar penuh
         form.setUsiaPasien(22);
         form.setKadarHb(7);
         form.setTekananDarahSistolik(105);
-        form.setGcsMata(4);       // terbuka spontan
-        form.setGcsVerbal(5);     // orientasi baik
-        form.setGcsMotorik(6);    // mengikuti perintah  → GCS 15
+        form.setGcsMata(4); // terbuka spontan
+        form.setGcsVerbal(5); // orientasi baik
+        form.setGcsMotorik(6); // mengikuti perintah → GCS 15
         form.setSpo2(97);
         form.setFrekuensiNapas(20);
         form.setFrekuensiNadi(96);
         form.setSuhuTubuh(38.9);
         form.setSkalaNyeri(5);
- 
+
         // Tidak ada tindakan emergensi
         form.setResusitasiCairan(0);
         form.setIntubasiAtauManajemenJalanNapas(0);
         form.setDefibrilasi(0);
- 
+
         // Resource medis (lab + konsultasi + obatIV + reassessment + transfusi = 5)
         form.setPemeriksaanLaboratorium(1);
         form.setPemeriksaanRadiologi(0);
@@ -404,11 +408,11 @@ public class App {
         form.setProsedurTindakan(0);
         form.setReassessmentTandaVital(1);
         form.setJumlahJenisResourceMedis(5); // lab + konsultasi + obatIV + reassessment + transfusi
- 
-        Request.getLiveRequestList().add(form);
- 
+
+        request.setForm(form);
+
         // #endregion
- 
+
     }
 
     public void menuAwal() {
