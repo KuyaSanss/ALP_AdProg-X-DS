@@ -49,10 +49,10 @@ public class App {
 
     // buat baca data dari txt dulu
     private void onStartUp() {
-        dataUser.insertUser(new Admin("admin", "admin", "085887312500", "Budi"));
-        dataUser.insertUser(new BDRS("Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital"));
-        dataUser.insertUser(new BDRS("Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital"));
-        dataUser.insertUser(new UDD("PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made"));
+        dataUser.insertUser(new Admin(this,"admin", "admin", "085887312500", "Budi",Provinsi.JAWA_TIMUR,WilayahIndonesia.KOTA_SURABAYA));
+        dataUser.insertUser(new BDRS(this,"Ciputra", "Hospital", "028317488396", "Made, Citraland", "Ciputra Hospital",Provinsi.JAWA_TIMUR,WilayahIndonesia.KOTA_SURABAYA));
+        dataUser.insertUser(new BDRS(this,"Siloam_1", "Hospital", "028317488396", "Tengah, Kota", "Siloam Hospital",Provinsi.JAWA_TIMUR,WilayahIndonesia.KOTA_SURABAYA));
+        dataUser.insertUser(new UDD(this,"PMI", "palang", "08303030", "Jl. Made me smile", "PMI-Made",Provinsi.JAWA_TIMUR,WilayahIndonesia.KOTA_SURABAYA));
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -589,7 +589,7 @@ public class App {
         Provinsi provinsi = Provinsi.inputProvinsi(this);
         WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(this);
 
-        dataUser.insertUser(new Pendonor(username, password, noTelp, gol, rhesus, nama,provinsi,wilayahIndonesia));
+        dataUser.insertUser(new Pendonor(this,username, password, noTelp, gol, rhesus, nama,provinsi,wilayahIndonesia));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
 
         // dummy riwayat & notif
