@@ -61,17 +61,25 @@ public class Form implements Comparable<Form> {
     private int prosedurTindakan;
     private int reassessmentTandaVital;
 
-    public Form(BDRS unitBDRS) {}
-
-    public void inputForm(App app) {
-
-        System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
-
+    public Form(BDRS unitBDRS) {
         setNamaRumahSakit(unitBDRS.getNama());
         setAlamat(unitBDRS.getAlamat());
         setTelepon(unitBDRS.getNoTelp());
         setTanggalPermintaan(LocalDate.now());
         setJamPermintaan(LocalTime.now());
+    }
+
+    public void menuForm(App app) {
+
+    }
+
+    public void formStok(){
+
+    }
+
+    public void formPasien(App app) {
+
+        System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
 
         System.out.println("\nA. DATA PASIEN");
 

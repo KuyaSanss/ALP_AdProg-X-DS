@@ -1,21 +1,13 @@
 package User;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import App.App;
-import Enum.PrioritasESI;
-import Enum.JenisKelamin;
-import Enum.golDarahEnum;
-import Enum.rhesusEnum;
-import Request.Form;
 import Request.Request;
 
 public class BDRS extends User {
     private String alamat;
+    private ArrayList<Request> listRequest = new ArrayList<>();
 
     public BDRS(String username, String password, String noTelp, String alamat, String nama) {
         super(username, password, noTelp, nama);
@@ -49,6 +41,12 @@ public class BDRS extends User {
                 System.out.println("Invalid Input!!");
                 tampilkanMenuUtama(app);
         }
+    }
+
+    private void makeRequest(App app){
+        Request request = new Request(this);
+        listRequest.add(request);
+        request.menuRequest(app);
     }
 
 }

@@ -21,8 +21,9 @@ public class Request implements Comparable<Request> {
         liveRequestList.add(this);
     }
 
-    public void createForm(App app){
-        form.inputForm(app);
+    public void menuRequest(App app){
+        form = new Form(unitBDRS);
+        form.menuForm(app);
     }
 
     public void approveRequest(App app) {
