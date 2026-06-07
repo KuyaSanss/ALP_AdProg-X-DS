@@ -1,9 +1,7 @@
 package Darah;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -13,8 +11,7 @@ import User.FasilitasDarah;
 public abstract class TesDarah {
 
     protected FasilitasDarah fasilitasDarah;
-    protected LocalDate tanggalTes;
-    protected LocalTime waktuTes;
+    protected LocalDateTime waktuTes;
 
     private void rencanaWaktuTransfusi(App app) {
         while (true) {
