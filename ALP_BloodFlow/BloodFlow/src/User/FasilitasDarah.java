@@ -1,9 +1,11 @@
 package User;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import App.App;
 import Darah.CrossMatch;
+import Darah.KantongDarah;
 import Darah.TesIMLTD;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
@@ -16,7 +18,9 @@ public abstract class FasilitasDarah extends User {
     private ArrayList<Request> listApproveRequest = new ArrayList<>();
     private ArrayList<TesIMLTD> listTesIMLTD = new ArrayList<>();
     private ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
-
+    //LinkedLists
+    private LinkedList<KantongDarah> stokDarah = new LinkedList<>() ;
+    //normal
     private String alamat;
     
     public FasilitasDarah(App app, String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {

@@ -73,11 +73,19 @@ public class Form implements Comparable<Form> {
 
     }
 
-    public void formStok(){
+    private void formStok(App app){
+
+        System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
+
+        System.out.println("\nA. DATA PERMINTAAN");
+
+        golonganDarah(app);
+        rhesus(app);
+        jumlahKantong(app);
 
     }
 
-    public void formPasien(App app) {
+    private void formPasien(App app) {
 
         System.out.println("=== INPUT FORM PERMINTAAN DARAH ===");
 
