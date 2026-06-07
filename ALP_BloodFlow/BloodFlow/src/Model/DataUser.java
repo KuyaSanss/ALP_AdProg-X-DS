@@ -41,11 +41,36 @@ public class DataUser {
 
     //inner class
 
+    private class GolonganDarahRhesus{
+
+        private Hashtable<golDarahEnum,Hashtable<rhesusEnum,Pendonor>> daftarGolonganDarahRhesusPendonor = new Hashtable<>();
+
+        private GolonganDarahRhesus(){
+            for(golDarahEnum gol : golDarahEnum.values()){
+                daftarGolonganDarahRhesusPendonor.put(gol, new Hashtable<>());
+            }
+        }
+
+        private void insertPendonor(Pendonor pendonor){
+            Hashtable<rhesusEnum,Pendonor> inner= daftarGolonganDarahRhesusPendonor.get(pendonor.getGolDarah());
+            inner.put(pendonor.getRhesus(),pendonor);
+        }
+
+    }
+
     private class FilterWilayahIndonesia_GolonganDarahRhesus{
 
-        private FilterWilayahIndonesia_GolonganDarahRhesus(){}
+        private Hashtable<WilayahIndonesia,GolonganDarahRhesus> table = new Hashtable<>();
 
-        private void insertPendonor(){
+        private FilterWilayahIndonesia_GolonganDarahRhesus(){
+            for(WilayahIndonesia w : WilayahIndonesia.values()){
+                table.put(w, new GolonganDarahRhesus());
+            }
+        }
+
+        private void insertPendonor(Pendonor pendonor){
+
+
 
         }
 
