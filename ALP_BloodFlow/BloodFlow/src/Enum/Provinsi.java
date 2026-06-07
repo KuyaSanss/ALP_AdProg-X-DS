@@ -64,7 +64,7 @@ public enum Provinsi {
                 LAMPUNG
                 NUSA_TENGGARA_BARAT
                 KEPULAUAN_BANGKA_BELITUNG
-            """);
+                """);
             System.out.print("Input : ");
             input = app.getSc().nextLine();
             input=input.toUpperCase().trim();

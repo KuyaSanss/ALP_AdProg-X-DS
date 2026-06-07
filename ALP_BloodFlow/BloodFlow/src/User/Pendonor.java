@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class Pendonor extends User {
+    private static int jumlahPendonor = 0;
     private golDarahEnum golDarah;
     private rhesusEnum rhesus;
     private String tanggalTerakhirDonor;
@@ -21,8 +22,10 @@ public class Pendonor extends User {
     private static final int MASA_TUNGGU_DONOR = 90;
 
     public Pendonor(App app, String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus,
-            String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(app, username, password, noTelp, nama,provinsi,wilayahIndonesia);
+            String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(app, username, password, noTelp, nama, provinsi, wilayahIndonesia);
+        jumlahPendonor++;
+        this.idPengguna = "PD" + jumlahPendonor;
         this.golDarah = golDarah;
         this.rhesus = rhesus;
         this.riwayatDonor = new ArrayList<>();
@@ -61,9 +64,9 @@ public class Pendonor extends User {
         this.riwayatDonor = riwayatDonor;
     }
 
-    //public Hashtable<Integer, String> getInbox() {
-   //     return inbox;
-   // }
+    // public Hashtable<Integer, String> getInbox() {
+    // return inbox;
+    // }
 
     @Override
     public void tampilkanMenuUtama(App app) {
@@ -179,16 +182,16 @@ public class Pendonor extends User {
 
             LocalDate tanggalBolehDonorLagi = tanggalTerakhirDonor.plusDays(90);
 
-            long sisaHari = ChronoUnit.DAYS.between(tanggalSekarang,tanggalBolehDonorLagi);
+            long sisaHari = ChronoUnit.DAYS.between(tanggalSekarang, tanggalBolehDonorLagi);
 
             System.out.println();
             System.out.println("=================================");
             System.out.println("STATUS DONOR");
 
-            System.out.println("Donor terakhir : "+ tanggalTerakhirDonor);
+            System.out.println("Donor terakhir : " + tanggalTerakhirDonor);
 
             if (sisaHari <= 0) {
-                String pesan = "Anda sudah dapat melakukan donor darah kembali sejak "+ tanggalBolehDonorLagi;
+                String pesan = "Anda sudah dapat melakukan donor darah kembali sejak " + tanggalBolehDonorLagi;
                 tambahNotifikasi(pesan);
                 System.out.println(
                         "Status : SUDAH BISA DONOR");
@@ -197,15 +200,15 @@ public class Pendonor extends User {
                                 + tanggalBolehDonorLagi);
             } else {
                 System.out.println("Status : BELUM BISA DONOR");
-                System.out.println( "Boleh donor lagi pada : "+ tanggalBolehDonorLagi);
-                System.out.println("Sisa waktu : "+ sisaHari+ " hari lagi");
+                System.out.println("Boleh donor lagi pada : " + tanggalBolehDonorLagi);
+                System.out.println("Sisa waktu : " + sisaHari + " hari lagi");
             }
             System.out.println("=================================");
 
         } catch (Exception e) {
 
             // System.out.println(
-            //         "Format tanggal donor salah");
+            // "Format tanggal donor salah");
             e.printStackTrace();
         }
     }
