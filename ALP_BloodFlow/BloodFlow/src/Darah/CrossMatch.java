@@ -7,7 +7,7 @@ import User.FasilitasDarah;
 
 public class CrossMatch extends TesDarah {
 
-    private boolean f1, f2, f3, ac;
+    private boolean f1, f2, f3, ac,aman;
 
     public CrossMatch(FasilitasDarah fasilitasDarah, SampelDarah sampelDarahPendonor) {
         super(fasilitasDarah, sampelDarahPendonor);
@@ -53,6 +53,46 @@ public class CrossMatch extends TesDarah {
                 System.out.println("[!] Input salah. Harap masukkan 'Y' atau 'T'.");
             }
         }
+    }
+
+    public boolean isAman() {
+        return aman;
+    }
+
+    public boolean isF1() {
+        return f1;
+    }
+
+    public void setF1(boolean f1) {
+        this.f1 = f1;
+    }
+
+    public boolean isF2() {
+        return f2;
+    }
+
+    public void setF2(boolean f2) {
+        this.f2 = f2;
+    }
+
+    public boolean isF3() {
+        return f3;
+    }
+
+    public void setF3(boolean f3) {
+        this.f3 = f3;
+    }
+
+    public boolean isAc() {
+        return ac;
+    }
+
+    public void setAc(boolean ac) {
+        this.ac = ac;
+    }
+
+    public void setAman(boolean aman) {
+        this.aman = aman;
     }
 
 }
