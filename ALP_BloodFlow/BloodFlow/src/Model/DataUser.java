@@ -18,8 +18,13 @@ public class DataUser {
     private Hashtable <String,User> daftarAdmin = new Hashtable<>();
 
     //Pendonor
-    private Hashtable <golDarahEnum,User> daftarGolDarahPendonor = new Hashtable<>();
-    private Hashtable <rhesusEnum,User> daftarRhesusPendonor = new Hashtable<>();
+    private Hashtable <golDarahEnum,Pendonor> daftarGolDarahPendonor = new Hashtable<>();//goldarah
+    private Hashtable <rhesusEnum,Pendonor> daftarRhesusPendonor = new Hashtable<>();//rhesus
+    private Hashtable <Provinsi,Pendonor> daftarProvinsiPendonor = new Hashtable<>();//provinsi
+    private Hashtable <WilayahIndonesia,Pendonor> daftarWilayahIndonesiaPendonor = new Hashtable<>();//wilayah indonesia
+    //todo
+    FilterWilayahIndonesia_GolonganDarahRhesus filterWilayahIndonesia_GolonganDarahRhesus= new FilterWilayahIndonesia_GolonganDarahRhesus();
+    FilterProvinsi_GolonganDarahRhesus filterProvinsi_GolonganDarahRhesus = new FilterProvinsi_GolonganDarahRhesus();
     // UDD
     private Hashtable <String,User> daftarAlamatUDD = new Hashtable<>();
 
@@ -27,6 +32,30 @@ public class DataUser {
     private Hashtable <String,User> daftarAlamatBDRS = new Hashtable<>();
 
     public DataUser(){}
+
+    //inner class
+
+    private class FilterWilayahIndonesia_GolonganDarahRhesus{
+
+        private FilterWilayahIndonesia_GolonganDarahRhesus(){}
+
+        private void insertPendonor(){
+
+        }
+
+    }
+
+    private class FilterProvinsi_GolonganDarahRhesus{
+
+        private FilterProvinsi_GolonganDarahRhesus(){
+
+        }
+
+        private void insertPendonor(){
+
+        }
+
+    }
 
     //#region insert
     public void insertUser(User user){
