@@ -65,7 +65,7 @@ public class Admin extends User {
         System.out.print("Masukkan Nomor Telepon       : ");
         String noTelp = app.getSc().nextLine();
         Provinsi provinsi = Provinsi.inputProvinsi(app);
-        WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(app);
+        WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(app,provinsi);
 
         if (pilihanInstansi == 1) {
             BDRS rsBaru = new BDRS(app,username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);

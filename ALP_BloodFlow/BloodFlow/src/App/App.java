@@ -588,7 +588,7 @@ public class App {
 
         Provinsi provinsi = Provinsi.inputProvinsi(this);
         WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(this, provinsi);
-
+        System.out.println(golDarah);
         dataUser.insertUser(new Pendonor(this,username, password, noTelp, gol, rhesus, nama,provinsi,wilayahIndonesia));
         currentUser = dataUser.getDaftarUsernameUser().get(username);
 
