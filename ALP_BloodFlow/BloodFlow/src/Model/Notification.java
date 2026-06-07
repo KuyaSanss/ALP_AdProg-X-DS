@@ -152,6 +152,7 @@ public class Notification implements Runnable {
         }
     }
 
+    //todo benerin
     public static void cekDonorDarurat(User user) {
 
         if (!(user instanceof Pendonor)) {
@@ -187,4 +188,7 @@ public class Notification implements Runnable {
             }
         }
     }
+
+    
+
 }

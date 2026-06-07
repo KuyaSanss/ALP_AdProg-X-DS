@@ -8,8 +8,8 @@ import User.*;
 public class DataUser {
     
     //all
-    private Hashtable <String,User> daftarUser = new Hashtable<>();
-    private Hashtable <String,User> daftarUsernameUser = new Hashtable<>();
+    private Hashtable <String,User> daftarUser = new Hashtable<>();//id pengguna
+    private Hashtable <String,User> daftarUsernameUser = new Hashtable<>();//username user
 
     // User
     private Hashtable <String,User> daftarPendonor = new Hashtable<>();
