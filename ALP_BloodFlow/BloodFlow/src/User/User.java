@@ -19,7 +19,7 @@ public abstract class User {
 
     public User(App app,String username, String password, String noTelp,String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         userTerbuat++;
-        idPengguna= "PD"+userTerbuat;
+        idPengguna= "UR"+userTerbuat;
         this.username = username;
         this.password = password;
         this.noTelp = noTelp;
