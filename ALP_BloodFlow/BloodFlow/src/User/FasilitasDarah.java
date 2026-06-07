@@ -42,6 +42,13 @@ public abstract class FasilitasDarah extends User {
         tampilkanMenuUtama(app);
     }
 
+    private void checkApprovedRequest(){
+        tampilkanApprovedRequests();
+        while(true){
+            
+        }
+    }
+
     public void tampilkanApprovedRequests(){
         System.out.println("=== Approved Requests ===");
         for (int i = 0; i < listApproveRequest.size(); i++) {

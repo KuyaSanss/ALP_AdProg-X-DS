@@ -300,6 +300,7 @@ public class App {
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Ciputra");
         request = new Request(bdrs);
         form = new Form(bdrs);
+        form.setPermintaanPasien(true);
 
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
@@ -360,6 +361,7 @@ public class App {
         bdrs = (BDRS) dataUser.getDaftarUsernameUser().get("Siloam_1");
         request = new Request(bdrs);
         form = new Form(bdrs);
+        form.setPermintaanPasien(true);
 
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());

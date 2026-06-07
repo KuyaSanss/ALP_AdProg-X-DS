@@ -12,7 +12,6 @@ import User.*;
 
 public class Form implements Comparable<Form> {
     // general
-    private String idPermintaan;
     private boolean permintaanPasien;
     public boolean getPermintaanPasien() {
         return permintaanPasien;
@@ -356,9 +355,9 @@ public class Form implements Comparable<Form> {
         int otherBool = ((other.getPermintaanPasien())?1:0);
 
         if (thisBool<otherBool){ //cek kalau stok
-            return -1;
-        }else if (otherBool<thisBool){
             return 1;
+        }else if (otherBool<thisBool){
+            return -1;
         }else if (thisBool==1 && otherBool==1){//dua-duanya pasien
             if (thisWeight < otherWeight) {
                 return -1;
@@ -366,8 +365,7 @@ public class Form implements Comparable<Form> {
                 return 1;
             }
         }
-
-        return this.idPermintaan.compareTo(other.idPermintaan);
+        return 0;
     }
 
     public int getGcsTotal() {
@@ -1113,14 +1111,6 @@ public class Form implements Comparable<Form> {
 
     public void setNomorSIP(String nomorSIP) {
         this.nomorSIP = nomorSIP;
-    }
-
-    public String getIdPermintaan() {
-        return idPermintaan;
-    }
-
-    public void setIdPermintaan(String idPermintaan) {
-        this.idPermintaan = idPermintaan;
     }
 
     public golDarahEnum getGolonganDarah() {
