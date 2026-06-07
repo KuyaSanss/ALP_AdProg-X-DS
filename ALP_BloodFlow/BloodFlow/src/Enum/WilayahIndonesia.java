@@ -540,10 +540,9 @@ public enum WilayahIndonesia {
         return this.provinsi;
     }
 
-    public static WilayahIndonesia inputWilayahIndonesia(App app) {
+    public static WilayahIndonesia inputWilayahIndonesia(App app, Provinsi provinsi) {
         
         Set<String> set = new HashSet<>();
-        Provinsi provinsi = app.getCurrentUser().getProvinsi();
 
         System.out.println("=== Kota/Kabupaten Provinsi "+provinsi.toString()+"===");
         System.out.println();
