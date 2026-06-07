@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import App.App;
 import Darah.CrossMatch;
 import Darah.KantongDarah;
-import Darah.TesIMLTD;
+import Darah.TesDarah;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
 import Request.Request;
@@ -15,8 +15,8 @@ public abstract class FasilitasDarah extends User {
 
     //ArrayLists
     private ArrayList<Request> listRequest = new ArrayList<>();
-    private ArrayList<Request> listApproveRequest = new ArrayList<>();
-    private ArrayList<TesIMLTD> listTesIMLTD = new ArrayList<>();
+    private LinkedList<Request> listApproveRequest = new LinkedList<>();
+    private ArrayList<TesDarah> listTesDarah = new ArrayList<>();
     private ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
     //LinkedLists
     private LinkedList<KantongDarah> stokDarah = new LinkedList<>() ;
@@ -43,7 +43,12 @@ public abstract class FasilitasDarah extends User {
     }
 
     public void tampilkanApprovedRequests(){
-        
+        System.out.println("=== Approved Requests ===");
+        for (int i = 0; i < listApproveRequest.size(); i++) {
+            System.out.println((i + 1) + " =====================");
+            listApproveRequest.get(i).getForm().tampilkanForm();
+            System.out.println();
+        }
     }
 
     //#endregion
@@ -62,8 +67,39 @@ public abstract class FasilitasDarah extends User {
         return listRequest;
     }
 
-    public ArrayList<Request> getListApproveRequest() {
+    public LinkedList<Request> getListApproveRequest() {
         return listApproveRequest;
+    }
+    public void setListRequest(ArrayList<Request> listRequest) {
+        this.listRequest = listRequest;
+    }
+
+    public void setListApproveRequest(LinkedList<Request> listApproveRequest) {
+        this.listApproveRequest = listApproveRequest;
+    }
+
+    public ArrayList<TesDarah> getListTesDarah() {
+        return listTesDarah;
+    }
+
+    public void setListTesDarah(ArrayList<TesDarah> listTesDarah) {
+        this.listTesDarah = listTesDarah;
+    }
+
+    public ArrayList<CrossMatch> getListCrossMatch() {
+        return listCrossMatch;
+    }
+
+    public void setListCrossMatch(ArrayList<CrossMatch> listCrossMatch) {
+        this.listCrossMatch = listCrossMatch;
+    }
+
+    public LinkedList<KantongDarah> getStokDarah() {
+        return stokDarah;
+    }
+
+    public void setStokDarah(LinkedList<KantongDarah> stokDarah) {
+        this.stokDarah = stokDarah;
     }
 
     //#endregion

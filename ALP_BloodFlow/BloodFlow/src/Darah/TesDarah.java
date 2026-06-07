@@ -15,6 +15,7 @@ public abstract class TesDarah {
         this.waktuTes = LocalDateTime.now();
         this.sampelDarahPendonor = sampelDarahPendonor;
         sampelDarahPendonor.getListTesDarah().add(this);
+        fasilitasDarah.getListTesDarah().add(this);
 }
 
 
