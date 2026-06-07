@@ -1,19 +1,21 @@
 package User;
 
 import App.App;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Model.DataUser;
-
-import java.util.Scanner;
 
 public class Admin extends User {
 
-    private Scanner scanner;
 
-    public Admin( String username, String password, String noTelp,String nama) {
-        super( username, password, noTelp,nama);
+    public Admin( App app,String username, String password, String noTelp,String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super( app,username, password, noTelp,nama,provinsi,wilayahIndonesia);
     }
 
-    public void buatAkunInstansi(DataUser dataUtama) {
+    public void buatAkunInstansi(App app) {
+
+        DataUser dataUtama = app.getDataUser();
+
         System.out.println("");
         System.out.println("=== BUAT AKUN INSTANSI BARU ===");
 
@@ -27,7 +29,7 @@ public class Admin extends User {
                 System.out.println("2. Unit Donor Darah (UDD)");
                 System.out.print("Pilihan (1/2): ");
 
-                pilihanInstansi = Integer.parseInt(scanner.nextLine());
+                pilihanInstansi = Integer.parseInt(app.getSc().nextLine());
 
                 if (pilihanInstansi == 1 || pilihanInstansi == 2) {
                     pilihanValid = true;
@@ -45,7 +47,7 @@ public class Admin extends User {
 
         while (!usernameValid) {
             System.out.print("Masukkan Username: ");
-            username = scanner.nextLine();
+            username = app.getSc().nextLine();
 
             if (dataUtama.getDaftarUsernameUser().containsKey(username)) {
                 System.out.println("Username '" + username + "' sudah terdaftar! Silakan buat ulang.\n");
@@ -55,42 +57,43 @@ public class Admin extends User {
         }
 
         System.out.print("Masukkan Password (sementara): ");
-        String password = scanner.nextLine();
+        String password = app.getSc().nextLine();
         System.out.print("Masukkan Nama Instansi       : ");
-        String nama = scanner.nextLine();
+        String nama = app.getSc().nextLine();
         System.out.print("Masukkan Alamat              : ");
-        String alamat = scanner.nextLine();
+        String alamat = app.getSc().nextLine();
         System.out.print("Masukkan Nomor Telepon       : ");
-        String noTelp = scanner.nextLine();
+        String noTelp = app.getSc().nextLine();
+        Provinsi provinsi = Provinsi.inputProvinsi(app);
+        WilayahIndonesia wilayahIndonesia = WilayahIndonesia.inputWilayahIndonesia(app);
 
         if (pilihanInstansi == 1) {
-            BDRS rsBaru = new BDRS(username, password, noTelp, alamat, nama);
-
-            dataUtama.insertUser(rsBaru);
+            BDRS rsBaru = new BDRS(app,username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
 
             System.out.println("Akun Rumah Sakit berhasil dibuat!");
             cetakRekapData(rsBaru, "Rumah Sakit");
 
         } else {
-            UDD uddBaru = new UDD(username, password, noTelp, alamat, nama);
-
-            dataUtama.insertUser(uddBaru);
+            UDD uddBaru = new UDD(app,username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
 
             System.out.println("Akun UDD berhasil dibuat!");
             cetakRekapData(uddBaru, "Unit Donor Darah");
         }
     }
 
-    public void hapusAkun(DataUser dataUtama) {
+    public void hapusAkun(App app) {
+
+        DataUser dataUtama = app.getDataUser();
+
         //tampilkan user
         for(String key : dataUtama.getDaftarUser().keySet()){
             User user = dataUtama.getDaftarUser().get(key);
             System.out.println(user.getIdPengguna()+" "+user.getUsername());
         }
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("=== HAPUS AKUN PENGGUNA ===");
         System.out.print("Masukkan ID Pengguna yang ingin dihapus: ");
-        String idTarget = scanner.next()+scanner.nextLine();
+        String idTarget = app.getSc().next()+app.getSc().nextLine();
 
         if (dataUtama.getDaftarUser().containsKey(idTarget)) {
             User targetHapus = dataUtama.getDaftarUser().get(idTarget);
@@ -112,11 +115,12 @@ public class Admin extends User {
         }
     }
 
-    public void editAkun(DataUser dataUtama) {
+    public void editAkun(App app) {
+        DataUser dataUtama= app.getDataUser();
 
         System.out.println("=== EDIT AKUN PENGGUNA ===");
         System.out.print("Masukkan ID Pengguna yang ingin diedit: ");
-        String idTarget = scanner.nextLine();
+        String idTarget = app.getSc().nextLine();
 
         if (dataUtama.getDaftarUser().containsKey(idTarget)) {
             User targetEdit = dataUtama.getDaftarUser().get(idTarget);
@@ -126,7 +130,7 @@ public class Admin extends User {
             System.out.println("Username : " + targetEdit.getUsername());
 
             System.out.print("Masukkan Password baru (Tekan ENTER jika tidak ingin mengubah): ");
-            String newPassword = scanner.nextLine();
+            String newPassword = app.getSc().nextLine();
             if (newPassword.equals("")) {
                     targetEdit.setPassword(targetEdit.getPassword());
                 } else {
@@ -138,7 +142,7 @@ public class Admin extends User {
                 System.out.println("Edit Data Spesifik Rumah Sakit ");
 
                 System.out.print("Nama UDD baru: ");
-                String newNama = scanner.nextLine();
+                String newNama = app.getSc().nextLine();
                 if (newNama.equals("")) {
                     bdrs.setUsername((bdrs.getUsername()));
                 } else {
@@ -146,7 +150,7 @@ public class Admin extends User {
                 }
 
                 System.out.print("Alamat baru ): ");
-                String newAlamat = scanner.nextLine();
+                String newAlamat = app.getSc().nextLine();
                 if (newAlamat.equals("")) {
                     bdrs.setAlamat(bdrs.getAlamat());
                 } else {
@@ -154,7 +158,7 @@ public class Admin extends User {
                 }
 
                 System.out.print("Nomor telepon baru ): ");
-                String newNoTelepon = scanner.nextLine();
+                String newNoTelepon = app.getSc().nextLine();
                 if (newNoTelepon.equals("")) {
                     bdrs.setNoTelp(bdrs.getNoTelp());
                 } else {
@@ -166,7 +170,7 @@ public class Admin extends User {
                 System.out.println("Edit Data Spesifik UDD");
 
                 System.out.print("Nama UDD baru: ");
-                String newNama = scanner.nextLine();
+                String newNama = app.getSc().nextLine();
                 if (newNama.equals("")) {
                     udd.setUsername(udd.getUsername());
                 } else {
@@ -174,7 +178,7 @@ public class Admin extends User {
                 }
 
                 System.out.print("Alamat baru: ");
-                String newAlamat = scanner.nextLine();
+                String newAlamat = app.getSc().nextLine();
                 if (newAlamat.equals("")) {
                     udd.setAlamat(udd.getAlamat());
                 } else {
@@ -182,7 +186,7 @@ public class Admin extends User {
                 }
 
                 System.out.print("Nomor telepon baru ): ");
-                String newNoTelepon = scanner.nextLine();
+                String newNoTelepon = app.getSc().nextLine();
                 if (newNoTelepon.equals("")) {
                     udd.setNoTelp(udd.getNoTelp());
                 } else {
@@ -208,7 +212,6 @@ public class Admin extends User {
 
     @Override
     public void tampilkanMenuUtama(App app) {
-        scanner= app.getSc();
         boolean kondisi = true;
 
         while (kondisi) {
@@ -219,17 +222,17 @@ public class Admin extends User {
             System.out.println("3. Hapus Akun Instansi");
             System.out.println("4. Logout");
             System.out.print("Pilih menu (1-4): ");
-            String pilihan = scanner.nextLine();
+            String pilihan = app.getSc().nextLine();
 
             switch (pilihan) {
                 case "1":
-                    buatAkunInstansi(app.getDataUser());
+                    buatAkunInstansi(app);
                     break;
                 case "2":
-                    editAkun(app.getDataUser());
+                    editAkun(app);
                     break;
                 case "3":
-                    hapusAkun(app.getDataUser());
+                    hapusAkun(app);
                     break;
                 case "4":
                     System.out.println("Berhasil logout dari menu admin.");
@@ -242,4 +245,5 @@ public class Admin extends User {
             }
         }
     }
+
 }

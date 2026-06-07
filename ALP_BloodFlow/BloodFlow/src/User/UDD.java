@@ -1,30 +1,25 @@
 package User;
 
 import App.App;
+import Darah.KantongDarah;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Model.RiwayatDonor;
 import Request.Request;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class UDD extends User {
-    private String alamat;
+public class UDD extends FasilitasDarah {
     private static LinkedList<KantongDarah> daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
 
-    public UDD(String username, String password, String noTelp, String alamat, String nama) {
-        super(username, password, noTelp, nama);
-        this.alamat = alamat;
+    public UDD(App app,String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(app,username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
     }
 
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
 
     @Override
     public void tampilkanMenuUtama(App app) {
@@ -61,7 +56,7 @@ public class UDD extends User {
 
             Pendonor pendonor = (Pendonor) user;
 
-            System.out.println("ID: " + pendonor.getIdPengguna()+ " | Nama: " + pendonor.getUsername());
+            System.out.println("ID: " + pendonor.getIdPengguna() + " | Nama: " + pendonor.getUsername());
         }
 
         User user;
@@ -145,4 +140,5 @@ public class UDD extends User {
         Request request = Request.displayRequests(app);
         request.approveRequest(app);
     }
+
 }

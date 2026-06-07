@@ -1,6 +1,8 @@
 package User;
 
 import App.App;
+import Enum.Provinsi;
+import Enum.WilayahIndonesia;
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
 import Model.Notification;
@@ -18,9 +20,9 @@ public class Pendonor extends User {
     private Hashtable<Integer, String> inbox;
     private static final int MASA_TUNGGU_DONOR = 90;
 
-    public Pendonor(String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus,
-            String nama) {
-        super(username, password, noTelp, nama);
+    public Pendonor(App app, String username, String password, String noTelp, golDarahEnum golDarah, rhesusEnum rhesus,
+            String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(app, username, password, noTelp, nama,provinsi,wilayahIndonesia);
         this.golDarah = golDarah;
         this.rhesus = rhesus;
         this.riwayatDonor = new ArrayList<>();
@@ -129,7 +131,7 @@ public class Pendonor extends User {
     public void tampilkanInbox() {
         cekKelayakanDonor();
         System.out.println("\n===== INBOX =====");
-         if (inbox == null) {
+        if (inbox == null) {
             inbox = new Hashtable<>();
         }
         if (inbox.isEmpty()) {
