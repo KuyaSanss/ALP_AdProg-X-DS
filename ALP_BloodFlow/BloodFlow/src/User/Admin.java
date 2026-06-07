@@ -73,11 +73,15 @@ public class Admin extends User {
             System.out.println("Akun Rumah Sakit berhasil dibuat!");
             cetakRekapData(rsBaru, "Rumah Sakit");
 
+            app.getDataUser().insertUser(rsBaru);
+
         } else {
             UDD uddBaru = new UDD(app,username, password, noTelp, alamat, nama,provinsi,wilayahIndonesia);
 
             System.out.println("Akun UDD berhasil dibuat!");
             cetakRekapData(uddBaru, "Unit Donor Darah");
+
+            app.getDataUser().insertUser(uddBaru);
         }
     }
 

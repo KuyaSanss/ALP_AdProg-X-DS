@@ -26,7 +26,6 @@ public abstract class User {
         this.nama = nama;
         this.provinsi = provinsi;
         this.wilayahIndonesia = wilayahIndonesia;
-        app.getDataUser().insertUser(this);
     }
 
     
