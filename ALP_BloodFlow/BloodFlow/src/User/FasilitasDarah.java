@@ -36,6 +36,16 @@ public abstract class FasilitasDarah extends User {
         request.menuRequest(app);
     }
 
+    public void checkRequest(App app) {
+        Request request = Request.displayRequests(app);
+        request.approveRequest(app,this);
+        tampilkanMenuUtama(app);
+    }
+
+    public void tampilkanApprovedRequests(){
+        
+    }
+
     //#endregion
 
     //#region Getter Setter

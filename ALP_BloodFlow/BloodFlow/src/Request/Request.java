@@ -1,19 +1,24 @@
 package Request;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import App.*;
+import Darah.TesDarah;
 import Model.MyMinHeap;
 import User.*;
 
 public class Request implements Comparable<Request> {
     // static
     private static long requestTerbuat;
-    private static LinkedList<Request> liveRequestList = new LinkedList<>();
+    private static LinkedList<Request> liveRequestList = new LinkedList<>();//todo pas unapprove add
     // general
     private Form form;
+    private ArrayList<TesDarah> listTesDarah;//kalau gagal auto clear biar ga kecampur sama yang dulu
     private String idPermintaan;
+    private boolean isApproved;//todo unapprove
     // for form
     private FasilitasDarah fasilitasDarah;
+    
 
     public Request(FasilitasDarah fasilitasDarah) {
         idPermintaan = "RQ" + requestTerbuat;
@@ -26,7 +31,7 @@ public class Request implements Comparable<Request> {
         form.menuForm(app);
     }
 
-    public void approveRequest(App app) {
+    public void approveRequest(App app,FasilitasDarah fasilitasDarah) {
         System.out.println("=== APPROVE REQUEST ===");
         form.tampilkanForm();
         System.out.println();
@@ -44,6 +49,11 @@ public class Request implements Comparable<Request> {
                 wrong = true;
             }
         } while (wrong);
+
+        fasilitasDarah.getListApproveRequest().add(this);
+        liveRequestList.remove(this);
+        isApproved=true;
+
     }
 
     @Override

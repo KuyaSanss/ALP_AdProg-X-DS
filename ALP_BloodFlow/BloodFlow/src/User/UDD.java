@@ -136,9 +136,6 @@ public class UDD extends FasilitasDarah {
         System.out.println("Kadaluarsa: " + darah.getTanggalKadaluarsa());
     }
 
-    public void checkRequest(App app) {
-        Request request = Request.displayRequests(app);
-        request.approveRequest(app);
-    }
+
 
 }
