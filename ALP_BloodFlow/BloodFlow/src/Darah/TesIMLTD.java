@@ -10,18 +10,15 @@ public class TesIMLTD extends TesDarah{
     }
     private boolean aman;
     
-    // 1. Atribut Form CLIA
     private String namaAlatCLIA;
     private String nomorLotReagen;
 
-    // Nilai S/CO untuk 4 Parameter Utama IMLTD
     private double scoHiv;
     private double scoHbsag;
     private double scoHcv;
     private double scoSifilis;
 
-    // 2. Method untuk Menerima Input dari Terminal (Simulasi Form)
-    public void isiFormDariTerminal(App app) {
+    public void formInput(App app) {
 
         System.out.println("=== FORM INPUT HASIL LAB CLIA (IMLTD) ===");
 
@@ -45,7 +42,6 @@ public class TesIMLTD extends TesDarah{
         cetakHasilVerifikasiForm();
     }
 
-    // 3. Logika Interpretasi Otomatis dari Form
     private String interpretasiSco(double sco) {
         if (sco < 1.0)
             return "NON-REAKTIF";
@@ -53,7 +49,6 @@ public class TesIMLTD extends TesDarah{
         return "REAKTIF";
     }
 
-    // 4. Menampilkan Hasil Form ke Layar
     public void cetakHasilVerifikasiForm() {
         System.out.println("\n==================================================");
         System.out.println("          HASIL VERIFIKASI FORM DATA CLIA         ");

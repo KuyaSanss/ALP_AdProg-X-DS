@@ -33,8 +33,9 @@ public class Transaksi {
         totalBiaya=biayaKantongBiasa * (double) request.getForm().getJumlahKantong();
     }
 
+    //faktur berdasarkan https://pmipangkalpinang.wordpress.com
     private void cetakFaktur(){
-// todo
+        // todo
     }
 
     private void ubahStatusLunas(){

@@ -7,6 +7,7 @@ import App.App;
 import Darah.CrossMatch;
 import Darah.KantongDarah;
 import Darah.TesDarah;
+import Darah.TesIMLTD;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
 import Request.Request;
@@ -95,7 +96,45 @@ public abstract class FasilitasDarah extends User {
     }
 
     private void testSample(App app, Request request){
-        System.out.println("=== Test Sample ===");
+        String input;
+        System.out.println("""
+                === Test Sample ===
+                1. Tes IMLTD
+                2. CrossMatch
+                3. Exit
+                """);
+
+        System.out.print("Input: ");
+        input = app.getSc().next() + app.getSc().nextLine();
+        switch (input) {
+            case "1":
+                menuTesIMLTD();
+                break;
+            case "2":
+                menuCrossMatch();
+                break;
+            case "3":
+                app.getCurrentUser().tampilkanMenuUtama(app);
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+                testSample(app, request);
+        }
+
+    }
+
+    private void menuTesIMLTD(){
+        boolean pernah=false;
+        for(TesDarah td:  listTesDarah){
+            if (td instanceof TesIMLTD){
+                pernah =true;
+                System.out.println("Tes IMLTD sudah pernah dilakukan");
+                break;
+            }
+        }
+    }
+
+    private void menuCrossMatch(){
 
     }
 

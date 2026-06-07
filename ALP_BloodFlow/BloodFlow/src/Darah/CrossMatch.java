@@ -19,24 +19,29 @@ public class CrossMatch extends TesDarah {
         System.out.println("==================================================");
         System.out.println("Petunjuk: Jawab dengan 'Y' (Ya) atau 'T' (Tidak)\n");
 
-        // Mengambil input dari user menggunakan fungsi helper
         f1 = ambilInput(app.getSc(), "1. Apakah ada aglutinasi/hemolisis pada Fase I (Suhu Kamar)? [Y/T]: ");
         f2 = ambilInput(app.getSc(), "2. Apakah ada aglutinasi/hemolisis pada Fase II (Inkubasi 37°C)? [Y/T]: ");
         f3 = ambilInput(app.getSc(), "3. Apakah ada aglutinasi/hemolisis pada Fase III (Coombs/AHG)? [Y/T]: ");
         ac = ambilInput(app.getSc(), "4. Apakah terjadi aglutinasi pada Auto-Control (AC)? [Y/T]: ");
 
-        // Memproses dan Menampilkan Kesimpulan
+        kesimpulan();
+        
+    }
+
+    private void kesimpulan(){
         System.out.println("\n================ HASIL VERIFIKASI ================");
 
         if (!f1 && !f2 && !f3 && !ac) {
             System.out.println("KESIMPULAN : KOMPATIBEL (COCOK)");
             System.out.println("STATUS     : Darah aman dan dapat ditransfusikan ke pasien.");
+            aman=true;
         } else {
             System.out.println("KESIMPULAN : TIDAK KOMPATIBEL (TIDAK COCOK)");
             System.out.println("STATUS     : Terdapat antibodi spesifik pada serum pasien terhadap donor.");
             System.out.println("TINDAKAN   : Darah TIDAK BOLEH diberikan. Cari kantong donor baru!");
 
             System.out.println("==================================================");
+            aman=false;
         }
     }
 

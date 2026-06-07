@@ -15,7 +15,7 @@ public abstract class User {
     protected WilayahIndonesia wilayahIndonesia;
 
     private static int userTerbuat = 0;
-    private ArrayList<Notification> inbox = new ArrayList<>();
+    protected ArrayList<Notification> inbox = new ArrayList<>();
 
     public User(App app,String username, String password, String noTelp,String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         userTerbuat++;
