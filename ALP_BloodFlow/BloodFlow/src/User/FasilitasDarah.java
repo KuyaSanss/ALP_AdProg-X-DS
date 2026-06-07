@@ -16,6 +16,7 @@ public abstract class FasilitasDarah extends User {
     //ArrayLists
     private ArrayList<Request> listRequest = new ArrayList<>();
     private LinkedList<Request> listApproveRequest = new LinkedList<>();
+    private ArrayList<Request> listRequestTuntas = new ArrayList<>();
     private ArrayList<TesDarah> listTesDarah = new ArrayList<>();
     private ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
     //LinkedLists
@@ -42,11 +43,64 @@ public abstract class FasilitasDarah extends User {
         tampilkanMenuUtama(app);
     }
 
-    private void checkApprovedRequest(){
+    private void checkApprovedRequest(App app) {
         tampilkanApprovedRequests();
-        while(true){
-            
+
+        if (listApproveRequest.isEmpty()) {
+            System.out.println("Belum ada request yang diApprove");
+            return;  // or continue to menu, as needed
         }
+
+        int size = listApproveRequest.size();
+        int pilihan=-1;
+        while (true) {
+            System.out.print("Pilih (1-" + size + "): ");
+            String input = app.getSc().nextLine().trim();
+
+            // 1. Check for empty input
+            if (input.isEmpty()) {
+                System.out.println("Error: Input tidak boleh kosong.\n");
+                continue;
+            }
+            boolean isNumeric = true;
+            for (int i = 0; i < input.length(); i++) {
+                if (!Character.isDigit(input.charAt(i))) {
+                    isNumeric = false;
+                    break;
+                }
+            }
+
+            if (!isNumeric) {
+                System.out.println("Error: Input harus berupa angka (tidak boleh huruf atau simbol).\n");
+                continue;
+            }
+
+            pilihan = Integer.parseInt(input);
+
+            if (pilihan < 1 || pilihan > size) {
+                System.out.println("Error: Pilihan di luar jangkauan. Masukkan angka antara 1 dan " + size + ".\n");
+                continue;
+            }
+
+            break; 
+        }
+
+        Request selected = listApproveRequest.get(pilihan - 1);
+        if(selected.getForm().getPermintaanPasien()){//true=pasien
+            testSample(app, selected);
+        }else{
+
+        }
+        
+    }
+
+    private void testSample(App app, Request request){
+        System.out.println("=== Test Sample ===");
+
+    }
+
+    private void pembayaran(){
+        
     }
 
     public void tampilkanApprovedRequests(){
