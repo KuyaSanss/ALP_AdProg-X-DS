@@ -13,17 +13,6 @@ import User.*;
 public class Form implements Comparable<Form> {
     // general
     private boolean permintaanPasien;
-    public boolean getPermintaanPasien() {
-        return permintaanPasien;
-    }
-
-    public void setPermintaanPasien(boolean permintaanPasien) {
-        this.permintaanPasien = permintaanPasien;
-    }
-
-    public BDRS getUnitBDRS() {
-        return unitBDRS;
-    }
 
     // form
     private String namaRumahSakit;
@@ -980,6 +969,18 @@ public class Form implements Comparable<Form> {
     //#endregion
 
     // #region Getter Setter
+
+        public boolean getPermintaanPasien() {
+        return permintaanPasien;
+    }
+
+    public void setPermintaanPasien(boolean permintaanPasien) {
+        this.permintaanPasien = permintaanPasien;
+    }
+
+    public BDRS getUnitBDRS() {
+        return unitBDRS;
+    }
 
     public String getNamaRumahSakit() {
         return namaRumahSakit;

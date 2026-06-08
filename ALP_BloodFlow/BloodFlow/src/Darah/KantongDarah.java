@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import Enum.golDarahEnum;
 import Enum.rhesusEnum;
+import Request.Request;
 import User.FasilitasDarah;
 
 public class KantongDarah {
@@ -14,10 +15,8 @@ public class KantongDarah {
     private LocalDate tanggalMasuk;
     private LocalDate tanggalKadaluarsa;
     private FasilitasDarah fasilitasDarah;
-
-    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
-        this.fasilitasDarah = fasilitasDarah;
-    }
+    private SampelDarah sampelDarah;
+    private Request request;
 
     public KantongDarah(String idDarah, String idPendonor, golDarahEnum jenisDarah, rhesusEnum rhesus,FasilitasDarah fasilitasDarah) {
         this.idDarah = idDarah;
@@ -26,7 +25,8 @@ public class KantongDarah {
         this.rhesus = rhesus;
         this.fasilitasDarah = fasilitasDarah;
         this.tanggalMasuk = LocalDate.now(); 
-        this.tanggalKadaluarsa = this.tanggalMasuk.plusDays(35); 
+        this.tanggalKadaluarsa = this.tanggalMasuk.plusDays(35);
+        sampelDarah = new SampelDarah(this);
     }
 
     public String getIdDarah() {
@@ -81,5 +81,24 @@ public class KantongDarah {
         return fasilitasDarah;
     }
 
-    
+        public SampelDarah getSampelDarah() {
+        return sampelDarah;
+    }
+
+    public void setSampelDarah(SampelDarah sampelDarah) {
+        this.sampelDarah = sampelDarah;
+    }
+
+    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
+        this.fasilitasDarah = fasilitasDarah;
+    }
+
+        public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
 }

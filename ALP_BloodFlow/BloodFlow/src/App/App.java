@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
@@ -39,12 +40,99 @@ public class App {
     public App() {
         onStartUp();
         while (true) {
+            cetakFaktur();
             menuAwal();
+            
 
             if (currentUser != null) {
                 tampilkanMenuUtama(this);
             }
         }
+    }
+
+    private void cetakFaktur(){
+        int jumlahKantong = 20;
+        
+        int biayaJasaAdmin      = 20000*jumlahKantong;
+        int biayaPemeliharaan   = 110120*jumlahKantong;
+        int biayaKantongDarah   = 93772*jumlahKantong; 
+        int biayaGolonganDarah  = 32479*jumlahKantong;
+        int biayaReagensia      = 46278*jumlahKantong;
+        
+        int biayaHepatitisB     = 33480*jumlahKantong;
+        int biayaHepatitisC     = 46114*jumlahKantong;
+        int biayaSyphilis       = 34162*jumlahKantong;
+        int biayaHiv            = 52743*jumlahKantong;
+        
+        int biayaPenunjang      = 20852*jumlahKantong;
+
+        int totalBiaya = biayaJasaAdmin + biayaPemeliharaan + 
+                         biayaKantongDarah + biayaGolonganDarah + biayaReagensia + 
+                         biayaHepatitisB + biayaHepatitisC + biayaSyphilis + 
+                         biayaHiv + biayaPenunjang;
+
+
+        String border = "+-----+----------------------------------------------------+--------------+";
+        
+        // Header Tabel
+        System.out.println(border);
+        System.out.printf("|  No.  |                      Keterangan                      |     Biaya      |%n");
+        System.out.println(border);
+        
+        // Baris I
+        System.out.printf("|   I   | %-52s | %12s |%n", "Darah","     Gratis    ");
+        System.out.println(border);
+        
+        // Baris II
+        System.out.printf("|   II  | %-52s | %12s |%n", "Jasa dan Administrasi", formatRupiah(biayaJasaAdmin));
+        System.out.println(border);
+        
+        // Baris III
+        System.out.printf("|  III  | %-52s | %12s |%n", "Pemeliharaan, Penyusutan Alat dan Pengembangan SDM", formatRupiah(biayaPemeliharaan));
+        System.out.println(border);
+        
+        // Baris IV
+        System.out.printf("|   IV  | %-52s |              |%n", "Kelompok Habis Pakai");
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "a. Kantong Darah", formatRupiah(biayaKantongDarah));
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "b. Golongan Darah,Rh dan HB", formatRupiah(biayaGolonganDarah));
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "c. Reagensia Pemeriksaan Uji Silang Serasi", formatRupiah(biayaReagensia));
+        System.out.println(border);
+        
+        // Baris V
+        System.out.printf("|   V   | %-52s |              |%n", "Screening *IMLTD dengan metode CLIA");
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "a. Hepatitis B (HBSAG)", formatRupiah(biayaHepatitisB));
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "b. Hepatitis C (HCV)", formatRupiah(biayaHepatitisC));
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "c. Syphilis (TPHA)", formatRupiah(biayaSyphilis));
+        System.out.println(border);
+        System.out.printf("|       | %-52s | %12s |%n", "d. HIV", formatRupiah(biayaHiv));
+        System.out.println(border);
+        
+        // Baris VI
+        System.out.printf("|   VI  | %-52s | %12s |%n", "Bahan Penunjang Lainnya", formatRupiah(biayaPenunjang));
+        System.out.println(border);
+        
+        // Baris Total
+        System.out.printf("|                            TOTAL                             | %12s |%n", formatRupiah(totalBiaya));
+        System.out.println(border);
+    }
+
+    // --- HELPER METHOD UNTUK FORMAT OTOMATIS KE RUPIAH ---
+    public static String formatRupiah(int nilai) {
+        if (nilai == 0) {
+            return "    Gratis    "; // Jika bernilai 0, otomatis mencetak tulisan Gratis
+        }
+        // Menggunakan Locale Indonesia agar format ribuan menggunakan titik (contoh: 20.000)
+        Locale lokasiIndo = Locale.forLanguageTag("id-ID");
+        String angkaFormat = String.format(lokasiIndo, "%,d", nilai);
+        
+        // Menggabungkan teks "Rp" dengan angka yang sudah diformat rapi
+        return "Rp " + String.format("%11s", angkaFormat);
     }
 
     // buat baca data dari txt dulu

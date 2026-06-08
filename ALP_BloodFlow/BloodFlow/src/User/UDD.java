@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class UDD extends FasilitasDarah {
-    private static LinkedList<KantongDarah> daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
 
     public UDD(App app,String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
@@ -117,7 +116,7 @@ public class UDD extends FasilitasDarah {
         KantongDarah darah = new KantongDarah(idDarah, pendonor.getIdPengguna(), pendonor.getGolDarah(),
                 pendonor.getRhesus(),this);
 
-        daftarKantongDarah.add(darah);
+        stokDarah.add(darah);
 
         RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk(), darah.getIdDarah(), this.getNama());
 

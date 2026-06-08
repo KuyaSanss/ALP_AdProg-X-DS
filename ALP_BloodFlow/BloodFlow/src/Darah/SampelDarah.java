@@ -7,16 +7,7 @@ import User.FasilitasDarah;
 public class SampelDarah {
 
     private static int sampelTerbuat=0;
-    
     private FasilitasDarah fasilitasDarah;
-    public FasilitasDarah getFasilitasDarah() {
-        return fasilitasDarah;
-    }
-
-    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
-        this.fasilitasDarah = fasilitasDarah;
-    }
-
     private String idSampel;
     private KantongDarah kantongDarah;
     private boolean dariPendonor;
@@ -89,4 +80,11 @@ public class SampelDarah {
         this.rhesus = rhesus;
     }
     
+    public FasilitasDarah getFasilitasDarah() {
+        return fasilitasDarah;
+    }
+
+    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
+        this.fasilitasDarah = fasilitasDarah;
+    }
 }

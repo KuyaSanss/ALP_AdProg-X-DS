@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import App.*;
+import Darah.SampelDarah;
 import Darah.TesDarah;
 import Model.MyMinHeap;
 import User.*;
@@ -17,6 +18,7 @@ public class Request implements Comparable<Request> {
     private String idPermintaan;
     private boolean isApproved,isDone;//todo unapprove
     private Transaksi transaksi;
+    private SampelDarah sampelDarah;
     // for form
     private FasilitasDarah fasilitasDarah;
     

@@ -21,11 +21,12 @@ public class CrossMatch extends TesDarah {
         f3 = ambilInput(app, "3. Apakah ada aglutinasi/hemolisis pada Fase III (Coombs/AHG)? [Y/T]: ");
         ac = ambilInput(app, "4. Apakah terjadi aglutinasi pada Auto-Control (AC)? [Y/T]: ");
 
-        kesimpulan();
+        cetakHasil();
         
     }
 
-    private void kesimpulan(){
+    @Override
+    public void cetakHasil(){
         System.out.println("\n================ HASIL VERIFIKASI ================");
 
         if (!f1 && !f2 && !f3 && !ac) {

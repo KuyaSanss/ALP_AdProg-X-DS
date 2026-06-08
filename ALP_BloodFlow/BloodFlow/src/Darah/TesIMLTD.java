@@ -19,7 +19,7 @@ public class TesIMLTD extends TesDarah{
     private double scoSifilis;
 
     public void formInput(App app) {
-
+        aman=true;
         System.out.println("=== FORM INPUT HASIL LAB CLIA (IMLTD) ===");
 
         System.out.print("Nama Alat CLIA yang Digunakan: ");
@@ -39,7 +39,7 @@ public class TesIMLTD extends TesDarah{
         System.out.print("4. S/CO Sifilis : ");
         this.scoSifilis = app.getSc().nextDouble();
 
-        cetakHasilVerifikasiForm();
+        cetakHasil();
     }
 
     private String interpretasiSco(double sco) {
@@ -49,7 +49,8 @@ public class TesIMLTD extends TesDarah{
         return "REAKTIF";
     }
 
-    public void cetakHasilVerifikasiForm() {
+    @Override
+    public void cetakHasil() {
         System.out.println("\n==================================================");
         System.out.println("          HASIL VERIFIKASI FORM DATA CLIA         ");
         System.out.println("==================================================");

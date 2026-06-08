@@ -15,15 +15,15 @@ import Request.Request;
 public abstract class FasilitasDarah extends User {
 
     //ArrayLists
-    private ArrayList<Request> listRequest = new ArrayList<>();
-    private LinkedList<Request> listApproveRequest = new LinkedList<>();
-    private ArrayList<Request> listRequestTuntas = new ArrayList<>();
-    private ArrayList<TesDarah> listTesDarah = new ArrayList<>();
-    private ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
+    protected ArrayList<Request> listRequest = new ArrayList<>();
+    protected LinkedList<Request> listApproveRequest = new LinkedList<>();
+    protected ArrayList<Request> listRequestTuntas = new ArrayList<>();
+    protected ArrayList<TesDarah> listTesDarah = new ArrayList<>();
+    protected ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
     //LinkedLists
-    private LinkedList<KantongDarah> stokDarah = new LinkedList<>() ;
+    protected LinkedList<KantongDarah> stokDarah = new LinkedList<>() ;
     //normal
-    private String alamat;
+    protected String alamat;
     
     public FasilitasDarah(App app, String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         super(app,username, password, noTelp, nama,provinsi,wilayahIndonesia);
@@ -90,7 +90,7 @@ public abstract class FasilitasDarah extends User {
         if(selected.getForm().getPermintaanPasien()){//true=pasien
             testSample(app, selected);
         }else{
-
+            pembayaran();
         }
         
     }
@@ -128,10 +128,14 @@ public abstract class FasilitasDarah extends User {
         for(TesDarah td:  listTesDarah){
             if (td instanceof TesIMLTD){
                 pernah =true;
-                System.out.println("Tes IMLTD sudah pernah dilakukan");
+                System.out.println("Tes IMLTD sudah pernah dilakukan\n");
+                td.cetakHasil();
                 break;
             }
         }
+        //tes
+        TesIMLTD tesIMLTD = new TesIMLTD(this, );
+
     }
 
     private void menuCrossMatch(){
