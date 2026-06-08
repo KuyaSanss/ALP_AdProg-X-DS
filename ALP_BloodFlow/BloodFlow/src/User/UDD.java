@@ -82,8 +82,7 @@ public class UDD extends FasilitasDarah {
 
             try {
 
-                LocalDate tanggalTerakhir = LocalDate.parse(
-                        pendonor.getTanggalTerakhirDonor());
+                LocalDate tanggalTerakhir = pendonor.getTanggalTerakhirDonor();
 
                 LocalDate bolehDonorLagi = tanggalTerakhir.plusDays(90);
 
@@ -122,7 +121,7 @@ public class UDD extends FasilitasDarah {
 
         daftarKantongDarah.add(darah);
 
-        RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk().toString(), darah.getIdDarah(), this.getNama());
+        RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk(), darah.getIdDarah(), this.getNama());
 
         pendonor.addRiwayatDonor(riwayat);
         pendonor.setTanggalTerakhirDonor(darah.getTanggalMasuk());

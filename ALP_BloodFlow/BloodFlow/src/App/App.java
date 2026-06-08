@@ -600,9 +600,10 @@ public class App {
         // dummy riwayat & notif
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-02-01", "KD006", "PMI Surabaya"));
-        pendonorBaru.setTanggalTerakhirDonor("2026-02-01");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor(LocalDate.parse("04-01-2026", formatter), "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor(LocalDate.parse("01-02-2026", formatter), "KD006", "PMI Surabaya"));
+        pendonorBaru.setTanggalTerakhirDonor(LocalDate.parse("02-01-2026", formatter));
         pendonorBaru.getInbox().add(new Notification("Selamat datang di BloodLink"));
 
         System.out.println("Registrasi berhasil, silakan login");

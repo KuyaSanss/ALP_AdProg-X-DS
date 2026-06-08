@@ -124,9 +124,7 @@ public class Notification implements Runnable {
                 "yyyy-MM-dd",
                 new Locale("id", "ID"));
 
-        LocalDate tanggalDonor = LocalDate.parse(
-                terakhir.getTanggalDonor(),
-                formatter);
+        LocalDate tanggalDonor = terakhir.getTanggalDonor();
 
         long selisihHari = ChronoUnit.DAYS.between(
                 tanggalDonor,
