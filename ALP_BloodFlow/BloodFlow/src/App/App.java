@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class App {
@@ -40,12 +41,14 @@ public class App {
         onStartUp();
         while (true) {
             menuAwal();
+            
 
             if (currentUser != null) {
                 tampilkanMenuUtama(this);
             }
         }
     }
+
 
     // buat baca data dari txt dulu
     private void onStartUp() {
@@ -66,7 +69,7 @@ public class App {
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
-        form.setUnitBDRS(bdrs);
+        form.setFasilitasDarah(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
 
@@ -125,7 +128,7 @@ public class App {
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
-        form.setUnitBDRS(bdrs);
+        form.setFasilitasDarah(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
 
@@ -185,7 +188,7 @@ public class App {
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
-        form.setUnitBDRS(bdrs);
+        form.setFasilitasDarah(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
 
@@ -245,7 +248,7 @@ public class App {
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
-        form.setUnitBDRS(bdrs);
+        form.setFasilitasDarah(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
 
@@ -305,7 +308,7 @@ public class App {
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
-        form.setUnitBDRS(bdrs);
+        form.setFasilitasDarah(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
 
@@ -366,7 +369,7 @@ public class App {
         form.setNamaRumahSakit(bdrs.getNama());
         form.setAlamat(bdrs.getAlamat());
         form.setTelepon(bdrs.getNoTelp());
-        form.setUnitBDRS(bdrs);
+        form.setFasilitasDarah(bdrs);
         form.setTanggalPermintaan(LocalDate.now());
         form.setJamPermintaan(LocalTime.now());
 
@@ -484,7 +487,6 @@ public class App {
 
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
 
-        String input;
         do {
             System.out.println();
             currentUser.tampilkanMenuUtama(this);
@@ -600,9 +602,10 @@ public class App {
         // dummy riwayat & notif
 
         Pendonor pendonorBaru = (Pendonor) dataUser.getDaftarUsernameUser().get(username);
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
-        pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-02-01", "KD006", "PMI Surabaya"));
-        pendonorBaru.setTanggalTerakhirDonor("2026-02-01");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor(LocalDate.parse("04-01-2026", formatter), "KD001", "PMI Surabaya"));
+        pendonorBaru.addRiwayatDonor(new RiwayatDonor(LocalDate.parse("01-02-2026", formatter), "KD006", "PMI Surabaya"));
+        pendonorBaru.setTanggalTerakhirDonor(LocalDate.parse("02-01-2026", formatter));
         pendonorBaru.getInbox().add(new Notification("Selamat datang di BloodLink"));
 
         System.out.println("Registrasi berhasil, silakan login");

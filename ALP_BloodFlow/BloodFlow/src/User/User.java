@@ -3,9 +3,6 @@ package User;
 import App.App;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
-import Model.Notification;
-
-import java.util.ArrayList;
 
 public abstract class User {
 

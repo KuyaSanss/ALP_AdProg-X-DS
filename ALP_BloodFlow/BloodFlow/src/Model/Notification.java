@@ -7,9 +7,7 @@ import Request.*;
 
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Locale;
 
 import Request.Form;
 
@@ -120,13 +118,7 @@ public class Notification implements Runnable {
                 .get(
                         pendonor.getRiwayatDonor().size() - 1);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
-                "yyyy-MM-dd",
-                new Locale("id", "ID"));
-
-        LocalDate tanggalDonor = LocalDate.parse(
-                terakhir.getTanggalDonor(),
-                formatter);
+        LocalDate tanggalDonor = terakhir.getTanggalDonor();
 
         long selisihHari = ChronoUnit.DAYS.between(
                 tanggalDonor,

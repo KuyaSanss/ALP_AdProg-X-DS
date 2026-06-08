@@ -9,7 +9,6 @@ import Model.Notification;
 import Model.RiwayatDonor;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
@@ -111,15 +110,9 @@ public class Pendonor extends User implements Comparable<Pendonor> {
         for (int i = 0; i < riwayatDonor.size(); i++) {
             RiwayatDonor riwayat = riwayatDonor.get(i);
             System.out.println("Riwayat Ke-" + (i + 1));
-            // Asumsikan riwayat.getTanggalDonor() masih mengembalikan String
-            String tglStr = riwayat.getTanggalDonor();
-            LocalDate tgl = null;
-            try {
-                tgl = LocalDate.parse(tglStr, FORMATTER);
-            } catch (DateTimeParseException e) {
-                System.out.println("Tanggal Donor : " + tglStr + " (format salah)");
-                continue;
-            }
+            LocalDate tgl = riwayat.getTanggalDonor();
+            System.out.println("Tanggal Donor : " + tgl.toString() + " (format salah)");
+
             System.out.println("Tanggal Donor : " + tgl.format(FORMATTER));
             System.out.println("ID Kantong Darah : " + riwayat.getIdKantongDarah());
             System.out.println("Lokasi Donor : " + riwayat.getLokasiDonor());
@@ -130,15 +123,9 @@ public class Pendonor extends User implements Comparable<Pendonor> {
         RiwayatDonor donorTerakhir = riwayatDonor.get(riwayatDonor.size() - 1);
         System.out.println();
         System.out.println("===== DONOR TERAKHIR =====");
-        String tglTerakhirStr = donorTerakhir.getTanggalDonor();
-        try {
-            LocalDate tglTerakhir = LocalDate.parse(tglTerakhirStr, FORMATTER);
-            this.tanggalTerakhirDonor = tglTerakhir;
-            System.out.println("Tanggal : " + tglTerakhir.format(FORMATTER));
-        } catch (DateTimeParseException e) {
-            System.out.println("Tanggal donor terakhir tidak valid: " + tglTerakhirStr);
-            this.tanggalTerakhirDonor = null;  // jaga agar field tetap valid
-        }
+        this.tanggalTerakhirDonor = donorTerakhir.getTanggalDonor();
+
+        System.out.println("Tanggal : " + tanggalTerakhirDonor);
 
         System.out.println("Total Donor : " + riwayatDonor.size() + " kali");
     }

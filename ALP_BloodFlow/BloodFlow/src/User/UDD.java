@@ -5,27 +5,23 @@ import Darah.KantongDarah;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
 import Model.RiwayatDonor;
-import Request.Request;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class UDD extends FasilitasDarah {
-    private static LinkedList<KantongDarah> daftarKantongDarah = new LinkedList<>();
     private static int counterIdDarah = 1;
 
-    public UDD(App app,String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(app,username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
+    public UDD(App app, String username, String password, String noTelp, String alamat, String nama, Provinsi provinsi,
+            WilayahIndonesia wilayahIndonesia) {
+        super(app, username, password, noTelp, nama, alamat, provinsi, wilayahIndonesia);
     }
-
 
     @Override
     public void tampilkanMenuUtama(App app) {
 
         System.out.println("=== MENU UTAMA ===");
-        System.out.println("1. Buat Cek Permintaan");
+        System.out.println("1. Menu Permintaan");
         System.out.println("2. Input Darah Masuk");
         System.out.println("0. Log Out");
         System.out.print("input: ");
@@ -36,7 +32,7 @@ public class UDD extends FasilitasDarah {
                 app.menuAwal();
                 break;
             case "1":
-                checkRequest(app);
+                menuPermintaan(app);
                 break;
             case "2":
                 inputDarahMasuk(app);
@@ -82,8 +78,7 @@ public class UDD extends FasilitasDarah {
 
             try {
 
-                LocalDate tanggalTerakhir = LocalDate.parse(
-                        pendonor.getTanggalTerakhirDonor());
+                LocalDate tanggalTerakhir = pendonor.getTanggalTerakhirDonor();
 
                 LocalDate bolehDonorLagi = tanggalTerakhir.plusDays(90);
 
@@ -118,11 +113,11 @@ public class UDD extends FasilitasDarah {
         String idDarah = String.valueOf(counterIdDarah++);
 
         KantongDarah darah = new KantongDarah(idDarah, pendonor.getIdPengguna(), pendonor.getGolDarah(),
-                pendonor.getRhesus(),this);
+                pendonor.getRhesus(), this);
 
-        daftarKantongDarah.add(darah);
+        stokDarah.add(darah);
 
-        RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk().toString(), darah.getIdDarah(), this.getNama());
+        RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk(), darah.getIdDarah(), this.getNama());
 
         pendonor.addRiwayatDonor(riwayat);
         pendonor.setTanggalTerakhirDonor(darah.getTanggalMasuk());
@@ -132,7 +127,5 @@ public class UDD extends FasilitasDarah {
 
         System.out.println("Kadaluarsa: " + darah.getTanggalKadaluarsa());
     }
-
-
 
 }

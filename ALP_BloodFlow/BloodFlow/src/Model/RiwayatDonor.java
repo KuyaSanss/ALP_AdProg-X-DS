@@ -1,13 +1,15 @@
 package Model;
 
+import java.time.LocalDate;
+
 public class RiwayatDonor {
 
-    private String tanggalDonor;
+    private LocalDate tanggalDonor;
     private String idKantongDarah;
     private String lokasiDonor;
 
     public RiwayatDonor(
-            String tanggalDonor,
+            LocalDate tanggalDonor,
             String idKantongDarah,
             String lokasiDonor
     ) {
@@ -17,11 +19,11 @@ public class RiwayatDonor {
         this.lokasiDonor = lokasiDonor;
     }
 
-    public String getTanggalDonor() {
+    public LocalDate getTanggalDonor() {
         return tanggalDonor;
     }
 
-    public void setTanggalDonor(String tanggalDonor) {
+    public void setTanggalDonor(LocalDate tanggalDonor) {
         this.tanggalDonor = tanggalDonor;
     }
 

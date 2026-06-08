@@ -1,19 +1,19 @@
 package Darah;
-
-import java.util.Scanner;
-
 import App.App;
 import User.FasilitasDarah;
 
 public class CrossMatch extends TesDarah {
 
     private boolean f1, f2, f3, ac,aman;
+    private SampelDarah sampelDarahPeminta;
 
-    public CrossMatch(FasilitasDarah fasilitasDarah, SampelDarah sampelDarahPendonor) {
+    public CrossMatch(FasilitasDarah fasilitasDarah, SampelDarah sampelDarahPendonor,SampelDarah sampelDarahPeminta) {
         super(fasilitasDarah, sampelDarahPendonor);
+        this.sampelDarahPeminta=sampelDarahPeminta;
     }
 
-    public void formCrossMatch(App app) {
+    @Override
+    public void formInput(App app) {
         System.out.println("==================================================");
         System.out.println("  SISTEM VERIFIKASI HASIL CROSS MATCHING DARAH    ");
         System.out.println("==================================================");
@@ -24,12 +24,15 @@ public class CrossMatch extends TesDarah {
         f3 = ambilInput(app, "3. Apakah ada aglutinasi/hemolisis pada Fase III (Coombs/AHG)? [Y/T]: ");
         ac = ambilInput(app, "4. Apakah terjadi aglutinasi pada Auto-Control (AC)? [Y/T]: ");
 
-        kesimpulan();
+        cetakHasil();
         
     }
 
-    private void kesimpulan(){
+    @Override
+    public void cetakHasil(){
         System.out.println("\n================ HASIL VERIFIKASI ================");
+        System.out.println("ID Sampel Darah Peminta: "+sampelDarahPeminta.getIdSampel());
+        System.out.println("ID Sampel Darah kantong Darah: "+sampelDarahPendonor.getIdSampel());
 
         if (!f1 && !f2 && !f3 && !ac) {
             System.out.println("KESIMPULAN : KOMPATIBEL (COCOK)");
@@ -98,6 +101,14 @@ public class CrossMatch extends TesDarah {
 
     public void setAman(boolean aman) {
         this.aman = aman;
+    }
+
+    public SampelDarah getSampelDarahPeminta() {
+        return sampelDarahPeminta;
+    }
+
+    public void setSampelDarahPeminta(SampelDarah sampelDarahPeminta) {
+        this.sampelDarahPeminta = sampelDarahPeminta;
     }
 
 }

@@ -13,26 +13,14 @@ import User.*;
 public class Form implements Comparable<Form> {
     // general
     private boolean permintaanPasien;
-    public boolean getPermintaanPasien() {
-        return permintaanPasien;
-    }
-
-    public void setPermintaanPasien(boolean permintaanPasien) {
-        this.permintaanPasien = permintaanPasien;
-    }
-
-    public BDRS getUnitBDRS() {
-        return unitBDRS;
-    }
 
     // form
     private String namaRumahSakit;
     private String alamat;
     private String telepon;
-    private BDRS unitBDRS;
     private LocalDate tanggalPermintaan;
     private LocalTime jamPermintaan;
-
+    private FasilitasDarah fasilitasDarah;
     private String namaPasien;
     private golDarahEnum golonganDarah;
     private rhesusEnum rhesus;
@@ -198,7 +186,7 @@ public class Form implements Comparable<Form> {
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
         System.out.println("Alamat                  : " + getAlamat());
         System.out.println("Telepon                 : " + getTelepon());
-        System.out.println("Unit Fasilitas Darah    : " + getfasilitasDarah().getNama());
+        System.out.println("Unit Fasilitas Darah    : " + getFasilitasDarah().getNama());
         System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
         System.out.println("Jam Permintaan          : " + getJamPermintaan());
 
@@ -271,7 +259,7 @@ public class Form implements Comparable<Form> {
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
         System.out.println("Alamat                  : " + getAlamat());
         System.out.println("Telepon                 : " + getTelepon());
-        System.out.println("Unit Fasilitas Darah    : " + getfasilitasDarah().getNama());
+        System.out.println("Unit Fasilitas Darah    : " + getFasilitasDarah().getNama());
         System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
         System.out.println("Jam Permintaan          : " + getJamPermintaan());
 
@@ -981,6 +969,23 @@ public class Form implements Comparable<Form> {
 
     // #region Getter Setter
 
+    public FasilitasDarah getFasilitasDarah() {
+        return fasilitasDarah;
+    }
+
+    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
+        this.fasilitasDarah = fasilitasDarah;
+    }
+
+    public boolean getPermintaanPasien() {
+        return permintaanPasien;
+    }
+
+    public void setPermintaanPasien(boolean permintaanPasien) {
+        this.permintaanPasien = permintaanPasien;
+    }
+
+
     public String getNamaRumahSakit() {
         return namaRumahSakit;
     }
@@ -1003,14 +1008,6 @@ public class Form implements Comparable<Form> {
 
     public void setTelepon(String telepon) {
         this.telepon = telepon;
-    }
-
-    public BDRS getfasilitasDarah() {
-        return unitBDRS;
-    }
-
-    public void setUnitBDRS(BDRS unitBDRS) {
-        this.unitBDRS = unitBDRS;
     }
 
     public LocalDate getTanggalPermintaan() {

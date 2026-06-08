@@ -2,6 +2,8 @@ package Darah;
 
 
 import java.time.LocalDateTime;
+
+import App.App;
 import User.FasilitasDarah;
 
 public abstract class TesDarah {
@@ -15,7 +17,10 @@ public abstract class TesDarah {
         this.waktuTes = LocalDateTime.now();
         this.sampelDarahPendonor = sampelDarahPendonor;
         fasilitasDarah.getListTesDarah().add(this);
-}
+    }
 
+    abstract public void cetakHasil();
+
+    abstract public void formInput(App app);
 
 }
