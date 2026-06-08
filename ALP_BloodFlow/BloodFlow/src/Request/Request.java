@@ -18,7 +18,8 @@ public class Request implements Comparable<Request> {
     private String idPermintaan;
     private boolean isApproved,isDone;//todo unapprove
     private Transaksi transaksi;
-    private SampelDarah sampelDarah;
+    private SampelDarah sampelDarahPeminta;
+
     // for form
     private FasilitasDarah fasilitasDarah;
     
@@ -32,6 +33,7 @@ public class Request implements Comparable<Request> {
     public void menuRequest(App app){
         form = new Form(fasilitasDarah);
         form.menuForm(app);
+        sampelDarahPeminta = new SampelDarah(form.getGolonganDarah(),form.getRhesus(),form.getFasilitasDarah());
     }
 
     public void approveRequest(App app,FasilitasDarah fasilitasDarah) {
@@ -193,6 +195,62 @@ public static Request displayRequests(App app) {
 
     public void setForm(Form form) {
         this.form = form;
+    }
+
+    public static long getRequestTerbuat() {
+        return requestTerbuat;
+    }
+
+    public static void setRequestTerbuat(long requestTerbuat) {
+        Request.requestTerbuat = requestTerbuat;
+    }
+
+    public ArrayList<TesDarah> getListTesDarah() {
+        return listTesDarah;
+    }
+
+    public void setListTesDarah(ArrayList<TesDarah> listTesDarah) {
+        this.listTesDarah = listTesDarah;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public Transaksi getTransaksi() {
+        return transaksi;
+    }
+
+    public void setTransaksi(Transaksi transaksi) {
+        this.transaksi = transaksi;
+    }
+
+    public SampelDarah getSampelDarahPeminta() {
+        return sampelDarahPeminta;
+    }
+
+    public void setSampelDarahPeminta(SampelDarah sampelDarahPeminta) {
+        this.sampelDarahPeminta = sampelDarahPeminta;
+    }
+
+    public FasilitasDarah getFasilitasDarah() {
+        return fasilitasDarah;
+    }
+
+    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
+        this.fasilitasDarah = fasilitasDarah;
     }
 
     // #endregion

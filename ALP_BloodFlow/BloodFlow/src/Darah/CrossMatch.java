@@ -5,9 +5,11 @@ import User.FasilitasDarah;
 public class CrossMatch extends TesDarah {
 
     private boolean f1, f2, f3, ac,aman;
+    private SampelDarah sampelDarahPeminta;
 
-    public CrossMatch(FasilitasDarah fasilitasDarah, SampelDarah sampelDarahPendonor) {
+    public CrossMatch(FasilitasDarah fasilitasDarah, SampelDarah sampelDarahPendonor,SampelDarah sampelDarahPeminta) {
         super(fasilitasDarah, sampelDarahPendonor);
+        this.sampelDarahPeminta=sampelDarahPeminta;
     }
 
     @Override
@@ -29,6 +31,8 @@ public class CrossMatch extends TesDarah {
     @Override
     public void cetakHasil(){
         System.out.println("\n================ HASIL VERIFIKASI ================");
+        System.out.println("ID Sampel Darah Peminta: "+sampelDarahPeminta.getIdSampel());
+        System.out.println("ID Sampel Darah kantong Darah: "+sampelDarahPendonor.getIdSampel());
 
         if (!f1 && !f2 && !f3 && !ac) {
             System.out.println("KESIMPULAN : KOMPATIBEL (COCOK)");
@@ -97,6 +101,14 @@ public class CrossMatch extends TesDarah {
 
     public void setAman(boolean aman) {
         this.aman = aman;
+    }
+
+    public SampelDarah getSampelDarahPeminta() {
+        return sampelDarahPeminta;
+    }
+
+    public void setSampelDarahPeminta(SampelDarah sampelDarahPeminta) {
+        this.sampelDarahPeminta = sampelDarahPeminta;
     }
 
 }

@@ -22,7 +22,7 @@ public class BDRS extends FasilitasDarah {
         System.out.println();
         switch (input) {
             case "1":
-                super.makeRequest(app);
+                makeRequest(app);
                 break;
             case "2":
                 app.menuAwal();

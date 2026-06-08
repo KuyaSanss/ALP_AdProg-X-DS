@@ -144,16 +144,45 @@ public abstract class FasilitasDarah extends User {
 
     private void menuCrossMatch(App app,Request request){
         KantongDarah kantongDarah = cekStokDarah(app);
-        CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah());
+        CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah(),request.getSampelDarahPeminta());
         crossMatch.formInput(app);
         listTesDarah.add(crossMatch);
         System.out.println("Crossmatch berhasil ditambahkan");
         //todo kalau gagal ke reset
     }
 
-    private void pembayaran(App app,Request request){
+    private void checkPembayaran(App app,Request request){
+
         Transaksi transaksi = new Transaksi(request);
-        
+
+    }
+
+    private void pembayaran(App app, Request request){
+        String input;
+        System.out.println("""
+                === Pembayaran ===
+                1. Check Pembayaran Permintaan
+                2. 
+                3. Exit
+                """);
+
+        System.out.print("Input: ");
+        input = app.getSc().next() + app.getSc().nextLine();
+        switch (input) {
+            case "1":
+                menuTesIMLTD(app,request);
+                break;
+            case "2":
+                menuCrossMatch(app,request);
+                break;
+            case "3":
+                app.getCurrentUser().tampilkanMenuUtama(app);
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+                testSample(app, request);
+        }
+
     }
 
     private void pengiriman(){

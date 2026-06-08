@@ -7,7 +7,6 @@ import Enum.WilayahIndonesia;
 import Model.RiwayatDonor;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class UDD extends FasilitasDarah {
@@ -22,7 +21,7 @@ public class UDD extends FasilitasDarah {
     public void tampilkanMenuUtama(App app) {
 
         System.out.println("=== MENU UTAMA ===");
-        System.out.println("1. Buat Cek Permintaan");
+        System.out.println("1. Cek Permintaan");
         System.out.println("2. Input Darah Masuk");
         System.out.println("0. Log Out");
         System.out.print("input: ");
