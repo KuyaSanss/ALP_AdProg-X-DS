@@ -57,10 +57,7 @@ public class Transaksi {
         
         int biayaPenunjang      = 20852*jumlahKantong;
 
-        int totalBiaya = biayaJasaAdmin + biayaPemeliharaan + 
-                         biayaKantongDarah + biayaGolonganDarah + biayaReagensia + 
-                         biayaHepatitisB + biayaHepatitisC + biayaSyphilis + 
-                         biayaHiv + biayaPenunjang;
+        hitungTotalBiaya();
 
         System.out.println("ID Faktur: "+idFaktur);
         String border = "+-----+----------------------------------------------------+--------------+";
@@ -109,7 +106,7 @@ public class Transaksi {
         System.out.println(border);
         
         // Baris Total
-        System.out.printf("|                            TOTAL                             | %12s |%n", formatRupiah(totalBiaya));
+        System.out.printf("|                            TOTAL                             | %12s |%n", formatRupiah((int)totalBiaya));
         System.out.println(border);
         System.out.println("Jumlah Kantong darah: "+jumlahKantong);
     }
