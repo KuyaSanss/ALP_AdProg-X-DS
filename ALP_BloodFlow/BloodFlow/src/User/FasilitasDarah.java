@@ -58,6 +58,7 @@ public abstract class FasilitasDarah extends User {
         System.out.println("3. Cek Permintaan Luar yg diApprove");
         System.out.println("4. Buat Permintaan");
         System.out.println("5. Cek Stok darah pribadi");
+        System.out.println("6. Cek Stok darah fasilitas kesehatan" );
         System.out.println("0. Kembali ke Menu");
         String input;
         while(true){
