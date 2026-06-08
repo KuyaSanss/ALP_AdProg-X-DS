@@ -5,8 +5,6 @@ import Darah.KantongDarah;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
 import Model.RiwayatDonor;
-import Request.Request;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;

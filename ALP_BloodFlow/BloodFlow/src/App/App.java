@@ -484,7 +484,6 @@ public class App {
 
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
 
-        String input;
         do {
             System.out.println();
             currentUser.tampilkanMenuUtama(this);

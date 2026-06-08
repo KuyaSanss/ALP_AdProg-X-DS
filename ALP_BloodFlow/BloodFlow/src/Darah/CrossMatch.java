@@ -1,7 +1,4 @@
 package Darah;
-
-import java.util.Scanner;
-
 import App.App;
 import User.FasilitasDarah;
 
