@@ -12,16 +12,16 @@ import java.util.Scanner;
 public class UDD extends FasilitasDarah {
     private static int counterIdDarah = 1;
 
-    public UDD(App app,String username, String password, String noTelp, String alamat, String nama,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(app,username, password, noTelp, nama,alamat,provinsi,wilayahIndonesia);
+    public UDD(App app, String username, String password, String noTelp, String alamat, String nama, Provinsi provinsi,
+            WilayahIndonesia wilayahIndonesia) {
+        super(app, username, password, noTelp, nama, alamat, provinsi, wilayahIndonesia);
     }
-
 
     @Override
     public void tampilkanMenuUtama(App app) {
 
         System.out.println("=== MENU UTAMA ===");
-        System.out.println("1. Cek Permintaan");
+        System.out.println("1. Menu Permintaan");
         System.out.println("2. Input Darah Masuk");
         System.out.println("0. Log Out");
         System.out.print("input: ");
@@ -32,7 +32,7 @@ public class UDD extends FasilitasDarah {
                 app.menuAwal();
                 break;
             case "1":
-                checkRequest(app);
+                menuPermintaan(app);
                 break;
             case "2":
                 inputDarahMasuk(app);
@@ -113,7 +113,7 @@ public class UDD extends FasilitasDarah {
         String idDarah = String.valueOf(counterIdDarah++);
 
         KantongDarah darah = new KantongDarah(idDarah, pendonor.getIdPengguna(), pendonor.getGolDarah(),
-                pendonor.getRhesus(),this);
+                pendonor.getRhesus(), this);
 
         stokDarah.add(darah);
 
@@ -127,7 +127,5 @@ public class UDD extends FasilitasDarah {
 
         System.out.println("Kadaluarsa: " + darah.getTanggalKadaluarsa());
     }
-
-
 
 }

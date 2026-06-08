@@ -17,41 +17,78 @@ import Request.Transaksi;
 
 public abstract class FasilitasDarah extends User {
 
-    //ArrayLists
+    // ArrayLists
     protected ArrayList<Request> listRequestTuntas = new ArrayList<>();
     protected ArrayList<TesDarah> listTesDarah = new ArrayList<>();
     protected ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
     protected ArrayList<Transaksi> listTransaksiTuntas = new ArrayList<>();
     protected ArrayList<Request> listApproveRequestTuntas = new ArrayList<>();
-    //LinkedLists
+    // LinkedLists
     protected LinkedList<Request> listRequest = new LinkedList<>();
     protected LinkedList<KantongDarah> stokDarah = new LinkedList<>();
-    protected LinkedList<Request> listApproveRequest = new LinkedList<>();//approve it yang buat fasilitas darah lain
+    protected LinkedList<Request> listApproveRequest = new LinkedList<>();// approve it yang buat fasilitas darah lain
     protected LinkedList<Transaksi> listTransaksi = new LinkedList<>();
-    //normal
+    // normal
     protected String alamat;
 
-    public FasilitasDarah(App app, String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
-        super(app,username, password, noTelp, nama,provinsi,wilayahIndonesia);
-        this.alamat=alamat;
+    public FasilitasDarah(App app, String username, String password, String noTelp, String nama, String alamat,
+            Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
+        super(app, username, password, noTelp, nama, provinsi, wilayahIndonesia);
+        this.alamat = alamat;
     }
 
-    //#region protected
 
-    protected void makeRequest(App app){
+
+    protected void makeRequest(App app) {
         Request request = new Request(this);
         listRequest.add(request);
-        request.menuRequest(app);
+        request.buatRequest(app);
     }
 
-    public void checkRequest(App app) {
+    public void checkLiveRequest(App app) {
         Request request = Request.displayRequests(app);
-        request.approveRequest(app,this);
+        request.approveRequest(app, this);
         tampilkanMenuUtama(app);
     }
 
-    private void menuRequest(App app){
-        //todo
+    protected void menuPermintaan(App app){
+        System.out.println("=== Menu Permintaan ===");
+        System.out.println("1. Cek Permintaan Global");
+        System.out.println("2. Cek Permintaan Pribadi");
+        System.out.println("3. Cek Permintaan Luar yg diApprove");
+        System.out.println("4. Buat Permintaan");
+        System.out.println("5. Cek Stok darah pribadi");
+        System.out.println("0. Kembali ke Menu");
+        String input;
+        while(true){
+            System.out.print("Input: ");
+            input=app.getSc().next()+app.getSc().nextLine();
+
+            switch (input) {
+                case "0":
+                    tampilkanMenuUtama(app);
+                    break;
+                case "1":
+                    checkLiveRequest(app);
+                    break;
+                case "2":
+                    // todo
+                    break;
+                case "3":
+                    //todo
+                    break;
+                case "4":
+                    makeRequest(app);
+                    break;
+                case "5":
+                    cekStokDarah(app);
+                    break;
+                    default:
+                        System.out.println("Input tidak sesuai!");
+                    break;
+            }
+        }
+
     }
 
     protected void checkApprovedRequest(App app) {
@@ -59,11 +96,11 @@ public abstract class FasilitasDarah extends User {
 
         if (listApproveRequest.isEmpty()) {
             System.out.println("Belum ada request yang diApprove");
-            return;  // or continue to menu, as needed
+            return; // or continue to menu, as needed
         }
 
         int size = listApproveRequest.size();
-        int pilihan=-1;
+        int pilihan = -1;
         while (true) {
             System.out.print("Pilih (1-" + size + "): ");
             String input = app.getSc().nextLine().trim();
@@ -93,19 +130,19 @@ public abstract class FasilitasDarah extends User {
                 continue;
             }
 
-            break; 
+            break;
         }
 
         Request selected = listApproveRequest.get(pilihan - 1);
-        if(selected.getForm().getPermintaanPasien()){//true=pasien
+        if (selected.getForm().getPermintaanPasien()) {// true=pasien
             testSample(app, selected);
-        }else{
-            pembayaran(app,selected);
+        } else {
+            pembayaran(app, selected);
         }
-        
+
     }
 
-    private void testSample(App app, Request request){
+    private void testSample(App app, Request request) {
         String input;
         System.out.println("""
                 === Test Sample ===
@@ -118,10 +155,10 @@ public abstract class FasilitasDarah extends User {
         input = app.getSc().next() + app.getSc().nextLine();
         switch (input) {
             case "1":
-                menuTesIMLTD(app,request);
+                menuTesIMLTD(app, request);
                 break;
             case "2":
-                menuCrossMatch(app,request);
+                menuCrossMatch(app, request);
                 break;
             case "3":
                 app.getCurrentUser().tampilkanMenuUtama(app);
@@ -133,36 +170,36 @@ public abstract class FasilitasDarah extends User {
 
     }
 
-    private void menuTesIMLTD(App app,Request request){
+    private void menuTesIMLTD(App app, Request request) {
         KantongDarah kantongDarah = cekStokDarah(app);
         TesIMLTD tesIMLTD = new TesIMLTD(this, kantongDarah.getSampelDarah());
         tesIMLTD.formInput(app);
         listTesDarah.add(tesIMLTD);
         System.out.println("Tes IMLTD berhasil ditambahkan");
-        //todo kalau gagal ke reset
+        // todo kalau gagal ke reset
     }
 
-    private void menuCrossMatch(App app,Request request){
+    private void menuCrossMatch(App app, Request request) {
         KantongDarah kantongDarah = cekStokDarah(app);
-        CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah(),request.getSampelDarahPeminta());
+        CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah(), request.getSampelDarahPeminta());
         crossMatch.formInput(app);
         listTesDarah.add(crossMatch);
         System.out.println("Crossmatch berhasil ditambahkan");
-        //todo kalau gagal ke reset
+        // todo kalau gagal ke reset
     }
 
-    private void checkPembayaran(App app,Request request){
+    private void checkPembayaran(App app, Request request) {
 
         Transaksi transaksi = new Transaksi(request);
 
     }
 
-    private void pembayaran(App app, Request request){
+    private void pembayaran(App app, Request request) {
         String input;
         System.out.println("""
                 === Pembayaran ===
                 1. Check Pembayaran Permintaan
-                2. 
+                2.
                 3. Exit
                 """);
 
@@ -170,10 +207,10 @@ public abstract class FasilitasDarah extends User {
         input = app.getSc().next() + app.getSc().nextLine();
         switch (input) {
             case "1":
-                menuTesIMLTD(app,request);
+                menuTesIMLTD(app, request);
                 break;
             case "2":
-                menuCrossMatch(app,request);
+                menuCrossMatch(app, request);
                 break;
             case "3":
                 app.getCurrentUser().tampilkanMenuUtama(app);
@@ -185,15 +222,15 @@ public abstract class FasilitasDarah extends User {
 
     }
 
-    private void pengiriman(){
+    private void pengiriman() {
 
     }
 
-    private void tesGagal(){
+    private void tesGagal() {
 
     }
 
-    public void tampilkanApprovedRequests(){
+    public void tampilkanApprovedRequests() {
         System.out.println("=== Approved Requests ===");
         for (int i = 0; i < listApproveRequest.size(); i++) {
             System.out.println((i + 1) + " =====================");
@@ -202,7 +239,9 @@ public abstract class FasilitasDarah extends User {
         }
     }
 
-    protected KantongDarah cekStokDarah(App app){
+    //#region cekStokDarah
+
+    protected KantongDarah cekStokDarah(App app) {
 
         System.out.println("=== Stok Darah ===");
         System.out.println();
@@ -242,8 +281,8 @@ public abstract class FasilitasDarah extends User {
         System.out.println("List Kantong Darah O-");
         tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.O, rhesusEnum.NEGATIVE);
         System.out.println("-----------------------------------");
-        KantongDarah output=null;
-        while(true){
+        KantongDarah output = null;
+        while (true) {
             System.out.print("Input ID Kantong Darah (masukan \"exit\" untuk exit): ");
             String input = app.getSc().next() + app.getSc().nextLine();
 
@@ -252,17 +291,18 @@ public abstract class FasilitasDarah extends User {
                 System.out.println("[Error] ID tidak boleh kosong! Silakan coba lagi.\n");
                 continue;
             }
-            
-            // 2. Validasi fitur EXIT menggunakanequalsIgnoreCase agar bisa "exit" atau "EXIT"
+
+            // 2. Validasi fitur EXIT menggunakanequalsIgnoreCase agar bisa "exit" atau
+            // "EXIT"
             if (input.trim().equalsIgnoreCase("exit")) {
                 System.out.println("Keluar dari pengecekan stok darah...");
                 app.getCurrentUser().tampilkanMenuUtama(app);
                 break;
             }
-            
+
             // 3. Cari kantong darah berdasarkan ID
             output = apakahKantongDarahAda(input);
-            
+
             // 4. Validasi jika data tidak ditemukan
             if (output == null) {
                 System.out.println("[Error] ID Kantong Darah '" + input + "' tidak ditemukan! Silakan coba lagi.\n");
@@ -275,32 +315,33 @@ public abstract class FasilitasDarah extends User {
         return output;
     }
 
-    private KantongDarah apakahKantongDarahAda(String idKantong){
-        for(KantongDarah d:stokDarah){
-            if(d.getIdDarah().equalsIgnoreCase(idKantong))return d;
+    private KantongDarah apakahKantongDarahAda(String idKantong) {
+        for (KantongDarah d : stokDarah) {
+            if (d.getIdDarah().equalsIgnoreCase(idKantong))
+                return d;
         }
         return null;
     }
 
-    private int hitungStokDarah(golDarahEnum golDarah,rhesusEnum rhesus){
-        int count=0;
-        for (KantongDarah d:stokDarah){
-            if(d.getJenisDarah()==golDarah && d.getRhesus()==rhesus && d.getRequest()==null){
+    private int hitungStokDarah(golDarahEnum golDarah, rhesusEnum rhesus) {
+        int count = 0;
+        for (KantongDarah d : stokDarah) {
+            if (d.getJenisDarah() == golDarah && d.getRhesus() == rhesus && d.getRequest() == null) {
                 count++;
             }
         }
         return count;
     }
 
-    private void tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum golDarah,rhesusEnum rhesus){
-        if(hitungStokDarah(golDarah, rhesus)==0){
+    private void tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum golDarah, rhesusEnum rhesus) {
+        if (hitungStokDarah(golDarah, rhesus) == 0) {
             System.out.println("Tidak ada Kantong Darah");
             return;
         }
-        int i=0;
-        for(KantongDarah d: stokDarah){
-            if(d.getJenisDarah()==golDarah && d.getRhesus()==rhesus && d.getRequest()==null){
-                System.out.println(i+"-------");
+        int i = 0;
+        for (KantongDarah d : stokDarah) {
+            if (d.getJenisDarah() == golDarah && d.getRhesus() == rhesus && d.getRequest() == null) {
+                System.out.println(i + "-------");
                 d.tampilkanDataKantongDarah();
             }
         }
@@ -308,7 +349,7 @@ public abstract class FasilitasDarah extends User {
 
     //#endregion
 
-    //#region Getter Setter
+    // #region Getter Setter
 
     public ArrayList<Request> getListRequestTuntas() {
         return listRequestTuntas;
@@ -390,6 +431,6 @@ public abstract class FasilitasDarah extends User {
         this.alamat = alamat;
     }
 
-    //#endregion
+    // #endregion
 
 }
