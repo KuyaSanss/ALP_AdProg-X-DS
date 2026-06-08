@@ -126,7 +126,7 @@ public class Transaksi {
         statusTransaksi=true;
     }
 
-    //#region
+    //#region getter setter
 
     public static double getBiayakantongbiasa() {
         return biayaKantongBiasa;

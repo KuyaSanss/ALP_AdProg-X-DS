@@ -29,6 +29,24 @@ public class KantongDarah {
         sampelDarah = new SampelDarah(this);
     }
 
+    public void tampilkanDataKantongDarah() {
+        System.out.println("============== DETAIL KANTONG DARAH ==============");
+        System.out.println("ID Kantong Darah   : " + idDarah);
+        System.out.println("ID Pendonor        : " + idPendonor);
+        System.out.println("Golongan Darah/Rh  : " + jenisDarah + " (" + rhesus + ")");
+        System.out.println("Tanggal Masuk      : " + tanggalMasuk);
+        System.out.println("Tanggal Kadaluarsa : " + tanggalKadaluarsa);
+                
+        System.out.println("Fasilitas Darah    : "+fasilitasDarah.getNama());
+
+        if (request != null) {
+            System.out.println("Status Request     : Terikat pada Request");
+        } else {
+            System.out.println("Status Request     : Tersedia di Stok");
+        }
+        System.out.println("--------------------------------------------------");
+    }
+
     public String getIdDarah() {
         return idDarah;
     }

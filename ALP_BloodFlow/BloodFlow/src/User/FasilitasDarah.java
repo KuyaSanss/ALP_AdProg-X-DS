@@ -10,21 +10,27 @@ import Darah.TesDarah;
 import Darah.TesIMLTD;
 import Enum.Provinsi;
 import Enum.WilayahIndonesia;
+import Enum.golDarahEnum;
+import Enum.rhesusEnum;
 import Request.Request;
+import Request.Transaksi;
 
 public abstract class FasilitasDarah extends User {
 
     //ArrayLists
-    protected ArrayList<Request> listRequest = new ArrayList<>();
-    protected LinkedList<Request> listApproveRequest = new LinkedList<>();
     protected ArrayList<Request> listRequestTuntas = new ArrayList<>();
     protected ArrayList<TesDarah> listTesDarah = new ArrayList<>();
     protected ArrayList<CrossMatch> listCrossMatch = new ArrayList<>();
+    protected ArrayList<Transaksi> listTransaksiTuntas = new ArrayList<>();
+    protected ArrayList<Request> listApproveRequestTuntas = new ArrayList<>();
     //LinkedLists
-    protected LinkedList<KantongDarah> stokDarah = new LinkedList<>() ;
+    protected LinkedList<Request> listRequest = new LinkedList<>();
+    protected LinkedList<KantongDarah> stokDarah = new LinkedList<>();
+    protected LinkedList<Request> listApproveRequest = new LinkedList<>();//approve it yang buat fasilitas darah lain
+    protected LinkedList<Transaksi> listTransaksi = new LinkedList<>();
     //normal
     protected String alamat;
-    
+
     public FasilitasDarah(App app, String username, String password, String noTelp, String nama, String alamat,Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         super(app,username, password, noTelp, nama,provinsi,wilayahIndonesia);
         this.alamat=alamat;
@@ -108,10 +114,10 @@ public abstract class FasilitasDarah extends User {
         input = app.getSc().next() + app.getSc().nextLine();
         switch (input) {
             case "1":
-                menuTesIMLTD();
+                menuTesIMLTD(app,request);
                 break;
             case "2":
-                menuCrossMatch();
+                menuCrossMatch(app,request);
                 break;
             case "3":
                 app.getCurrentUser().tampilkanMenuUtama(app);
@@ -123,7 +129,7 @@ public abstract class FasilitasDarah extends User {
 
     }
 
-    private void menuTesIMLTD(){
+    private void menuTesIMLTD(App app,Request request){
         boolean pernah=false;
         for(TesDarah td:  listTesDarah){
             if (td instanceof TesIMLTD){
@@ -135,15 +141,19 @@ public abstract class FasilitasDarah extends User {
         }
         //tes
         TesIMLTD tesIMLTD = new TesIMLTD(this, );
-
+        //todo
     }
 
-    private void menuCrossMatch(){
-
+    private void menuCrossMatch(App app,Request request){
+        //todo
     }
 
-    private void pembayaran(){
-        
+    private void pembayaran(App app,Request request){
+        Transaksi transaksi = new Transaksi(request);
+    }
+
+    private void pengiriman(){
+
     }
 
     public void tampilkanApprovedRequests(){
@@ -155,31 +165,120 @@ public abstract class FasilitasDarah extends User {
         }
     }
 
+    protected KantongDarah cekStokDarah(App app){
+
+        System.out.println("=== Stok Darah ===");
+        System.out.println();
+        System.out.println("Jenis darah |  Jumlah Kantong");
+        System.out.println("-----------------------------------");
+        System.out.println("A+          |   " + hitungStokDarah(golDarahEnum.A, rhesusEnum.POSITIVE));
+        System.out.println("A-          |   " + hitungStokDarah(golDarahEnum.A, rhesusEnum.NEGATIVE));
+        System.out.println("B+          |   " + hitungStokDarah(golDarahEnum.B, rhesusEnum.POSITIVE));
+        System.out.println("B-          |   " + hitungStokDarah(golDarahEnum.B, rhesusEnum.NEGATIVE));
+        System.out.println("AB+         |   " + hitungStokDarah(golDarahEnum.AB, rhesusEnum.POSITIVE));
+        System.out.println("AB-         |   " + hitungStokDarah(golDarahEnum.AB, rhesusEnum.NEGATIVE));
+        System.out.println("O+          |   " + hitungStokDarah(golDarahEnum.O, rhesusEnum.POSITIVE));
+        System.out.println("O-          |   " + hitungStokDarah(golDarahEnum.O, rhesusEnum.NEGATIVE));
+        System.out.println("====================================");
+        System.out.println();
+        System.out.println("List Kantong Darah A+");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.A, rhesusEnum.POSITIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah A-");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.A, rhesusEnum.NEGATIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah B+");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.B, rhesusEnum.POSITIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah B-");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.B, rhesusEnum.NEGATIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah AB+");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.AB, rhesusEnum.POSITIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah AB-");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.AB, rhesusEnum.NEGATIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah O+");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.O, rhesusEnum.POSITIVE);
+        System.out.println("-----------------------------------");
+        System.out.println("List Kantong Darah O-");
+        tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum.O, rhesusEnum.NEGATIVE);
+        System.out.println("-----------------------------------");
+        KantongDarah output=null;
+        while(true){
+            System.out.print("Input ID Kantong Darah (masukan \"exit\" untuk exit): ");
+            String input = app.getSc().next() + app.getSc().nextLine();
+
+            // 1. Validasi jika input kosong
+            if (input.trim().isEmpty()) {
+                System.out.println("[Error] ID tidak boleh kosong! Silakan coba lagi.\n");
+                continue;
+            }
+            
+            // 2. Validasi fitur EXIT menggunakanequalsIgnoreCase agar bisa "exit" atau "EXIT"
+            if (input.trim().equalsIgnoreCase("exit")) {
+                System.out.println("Keluar dari pengecekan stok darah...");
+                app.getCurrentUser().tampilkanMenuUtama(app);
+                break;
+            }
+            
+            // 3. Cari kantong darah berdasarkan ID
+            output = apakahKantongDarahAda(input);
+            
+            // 4. Validasi jika data tidak ditemukan
+            if (output == null) {
+                System.out.println("[Error] ID Kantong Darah '" + input + "' tidak ditemukan! Silakan coba lagi.\n");
+                continue;
+            }
+
+            System.out.println("Kantong Darah berhasil ditemukan!");
+            break;
+        }
+        return output;
+    }
+
+    private KantongDarah apakahKantongDarahAda(String idKantong){
+        for(KantongDarah d:stokDarah){
+            if(d.getIdDarah().equalsIgnoreCase(idKantong))return d;
+        }
+        return null;
+    }
+
+    private int hitungStokDarah(golDarahEnum golDarah,rhesusEnum rhesus){
+        int count=0;
+        for (KantongDarah d:stokDarah){
+            if(d.getJenisDarah()==golDarah && d.getRhesus()==rhesus && d.getRequest()==null){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private void tampilFilterBerdasarkanGolDarahRhesus(golDarahEnum golDarah,rhesusEnum rhesus){
+        if(hitungStokDarah(golDarah, rhesus)==0){
+            System.out.println("Tidak ada Kantong Darah");
+            return;
+        }
+        int i=0;
+        for(KantongDarah d: stokDarah){
+            if(d.getJenisDarah()==golDarah && d.getRhesus()==rhesus && d.getRequest()==null){
+                System.out.println(i+"-------");
+                d.tampilkanDataKantongDarah();
+            }
+        }
+    }
+
     //#endregion
 
     //#region Getter Setter
 
-    public String getAlamat() {
-        return alamat;
+    public ArrayList<Request> getListRequestTuntas() {
+        return listRequestTuntas;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
-
-    public ArrayList<Request> getListRequest() {
-        return listRequest;
-    }
-
-    public LinkedList<Request> getListApproveRequest() {
-        return listApproveRequest;
-    }
-    public void setListRequest(ArrayList<Request> listRequest) {
-        this.listRequest = listRequest;
-    }
-
-    public void setListApproveRequest(LinkedList<Request> listApproveRequest) {
-        this.listApproveRequest = listApproveRequest;
+    public void setListRequestTuntas(ArrayList<Request> listRequestTuntas) {
+        this.listRequestTuntas = listRequestTuntas;
     }
 
     public ArrayList<TesDarah> getListTesDarah() {
@@ -198,12 +297,60 @@ public abstract class FasilitasDarah extends User {
         this.listCrossMatch = listCrossMatch;
     }
 
+    public ArrayList<Transaksi> getListTransaksiTuntas() {
+        return listTransaksiTuntas;
+    }
+
+    public void setListTransaksiTuntas(ArrayList<Transaksi> listTransaksiTuntas) {
+        this.listTransaksiTuntas = listTransaksiTuntas;
+    }
+
+    public ArrayList<Request> getListApproveRequestTuntas() {
+        return listApproveRequestTuntas;
+    }
+
+    public void setListApproveRequestTuntas(ArrayList<Request> listApproveRequestTuntas) {
+        this.listApproveRequestTuntas = listApproveRequestTuntas;
+    }
+
+    public LinkedList<Request> getListRequest() {
+        return listRequest;
+    }
+
+    public void setListRequest(LinkedList<Request> listRequest) {
+        this.listRequest = listRequest;
+    }
+
     public LinkedList<KantongDarah> getStokDarah() {
         return stokDarah;
     }
 
     public void setStokDarah(LinkedList<KantongDarah> stokDarah) {
         this.stokDarah = stokDarah;
+    }
+
+    public LinkedList<Request> getListApproveRequest() {
+        return listApproveRequest;
+    }
+
+    public void setListApproveRequest(LinkedList<Request> listApproveRequest) {
+        this.listApproveRequest = listApproveRequest;
+    }
+
+    public LinkedList<Transaksi> getListTransaksi() {
+        return listTransaksi;
+    }
+
+    public void setListTransaksi(LinkedList<Transaksi> listTransaksi) {
+        this.listTransaksi = listTransaksi;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
     }
 
     //#endregion
