@@ -1,22 +1,30 @@
 package Darah;
 
-import Enum.golDarahEnum;
-import Enum.rhesusEnum;
 import java.time.LocalDate;
 
-public class KantongDarah {
-    String idDarah;
-    String idPendonor;
-    golDarahEnum jenisDarah;
-    rhesusEnum rhesus;
-    LocalDate tanggalMasuk;
-    LocalDate tanggalKadaluarsa;
+import Enum.golDarahEnum;
+import Enum.rhesusEnum;
+import User.FasilitasDarah;
 
-    public KantongDarah(String idDarah, String idPendonor, golDarahEnum jenisDarah, rhesusEnum rhesus) {
+public class KantongDarah {
+    private String idDarah;
+    private String idPendonor;
+    private golDarahEnum jenisDarah;
+    private rhesusEnum rhesus;
+    private LocalDate tanggalMasuk;
+    private LocalDate tanggalKadaluarsa;
+    private FasilitasDarah fasilitasDarah;
+
+    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
+        this.fasilitasDarah = fasilitasDarah;
+    }
+
+    public KantongDarah(String idDarah, String idPendonor, golDarahEnum jenisDarah, rhesusEnum rhesus,FasilitasDarah fasilitasDarah) {
         this.idDarah = idDarah;
         this.idPendonor = idPendonor;
         this.jenisDarah = jenisDarah;
         this.rhesus = rhesus;
+        this.fasilitasDarah = fasilitasDarah;
         this.tanggalMasuk = LocalDate.now(); 
         this.tanggalKadaluarsa = this.tanggalMasuk.plusDays(35); 
     }
@@ -43,6 +51,34 @@ public class KantongDarah {
 
     public LocalDate getTanggalKadaluarsa() {
         return tanggalKadaluarsa;
+    }
+
+        public void setIdDarah(String idDarah) {
+        this.idDarah = idDarah;
+    }
+
+    public void setIdPendonor(String idPendonor) {
+        this.idPendonor = idPendonor;
+    }
+
+    public void setJenisDarah(golDarahEnum jenisDarah) {
+        this.jenisDarah = jenisDarah;
+    }
+
+    public void setRhesus(rhesusEnum rhesus) {
+        this.rhesus = rhesus;
+    }
+
+    public void setTanggalMasuk(LocalDate tanggalMasuk) {
+        this.tanggalMasuk = tanggalMasuk;
+    }
+
+    public void setTanggalKadaluarsa(LocalDate tanggalKadaluarsa) {
+        this.tanggalKadaluarsa = tanggalKadaluarsa;
+    }
+
+    public FasilitasDarah getFasilitasDarah() {
+        return fasilitasDarah;
     }
 
     

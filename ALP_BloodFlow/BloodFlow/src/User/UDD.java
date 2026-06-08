@@ -78,10 +78,7 @@ public class UDD extends FasilitasDarah {
 
         System.out.println("Pendonor ditemukan: " + pendonor.getUsername());
 
-        if (pendonor.getTanggalTerakhirDonor() != null
-                &&
-                !pendonor.getTanggalTerakhirDonor()
-                        .isEmpty()) {
+        if (pendonor.getTanggalTerakhirDonor() != null) {
 
             try {
 
@@ -121,14 +118,14 @@ public class UDD extends FasilitasDarah {
         String idDarah = String.valueOf(counterIdDarah++);
 
         KantongDarah darah = new KantongDarah(idDarah, pendonor.getIdPengguna(), pendonor.getGolDarah(),
-                pendonor.getRhesus());
+                pendonor.getRhesus(),this);
 
         daftarKantongDarah.add(darah);
 
         RiwayatDonor riwayat = new RiwayatDonor(darah.getTanggalMasuk().toString(), darah.getIdDarah(), this.getNama());
 
         pendonor.addRiwayatDonor(riwayat);
-        pendonor.setTanggalTerakhirDonor(darah.getTanggalMasuk().toString());
+        pendonor.setTanggalTerakhirDonor(darah.getTanggalMasuk());
 
         System.out.println("Kantong darah berhasil ditambahkan!");
         System.out.println("Golongan: " + darah.getJenisDarah() + " " + darah.getRhesus());

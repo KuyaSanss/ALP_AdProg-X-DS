@@ -15,7 +15,6 @@ public abstract class User {
     protected WilayahIndonesia wilayahIndonesia;
 
     private static int userTerbuat = 0;
-    protected ArrayList<Notification> inbox = new ArrayList<>();
 
     public User(App app,String username, String password, String noTelp,String nama, Provinsi provinsi, WilayahIndonesia wilayahIndonesia) {
         userTerbuat++;
@@ -82,20 +81,6 @@ public abstract class User {
 
     public static void setUserTerbuat(int userTerbuat) {
         User.userTerbuat = userTerbuat;
-    }
-
-    public ArrayList<Notification> getInbox() {
-        return inbox;
-    }
-
-
-    public void setInbox(ArrayList<Notification> inbox) {
-        this.inbox = inbox;
-    }
-    
-
-    public void tambahNotifikasi(Notification pesan){
-        inbox.add(pesan);
     }
 
     public Provinsi getProvinsi() {

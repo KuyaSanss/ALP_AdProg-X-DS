@@ -474,10 +474,13 @@ public class App {
         System.out.println();
 
         currentUser = dataUser.getDaftarUsernameUser().get(username);
-        Notification.cekPengingatDonor(currentUser);
-        Notification.cekDonorDarurat(currentUser);
-        Notification notif = new Notification(this);
-        notif.run();
+        if(currentUser instanceof Pendonor){
+            Notification.cekPengingatDonor((Pendonor)currentUser);
+            Notification.cekDonorDarurat((Pendonor)currentUser);
+            Notification notif = new Notification(this);
+            notif.run();
+        }
+        
 
         System.out.println("Login berhasil sebagai: " + currentUser.getClass().getSimpleName());
 
@@ -600,24 +603,15 @@ public class App {
         pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-01-04", "KD001", "PMI Surabaya"));
         pendonorBaru.addRiwayatDonor(new RiwayatDonor("2026-02-01", "KD006", "PMI Surabaya"));
         pendonorBaru.setTanggalTerakhirDonor("2026-02-01");
-        pendonorBaru.tambahNotifikasi(new Notification("Selamat datang di BloodLink"));
+        pendonorBaru.getInbox().add(new Notification("Selamat datang di BloodLink"));
 
         System.out.println("Registrasi berhasil, silakan login");
         menuAwal();
     }
 
-    private void menuPendonor() {
-        tampilkanMenuUtama(this);
-    }
-
     private void exit() {
-        save();
         System.out.println("Sampai Jumpa!");
         System.exit(0);
-    }
-
-    private void save() {
-
     }
 
 }

@@ -1,20 +1,44 @@
 package Darah;
 
-import java.util.ArrayList;
+import Enum.golDarahEnum;
+import Enum.rhesusEnum;
+import User.FasilitasDarah;
 
 public class SampelDarah {
 
     private static int sampelTerbuat=0;
     
+    private FasilitasDarah fasilitasDarah;
+    public FasilitasDarah getFasilitasDarah() {
+        return fasilitasDarah;
+    }
+
+    public void setFasilitasDarah(FasilitasDarah fasilitasDarah) {
+        this.fasilitasDarah = fasilitasDarah;
+    }
+
     private String idSampel;
     private KantongDarah kantongDarah;
     private boolean dariPendonor;
-    private ArrayList<TesDarah> listTesDarah = new ArrayList<>();
+    private golDarahEnum golDarah;
+    private rhesusEnum rhesus;
 
-    public SampelDarah(boolean dariPendonor) {
-        this.dariPendonor = dariPendonor;
+    public SampelDarah(KantongDarah kantongDarah) {
+        this.dariPendonor = true;
         sampelTerbuat++;
         idSampel="SM"+sampelTerbuat;
+        golDarah = kantongDarah.getJenisDarah();
+        rhesus = kantongDarah.getRhesus();
+        fasilitasDarah = kantongDarah.getFasilitasDarah();
+    }
+
+    public SampelDarah(golDarahEnum golDarah, rhesusEnum rhesus, FasilitasDarah fasilitasDarah) {
+        this.dariPendonor = true;
+        sampelTerbuat++;
+        idSampel="SM"+sampelTerbuat;
+        this.golDarah = golDarah;
+        this.rhesus = rhesus;
+        this.fasilitasDarah = fasilitasDarah;
     }
     
     public static int getSampelTerbuat() {
@@ -41,16 +65,28 @@ public class SampelDarah {
         this.dariPendonor = dariPendonor;
     }
 
-    public ArrayList<TesDarah> getListTesDarah() {
-        return listTesDarah;
-    }
-
-    public void setListTesDarah(ArrayList<TesDarah> listTesDarah) {
-        this.listTesDarah = listTesDarah;
-    }
-
     public String getIdSampel() {
         return idSampel;
+    }
+
+        public void setIdSampel(String idSampel) {
+        this.idSampel = idSampel;
+    }
+
+    public golDarahEnum getGolDarah() {
+        return golDarah;
+    }
+
+    public void setGolDarah(golDarahEnum golDarah) {
+        this.golDarah = golDarah;
+    }
+
+    public rhesusEnum getRhesus() {
+        return rhesus;
+    }
+
+    public void setRhesus(rhesusEnum rhesus) {
+        this.rhesus = rhesus;
     }
     
 }

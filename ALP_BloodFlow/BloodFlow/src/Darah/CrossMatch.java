@@ -19,10 +19,10 @@ public class CrossMatch extends TesDarah {
         System.out.println("==================================================");
         System.out.println("Petunjuk: Jawab dengan 'Y' (Ya) atau 'T' (Tidak)\n");
 
-        f1 = ambilInput(app.getSc(), "1. Apakah ada aglutinasi/hemolisis pada Fase I (Suhu Kamar)? [Y/T]: ");
-        f2 = ambilInput(app.getSc(), "2. Apakah ada aglutinasi/hemolisis pada Fase II (Inkubasi 37°C)? [Y/T]: ");
-        f3 = ambilInput(app.getSc(), "3. Apakah ada aglutinasi/hemolisis pada Fase III (Coombs/AHG)? [Y/T]: ");
-        ac = ambilInput(app.getSc(), "4. Apakah terjadi aglutinasi pada Auto-Control (AC)? [Y/T]: ");
+        f1 = ambilInput(app, "1. Apakah ada aglutinasi/hemolisis pada Fase I (Suhu Kamar)? [Y/T]: ");
+        f2 = ambilInput(app, "2. Apakah ada aglutinasi/hemolisis pada Fase II (Inkubasi 37°C)? [Y/T]: ");
+        f3 = ambilInput(app, "3. Apakah ada aglutinasi/hemolisis pada Fase III (Coombs/AHG)? [Y/T]: ");
+        ac = ambilInput(app, "4. Apakah terjadi aglutinasi pada Auto-Control (AC)? [Y/T]: ");
 
         kesimpulan();
         
@@ -45,10 +45,10 @@ public class CrossMatch extends TesDarah {
         }
     }
 
-    private static boolean ambilInput(Scanner scanner, String pertanyaan) {
+    private static boolean ambilInput(App app, String pertanyaan) {
         while (true) {
             System.out.print(pertanyaan);
-            String input = scanner.nextLine().trim().toUpperCase();
+            String input = app.getSc().nextLine().trim().toUpperCase();
 
             if (input.equals("Y")) {
                 return true;

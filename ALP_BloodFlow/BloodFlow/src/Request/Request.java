@@ -15,7 +15,8 @@ public class Request implements Comparable<Request> {
     private Form form;
     private ArrayList<TesDarah> listTesDarah;//kalau gagal auto clear biar ga kecampur sama yang dulu
     private String idPermintaan;
-    private boolean isApproved;//todo unapprove
+    private boolean isApproved,isDone;//todo unapprove
+    private Transaksi transaksi;
     // for form
     private FasilitasDarah fasilitasDarah;
     
