@@ -3,9 +3,8 @@ package Model;
 import App.App;
 import User.Pendonor;
 import User.User;
-
 import Request.*;
-import User.Pendonor;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,9 +12,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 import Request.Form;
-import User.Pendonor;
-
-import java.util.ArrayList;
 
 public class Notification implements Runnable {
     private App aplikasi;
@@ -34,15 +30,13 @@ public class Notification implements Runnable {
     @Override
     public void run() {
 
-        User user = aplikasi.getCurrentUser();
-
-        if (user == null) {
-            return;
-        }
+        User currentUser = aplikasi.getCurrentUser();
+        if(!(currentUser instanceof Pendonor))return;
+        Pendonor pendonor = (Pendonor) currentUser;
 
         int unread = 0;
 
-        for (Notification notif : user.getInbox()) {
+        for (Notification notif : pendonor.getInbox()) {
 
             if (!notif.isRead()) {
                 unread++;
@@ -82,16 +76,16 @@ public class Notification implements Runnable {
         this.pesan = pesan;
     }
 
-    public static void tampilkanSemuaNotifikasi(User user) {
+    public static void tampilkanSemuaNotifikasi(Pendonor pendonor) {
 
-        if (user.getInbox().isEmpty()) {
+        if (pendonor.getInbox().isEmpty()) {
             System.out.println("Tidak ada notifikasi");
             return;
         }
 
         System.out.println("===== NOTIFIKASI =====");
 
-        for (Notification notif : user.getInbox()) {
+        for (Notification notif : pendonor.getInbox()) {
 
             String status = "";
 
@@ -108,19 +102,13 @@ public class Notification implements Runnable {
         }
     }
 
-    public static void cekPengingatDonor(User user) {
-
-        if (!(user instanceof Pendonor)) {
-            return;
-        }
-
-        Pendonor pendonor = (Pendonor) user;
+    public static void cekPengingatDonor(Pendonor pendonor) {
 
         if (pendonor.getRiwayatDonor().isEmpty()) {
             return;
         }
 
-        for (Notification n : user.getInbox()) {
+        for (Notification n : pendonor.getInbox()) {
 
             if (n.getPesan().equals(
                     "Anda sudah dapat melakukan donor darah kembali")) {
@@ -146,20 +134,14 @@ public class Notification implements Runnable {
 
         if (selisihHari >= 90) {
 
-            user.tambahNotifikasi(
+            pendonor.getInbox().add(
                     new Notification(
                             "Anda sudah dapat melakukan donor darah kembali"));
         }
     }
 
     //todo benerin
-    public static void cekDonorDarurat(User user) {
-
-        if (!(user instanceof Pendonor)) {
-            return;
-        }
-
-        Pendonor pendonor = (Pendonor) user;
+    public static void cekDonorDarurat(Pendonor pendonor) {
 
         for (Request req : Request.getLiveRequestList()) {
             Form form = req.getForm();
@@ -172,7 +154,7 @@ public class Notification implements Runnable {
 
                 boolean sudahAda = false;
 
-                for (Notification notif : user.getInbox()) {
+                for (Notification notif : pendonor.getInbox()) {
 
                     if (notif.getPesan().equals(pesan)) {
                         sudahAda = true;
@@ -182,7 +164,7 @@ public class Notification implements Runnable {
 
                 if (!sudahAda) {
 
-                    user.tambahNotifikasi(
+                    pendonor.getInbox().add(
                             new Notification(pesan));
                 }
             }

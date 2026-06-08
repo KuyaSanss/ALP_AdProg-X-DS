@@ -12,7 +12,19 @@ import User.*;
 
 public class Form implements Comparable<Form> {
     // general
-    private String idPermintaan;
+    private boolean permintaanPasien;
+    public boolean getPermintaanPasien() {
+        return permintaanPasien;
+    }
+
+    public void setPermintaanPasien(boolean permintaanPasien) {
+        this.permintaanPasien = permintaanPasien;
+    }
+
+    public BDRS getUnitBDRS() {
+        return unitBDRS;
+    }
+
     // form
     private String namaRumahSakit;
     private String alamat;
@@ -70,6 +82,29 @@ public class Form implements Comparable<Form> {
     }
 
     public void menuForm(App app) {
+        String input;
+
+        System.out.println("""
+                === Jenis Request ===
+                1. Darah untuk Pasien
+                2. Darah untuk Stok
+                3. Exit
+                """);
+        System.out.print("Input: ");
+        input = app.getSc().next() + app.getSc().nextLine();
+        switch (input) {
+            case "1":
+                formPasien(app);
+                break;
+            case "2":
+                formStok(app);
+                break;
+            case "3":
+                app.getCurrentUser().tampilkanMenuUtama(app);
+                break;
+            default:
+                System.out.println("Invalid Input!!");
+        }
 
     }
 
@@ -155,7 +190,7 @@ public class Form implements Comparable<Form> {
         app.getCurrentUser().tampilkanMenuUtama(app);//kembali ke menu user
     }
 
-    public void tampilkanForm() {
+    private void tampilkanFormPasien() {
         System.out.println("ESI Priority            : " + hitungWeight());
 
         System.out.println("\n=== FORM PERMINTAAN DARAH ===");
@@ -163,7 +198,7 @@ public class Form implements Comparable<Form> {
         System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
         System.out.println("Alamat                  : " + getAlamat());
         System.out.println("Telepon                 : " + getTelepon());
-        System.out.println("Unit BDRS               : " + getfasilitasDarah().getNama());
+        System.out.println("Unit Fasilitas Darah    : " + getfasilitasDarah().getNama());
         System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
         System.out.println("Jam Permintaan          : " + getJamPermintaan());
 
@@ -218,9 +253,35 @@ public class Form implements Comparable<Form> {
         System.out.println("\nD. TINDAKAN EMERGENSI");
 
         System.out.println("Resusitasi Cairan        : " + (getResusitasiCairan() == 1 ? "YA" : "TIDAK"));
-        System.out
-                .println("Intubasi / Jalan Napas   : " + (getIntubasiAtauManajemenJalanNapas() == 1 ? "YA" : "TIDAK"));
+        System.out.println("Intubasi / Jalan Napas   : " + (getIntubasiAtauManajemenJalanNapas() == 1 ? "YA" : "TIDAK"));
         System.out.println("Defibrilasi              : " + (getDefibrilasi() == 1 ? "YA" : "TIDAK"));
+    }
+
+    public void tampilkanForm(){
+        if(permintaanPasien){
+            tampilkanFormPasien();
+        }else{
+            tampilkanFormStok();
+        }
+    }
+
+    private void tampilkanFormStok(){
+        System.out.println("\n=== FORM PERMINTAAN DARAH ===");
+
+        System.out.println("Nama Rumah Sakit        : " + getNamaRumahSakit());
+        System.out.println("Alamat                  : " + getAlamat());
+        System.out.println("Telepon                 : " + getTelepon());
+        System.out.println("Unit Fasilitas Darah    : " + getfasilitasDarah().getNama());
+        System.out.println("Tanggal Permintaan      : " + getTanggalPermintaan());
+        System.out.println("Jam Permintaan          : " + getJamPermintaan());
+
+        System.out.println("\nB. DATA PERMINTAAN DARAH");
+
+        System.out.println("Jumlah Kantong          : " + getJumlahKantong());
+        System.out.println("Rencana Transfusi       : " + getRencanaWaktuTransfusi());
+        System.out.println("Golongan Darah          : " + getGolonganDarah());
+        System.out.println("Rhesus Darah            : " + getRhesus());
+
     }
 
     public int hitungWeight() {
@@ -290,13 +351,21 @@ public class Form implements Comparable<Form> {
         int thisWeight = this.hitungWeight();
         int otherWeight = other.hitungWeight();
 
-        if (thisWeight < otherWeight) {
-            return -1;
-        } else if (thisWeight > otherWeight) {
+        int thisBool = ((this.getPermintaanPasien())?1:0);
+        int otherBool = ((other.getPermintaanPasien())?1:0);
+
+        if (thisBool<otherBool){ //cek kalau stok
             return 1;
-        } else {
-            return this.idPermintaan.compareTo(other.idPermintaan);
+        }else if (otherBool<thisBool){
+            return -1;
+        }else if (thisBool==1 && otherBool==1){//dua-duanya pasien
+            if (thisWeight < otherWeight) {
+                return -1;
+            } else if (thisWeight > otherWeight) {
+                return 1;
+            }
         }
+        return 0;
     }
 
     public int getGcsTotal() {
@@ -1042,14 +1111,6 @@ public class Form implements Comparable<Form> {
 
     public void setNomorSIP(String nomorSIP) {
         this.nomorSIP = nomorSIP;
-    }
-
-    public String getIdPermintaan() {
-        return idPermintaan;
-    }
-
-    public void setIdPermintaan(String idPermintaan) {
-        this.idPermintaan = idPermintaan;
     }
 
     public golDarahEnum getGolonganDarah() {
