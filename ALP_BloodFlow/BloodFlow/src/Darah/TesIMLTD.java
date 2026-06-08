@@ -18,6 +18,7 @@ public class TesIMLTD extends TesDarah{
     private double scoHcv;
     private double scoSifilis;
 
+    @Override
     public void formInput(App app) {
         aman=true;
         System.out.println("=== FORM INPUT HASIL LAB CLIA (IMLTD) ===");

@@ -2,6 +2,8 @@ package Darah;
 
 
 import java.time.LocalDateTime;
+
+import App.App;
 import User.FasilitasDarah;
 
 public abstract class TesDarah {
@@ -19,5 +21,6 @@ public abstract class TesDarah {
 
     abstract public void cetakHasil();
 
+    abstract public void formInput(App app);
 
 }

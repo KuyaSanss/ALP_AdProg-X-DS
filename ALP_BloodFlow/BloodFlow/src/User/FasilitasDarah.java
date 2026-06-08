@@ -50,7 +50,11 @@ public abstract class FasilitasDarah extends User {
         tampilkanMenuUtama(app);
     }
 
-    private void checkApprovedRequest(App app) {
+    private void menuRequest(App app){
+        //todo
+    }
+
+    protected void checkApprovedRequest(App app) {
         tampilkanApprovedRequests();
 
         if (listApproveRequest.isEmpty()) {
@@ -96,7 +100,7 @@ public abstract class FasilitasDarah extends User {
         if(selected.getForm().getPermintaanPasien()){//true=pasien
             testSample(app, selected);
         }else{
-            pembayaran();
+            pembayaran(app,selected);
         }
         
     }
@@ -130,29 +134,33 @@ public abstract class FasilitasDarah extends User {
     }
 
     private void menuTesIMLTD(App app,Request request){
-        boolean pernah=false;
-        for(TesDarah td:  listTesDarah){
-            if (td instanceof TesIMLTD){
-                pernah =true;
-                System.out.println("Tes IMLTD sudah pernah dilakukan\n");
-                td.cetakHasil();
-                break;
-            }
-        }
-        //tes
-        TesIMLTD tesIMLTD = new TesIMLTD(this, );
-        //todo
+        KantongDarah kantongDarah = cekStokDarah(app);
+        TesIMLTD tesIMLTD = new TesIMLTD(this, kantongDarah.getSampelDarah());
+        tesIMLTD.formInput(app);
+        listTesDarah.add(tesIMLTD);
+        System.out.println("Tes IMLTD berhasil ditambahkan");
+        //todo kalau gagal ke reset
     }
 
     private void menuCrossMatch(App app,Request request){
-        //todo
+        KantongDarah kantongDarah = cekStokDarah(app);
+        CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah());
+        crossMatch.formInput(app);
+        listTesDarah.add(crossMatch);
+        System.out.println("Crossmatch berhasil ditambahkan");
+        //todo kalau gagal ke reset
     }
 
     private void pembayaran(App app,Request request){
         Transaksi transaksi = new Transaksi(request);
+
     }
 
     private void pengiriman(){
+
+    }
+
+    private void tesGagal(){
 
     }
 

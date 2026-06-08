@@ -10,7 +10,8 @@ public class CrossMatch extends TesDarah {
         super(fasilitasDarah, sampelDarahPendonor);
     }
 
-    public void formCrossMatch(App app) {
+    @Override
+    public void formInput(App app) {
         System.out.println("==================================================");
         System.out.println("  SISTEM VERIFIKASI HASIL CROSS MATCHING DARAH    ");
         System.out.println("==================================================");
