@@ -47,8 +47,12 @@ public abstract class FasilitasDarah extends User {
 
     public void checkLiveRequest(App app) {
         Request request = Request.displayRequests(app);
-        request.approveRequest(app, this);
-        tampilkanMenuUtama(app);
+        if (request != null) {
+            boolean approved = request.approveRequest(app, this);
+            if (approved) {
+                testSample(app, request);
+            }
+        }
     }
 
     protected void menuPermintaan(App app){
@@ -68,15 +72,15 @@ public abstract class FasilitasDarah extends User {
             switch (input) {
                 case "0":
                     tampilkanMenuUtama(app);
-                    break;
+                    return;
                 case "1":
                     checkLiveRequest(app);
                     break;
                 case "2":
-                    // todo
+                    cekPermintaanPribadi(app);
                     break;
                 case "3":
-                    //todo
+                    cekPermintaanDiApprove(app);
                     break;
                 case "4":
                     makeRequest(app);
@@ -84,151 +88,203 @@ public abstract class FasilitasDarah extends User {
                 case "5":
                     cekStokDarah(app);
                     break;
-                    default:
-                        System.out.println("Input tidak sesuai!");
+                default:
+                    System.out.println("Input tidak sesuai!");
                     break;
             }
+            System.out.println("=== Menu Permintaan ===");
+            System.out.println("1. Cek Permintaan Global");
+            System.out.println("2. Cek Permintaan Pribadi");
+            System.out.println("3. Cek Permintaan Luar yg diApprove");
+            System.out.println("4. Buat Permintaan");
+            System.out.println("5. Cek Stok darah pribadi");
+            System.out.println("6. Cek Stok darah fasilitas kesehatan" );
+            System.out.println("0. Kembali ke Menu");
         }
-
     }
 
-    protected void checkApprovedRequest(App app) {
-        tampilkanApprovedRequests();
-
-        if (listApproveRequest.isEmpty()) {
-            System.out.println("Belum ada request yang diApprove");
-            return; // or continue to menu, as needed
+    private void cekPermintaanPribadi(App app) {
+        if (listRequest.isEmpty()) {
+            System.out.println("Belum ada permintaan pribadi.");
+            return;
         }
-
-        int size = listApproveRequest.size();
-        int pilihan = -1;
-        while (true) {
-            System.out.print("Pilih (1-" + size + "): ");
-            String input = app.getSc().nextLine().trim();
-
-            // 1. Check for empty input
-            if (input.isEmpty()) {
-                System.out.println("Error: Input tidak boleh kosong.\n");
-                continue;
-            }
-            boolean isNumeric = true;
-            for (int i = 0; i < input.length(); i++) {
-                if (!Character.isDigit(input.charAt(i))) {
-                    isNumeric = false;
-                    break;
+        System.out.println("=== Permintaan Pribadi ===");
+        for (int i = 0; i < listRequest.size(); i++) {
+            System.out.println((i + 1) + ". Request ID: " + listRequest.get(i).getIdPermintaan());
+            listRequest.get(i).tampilkanRequest();
+        }
+        System.out.print("Pilih nomor request untuk cek transaksi (0 untuk kembali): ");
+        String input = app.getSc().nextLine().trim();
+        if(input.equals("0") || input.isEmpty()) return;
+        
+        try {
+            int pil = Integer.parseInt(input);
+            if (pil > 0 && pil <= listRequest.size()) {
+                Request req = listRequest.get(pil - 1);
+                if (req.isDone()) {
+                    System.out.println("Permintaan ini sudah selesai (Darah telah diterima).");
+                } else if (req.getFasilitasDarahApprove() != null && req.getTransaksi() != null) {
+                    if (req.getTransaksi().getKodeTransaksi() != null) {
+                        System.out.println("Anda sudah menginput pembayaran. Menunggu verifikasi dari " + req.getFasilitasDarahApprove().getNama() + ".");
+                    } else {
+                        bayarPermintaan(app, req);
+                    }
+                } else {
+                    System.out.println("Permintaan ini belum sampai ke tahap transaksi atau belum di-approve.");
                 }
+            } else {
+                System.out.println("Pilihan tidak valid.");
             }
-
-            if (!isNumeric) {
-                System.out.println("Error: Input harus berupa angka (tidak boleh huruf atau simbol).\n");
-                continue;
-            }
-
-            pilihan = Integer.parseInt(input);
-
-            if (pilihan < 1 || pilihan > size) {
-                System.out.println("Error: Pilihan di luar jangkauan. Masukkan angka antara 1 dan " + size + ".\n");
-                continue;
-            }
-
-            break;
+        } catch (NumberFormatException e) {
+            System.out.println("Pilihan harus berupa angka.");
         }
+    }
 
-        Request selected = listApproveRequest.get(pilihan - 1);
-        if (selected.getForm().getPermintaanPasien()) {// true=pasien
-            testSample(app, selected);
+    private void bayarPermintaan(App app, Request request) {
+        System.out.println("\n=== PEMBAYARAN TRANSAKSI (PEMINTA) ===");
+        request.getTransaksi().cetakFaktur();
+        System.out.println("Silahkan transfer ke Rekening: " + request.getTransaksi().getRekening());
+        System.out.print("Masukkan Kode Transaksi: ");
+        String kode = app.getSc().nextLine().trim();
+        System.out.print("Masukkan Kode Unik (2 digit): ");
+        String unik = app.getSc().nextLine().trim();
+        
+        request.getTransaksi().setKodeTransaksi(kode);
+        request.getTransaksi().setKodeUnik(unik);
+        System.out.println("Data pembayaran berhasil disimpan.");
+    }
+
+    private void cekPermintaanDiApprove(App app) {
+        if (listApproveRequest.isEmpty()) {
+            System.out.println("Belum ada request yang diApprove.");
+            return;
+        }
+        System.out.println("=== Permintaan Luar yg diApprove ===");
+        for (int i = 0; i < listApproveRequest.size(); i++) {
+            System.out.println((i + 1) + ". Request ID: " + listApproveRequest.get(i).getIdPermintaan());
+            listApproveRequest.get(i).tampilkanRequest();
+        }
+        System.out.print("Pilih nomor request untuk verifikasi (0 untuk kembali): ");
+        String input = app.getSc().nextLine().trim();
+        if(input.equals("0") || input.isEmpty()) return;
+        
+        try {
+            int pil = Integer.parseInt(input);
+            if (pil > 0 && pil <= listApproveRequest.size()) {
+                Request req = listApproveRequest.get(pil - 1);
+                if (req.isDone()) {
+                    System.out.println("Permintaan ini sudah selesai.");
+                } else if (req.getTransaksi() != null && req.getTransaksi().getKodeTransaksi() != null) {
+                    if (!req.getTransaksi().isStatusTransaksi()) {
+                        verifikasiPembayaran(app, req);
+                    } else {
+                        System.out.println("Transaksi sudah lunas.");
+                    }
+                } else {
+                    System.out.println("Menunggu peminta melakukan pembayaran.");
+                }
+            } else {
+                System.out.println("Pilihan tidak valid.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Pilihan harus berupa angka.");
+        }
+    }
+
+    private void verifikasiPembayaran(App app, Request request) {
+        System.out.println("\n=== VERIFIKASI PEMBAYARAN ===");
+        System.out.println("Kode Transaksi dari Peminta: " + request.getTransaksi().getKodeTransaksi());
+        System.out.print("Masukkan Kode Unik untuk verifikasi: ");
+        String unik = app.getSc().nextLine().trim();
+        
+        if (unik.equals(request.getTransaksi().getKodeUnik())) {
+            System.out.println("Verifikasi Berhasil! Pembayaran Lunas.");
+            request.getTransaksi().ubahStatusLunas();
+            pengiriman(request);
         } else {
-            pembayaran(app, selected);
+            System.out.println("Kode Unik salah! Verifikasi gagal.");
         }
-
     }
 
     private void testSample(App app, Request request) {
+        System.out.println("\n=== MELAKUKAN TES DARAH (IMLTD) ===");
+        menuTesIMLTD(app, request);
+        System.out.println("\n=== MELAKUKAN TES DARAH (CrossMatch) ===");
+        menuCrossMatch(app, request);
+        
+        System.out.println("\nApakah hasil tes IMLTD dan CrossMatch aman?");
+        System.out.println("1. Ya, Aman");
+        System.out.println("2. Tidak, Gagal");
         String input;
-        System.out.println("""
-                === Test Sample ===
-                1. Tes IMLTD
-                2. CrossMatch
-                3. Exit
-                """);
-
-        System.out.print("Input: ");
-        input = app.getSc().next() + app.getSc().nextLine();
-        switch (input) {
-            case "1":
-                menuTesIMLTD(app, request);
+        while(true) {
+            System.out.print("Input: ");
+            input = app.getSc().nextLine().trim();
+            if (input.equals("1") || input.equals("2")) {
                 break;
-            case "2":
-                menuCrossMatch(app, request);
-                break;
-            case "3":
-                app.getCurrentUser().tampilkanMenuUtama(app);
-                break;
-            default:
-                System.out.println("Invalid Input!!");
-                testSample(app, request);
+            }
+            System.out.println("Input tidak valid!");
         }
 
+        if (input.equals("1")) {
+            System.out.println("Tes berhasil. Lanjut ke transaksi...");
+            lanjutTransaksiApprover(app, request);
+        } else {
+            tesGagal(request);
+        }
     }
 
     private void menuTesIMLTD(App app, Request request) {
         KantongDarah kantongDarah = cekStokDarah(app);
-        TesIMLTD tesIMLTD = new TesIMLTD(this, kantongDarah.getSampelDarah());
-        tesIMLTD.formInput(app);
-        listTesDarah.add(tesIMLTD);
-        System.out.println("Tes IMLTD berhasil ditambahkan");
-        // todo kalau gagal ke reset
+        if (kantongDarah != null) {
+            TesIMLTD tesIMLTD = new TesIMLTD(this, kantongDarah.getSampelDarah());
+            tesIMLTD.formInput(app);
+            listTesDarah.add(tesIMLTD);
+            request.getListTesDarah().add(tesIMLTD);
+            System.out.println("Tes IMLTD berhasil ditambahkan");
+        }
     }
 
     private void menuCrossMatch(App app, Request request) {
         KantongDarah kantongDarah = cekStokDarah(app);
-        CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah(), request.getSampelDarahPeminta());
-        crossMatch.formInput(app);
-        listTesDarah.add(crossMatch);
-        System.out.println("Crossmatch berhasil ditambahkan");
-        // todo kalau gagal ke reset
-    }
-
-    private void checkPembayaran(App app, Request request) {
-
-        Transaksi transaksi = new Transaksi(request);
-
-    }
-
-    private void pembayaran(App app, Request request) {
-        String input;
-        System.out.println("""
-                === Pembayaran ===
-                1. Check Pembayaran Permintaan
-                2.
-                3. Exit
-                """);
-
-        System.out.print("Input: ");
-        input = app.getSc().next() + app.getSc().nextLine();
-        switch (input) {
-            case "1":
-                menuTesIMLTD(app, request);
-                break;
-            case "2":
-                menuCrossMatch(app, request);
-                break;
-            case "3":
-                app.getCurrentUser().tampilkanMenuUtama(app);
-                break;
-            default:
-                System.out.println("Invalid Input!!");
-                testSample(app, request);
+        if (kantongDarah != null) {
+            CrossMatch crossMatch = new CrossMatch(this, kantongDarah.getSampelDarah(), request.getSampelDarahPeminta());
+            crossMatch.formInput(app);
+            listTesDarah.add(crossMatch);
+            request.getListTesDarah().add(crossMatch);
+            System.out.println("Crossmatch berhasil ditambahkan");
         }
-
     }
 
-    private void pengiriman() {
-
+    private void lanjutTransaksiApprover(App app, Request request) {
+        System.out.println("\n=== TRANSAKSI (PENG-APPROVE) ===");
+        Transaksi transaksi = new Transaksi(request);
+        System.out.print("Masukkan Rekening Anda: ");
+        String rekening = app.getSc().nextLine();
+        transaksi.setRekening(rekening);
+        transaksi.setPenerimaUang(this);
+        request.setTransaksi(transaksi);
+        System.out.println("Rekening berhasil diisi. Menunggu peminta mengisi kode transaksi.");
     }
 
-    private void tesGagal() {
+    private void tesGagal(Request request) {
+        System.out.println("Tes gagal. Mengembalikan permintaan ke daftar global...");
+        listApproveRequest.remove(request);
+        request.setFasilitasDarahApprove(null);
+        if (request.getListTesDarah() != null) {
+            request.getListTesDarah().clear();
+        }
+        Request.getLiveRequestList().add(request);
+    }
 
+    private void pengiriman(Request request) {
+        System.out.println("\n=== PENGIRIMAN ===");
+        System.out.println("Mengirim dari: " + this.getNama());
+        System.out.println("Kepada Penerima: " + request.getFasilitasDarahPeminta().getNama());
+        request.setDone(true);
+        this.listTransaksiTuntas.add(request.getTransaksi());
+        this.listApproveRequestTuntas.add(request);
+        request.getFasilitasDarahPeminta().getListRequestTuntas().add(request);
+        System.out.println("Pengiriman selesai!");
     }
 
     public void tampilkanApprovedRequests() {

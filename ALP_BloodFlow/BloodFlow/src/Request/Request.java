@@ -15,7 +15,7 @@ public class Request implements Comparable<Request> {
     private static LinkedList<Request> liveRequestList = new LinkedList<>();// todo pas unapprove add
     // general
     private Form form;
-    private ArrayList<TesDarah> listTesDarah;// kalau gagal auto clear biar ga kecampur sama yang dulu
+    private ArrayList<TesDarah> listTesDarah = new ArrayList<>();// kalau gagal auto clear biar ga kecampur sama yang dulu
     private String idPermintaan;
     private boolean isDone;
     // is approve artinya ada yang mau tes darah is done artinya udah di terima
@@ -39,7 +39,7 @@ public class Request implements Comparable<Request> {
         sampelDarahPeminta = new SampelDarah(form.getGolonganDarah(), form.getRhesus(), form.getFasilitasDarah());
     }
 
-    public void approveRequest(App app, FasilitasDarah fasilitasDarahApprove) {
+    public boolean approveRequest(App app, FasilitasDarah fasilitasDarahApprove) {
         System.out.println("=== APPROVE REQUEST ===");
         form.tampilkanForm();
         System.out.println();
@@ -49,19 +49,18 @@ public class Request implements Comparable<Request> {
         do {
             String input = app.getSc().next() + app.getSc().nextLine();
             if (input.equals("1")) {
-
+                fasilitasDarahApprove.getListApproveRequest().add(this);
+                liveRequestList.remove(this);
+                this.fasilitasDarahApprove = fasilitasDarahApprove;
+                return true;
             } else if (input.equals("0")) {
-
+                return false;
             } else {
                 System.out.println("Wrong input! Only 1 or 0");
                 wrong = true;
             }
         } while (wrong);
-
-        fasilitasDarahApprove.getListApproveRequest().add(this);
-        liveRequestList.remove(this);
-        this.fasilitasDarahApprove = fasilitasDarahApprove;
-
+        return false;
     }
 
     public void tampilkanRequest() {

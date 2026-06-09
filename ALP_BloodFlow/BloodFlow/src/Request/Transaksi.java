@@ -29,6 +29,9 @@ public class Transaksi {
     private boolean statusTransaksi;
     private FasilitasDarah penerimaUang;
     private Request request;
+    private String rekening;
+    private String kodeTransaksi;
+    private String kodeUnik;
 
     public Transaksi(Request request) {
         this.request = request;
@@ -121,6 +124,30 @@ public class Transaksi {
 
     public void ubahStatusLunas(){
         statusTransaksi=true;
+    }
+
+    public String getRekening() {
+        return rekening;
+    }
+
+    public void setRekening(String rekening) {
+        this.rekening = rekening;
+    }
+
+    public String getKodeTransaksi() {
+        return kodeTransaksi;
+    }
+
+    public void setKodeTransaksi(String kodeTransaksi) {
+        this.kodeTransaksi = kodeTransaksi;
+    }
+
+    public String getKodeUnik() {
+        return kodeUnik;
+    }
+
+    public void setKodeUnik(String kodeUnik) {
+        this.kodeUnik = kodeUnik;
     }
 
     //#region getter setter
